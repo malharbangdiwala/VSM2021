@@ -1,49 +1,65 @@
 package com.example.myapplication;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.media.tv.TvContract;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
+public class MainActivity extends AppCompatActivity implements View.OnKeyListener {
+    ConnectionHelper con;
+    Connection connect;
+    EditText nameEditText;
+    EditText numberEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         try {
-            ConnectionHelper con = new ConnectionHelper();
-            Connection connect = ConnectionHelper.CONN();
-            Log.i("In", "successss");
+            con = new ConnectionHelper();
+            connect = ConnectionHelper.CONN();
+            //Log.i("In", "successss");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        nameEditText=findViewById(R.id.nameEditText);
+        numberEditText=findViewById(R.id.numberEditText);
+        numberEditText.setOnKeyListener(this);
+    }
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent){
+        if(i==KeyEvent.KEYCODE_ENTER && keyEvent.getAction()==KeyEvent.ACTION_DOWN){
+            login(view);
+        }
+        return false;
+    }
+    public void login(View view){
+        String name=nameEditText.getText().toString();
+        String number=numberEditText.getText().toString();
+        Log.i("Name",name);
+        Log.i("Number",number);
+        String query="Select * from login where phoneID= "+number+";";
+        try {
+            Statement st = connect.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()){
+                //Log.i("DB Name",rs.getString("nameID")) ;
+                //Log.i("DB Number",rs.getString("phoneID"));
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                //TODO:CREATE INTENT TO NEXT PAGE HERE
+            }else{
+                Toast.makeText(this, "Login Unsuccessful. Try Again!", Toast.LENGTH_SHORT).show();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
