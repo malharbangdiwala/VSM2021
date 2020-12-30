@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
-            //Log.i("In", "successss");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,10 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()){
+                Log.i("TAG",String.valueOf(rs.getString("nameID").equals(name)));
                 //Log.i("DB Name",rs.getString("nameID")) ;
                 //Log.i("DB Number",rs.getString("phoneID"));
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                //TODO:CREATE INTENT TO NEXT PAGE HERE
+                //Transition to next Activity
+                Intent intent = new Intent(MainActivity.this,SelectorActivity.class);
+                startActivity(intent);
+                finish();
             }else{
                 Toast.makeText(this, "Login Unsuccessful. Try Again!", Toast.LENGTH_SHORT).show();
             }
