@@ -15,7 +15,7 @@ public class SelectorActivity extends AppCompatActivity {
         Button gameRound = findViewById(R.id.gameRound);
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
-            Intent intent = new Intent(SelectorActivity.this, GameActivity.class);
+            Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);
             startActivity(intent);
         }
         });

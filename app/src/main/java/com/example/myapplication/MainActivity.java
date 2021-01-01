@@ -1,8 +1,9 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -19,11 +20,14 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     Connection connect;
     EditText nameEditText;
     EditText numberEditText;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         getSupportActionBar().hide();
         try {
             con = new ConnectionHelper();
@@ -45,18 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public void login(View view){
         String name=nameEditText.getText().toString();
         String number=numberEditText.getText().toString();
-        Log.i("Name",name);
-        Log.i("Number",number);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("number",number);
+        editor.apply();
         String query="Select * from login where phoneID= "+number+";";
         try {
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()){
-                Log.i("TAG",String.valueOf(rs.getString("nameID").equals(name)));
-                //Log.i("DB Name",rs.getString("nameID")) ;
-                //Log.i("DB Number",rs.getString("phoneID"));
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                //Transition to next Activity
                 Intent intent = new Intent(MainActivity.this,SelectorActivity.class);
                 startActivity(intent);
                 finish();

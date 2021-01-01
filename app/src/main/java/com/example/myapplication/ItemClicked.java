@@ -3,5 +3,6 @@ package com.example.myapplication;
 import android.view.View;
 
 public interface ItemClicked{
-    void onClick(int position, View view);
+    void onClickBuy(int position, View view);
+    void onClickSell(int position, View view);
 }

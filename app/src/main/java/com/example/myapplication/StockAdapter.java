@@ -44,6 +44,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
     public int getItemCount() {
         return stocks.size();
     }
+    public void resetData(ArrayList<Stocks> stocks) {
+        this.stocks = stocks;
+        this.notifyDataSetChanged();
+    }
 
     class StockHolder extends RecyclerView.ViewHolder
     {
@@ -59,13 +63,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
             buy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemClicked.onClick(getAdapterPosition(),v);
+                    itemClicked.onClickBuy(getAdapterPosition(),v);
                 }
             });
             sell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemClicked.onClick(getAdapterPosition(),v);
+                    itemClicked.onClickSell(getAdapterPosition(),v);
                 }
             });
         }
