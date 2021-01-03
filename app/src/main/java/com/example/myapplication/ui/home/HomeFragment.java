@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,13 +77,52 @@ public class HomeFragment extends Fragment
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
-            public void onClickBuy(int position, View view) {
-                Log.d("Buy","Lets Buy");
+            public void onClickBuy(int position, View view)
+            {
+                LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.buy_stocks,null,false);
+                TextView stockNames = v.findViewById(R.id.stockName);
+                final EditText stockBuy = v.findViewById(R.id.buy_id);
+                stockNames.setText(stockName.get(position));
+                new AlertDialog.Builder(requireContext())
+                        .setView(v)
+                        .setTitle("\t\t\t\t\t\tBUY\t\t\t\t\t")
+                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO:check if that company shares are > 0 if so then update table else insert into table
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO:Nothing
+                            }
+                        }).show();
             }
-
             @Override
-            public void onClickSell(int position, View view) {
-                Log.d("Sell","Lets Sell");
+            public void onClickSell(int position, View view)
+            {
+                LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.buy_stocks,null,false);
+                TextView stockNames = v.findViewById(R.id.stockName);
+                final EditText stockSell = v.findViewById(R.id.buy_id);
+                stockNames.setText(stockName.get(position));
+                new AlertDialog.Builder(requireContext())
+                        .setView(v)
+                        .setTitle("\t\t\t\t\t\tSell\t\t\t\t\t")
+                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO:Check if that many amount of shares present if not display toast else check if amount = the total he has if so then delete that row else update
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
             }
         });
         stockList.setAdapter(adapter);
@@ -130,7 +170,7 @@ public class HomeFragment extends Fragment
     }
     private void startContinueTimer()
     {
-        countDownTimer = new CountDownTimer(30100, 1000)
+        countDownTimer = new CountDownTimer(millisecValue, 1000)
         {
             @Override
             public void onTick(long millisUntilFinished)
@@ -140,6 +180,11 @@ public class HomeFragment extends Fragment
             @Override
             public void onFinish()
             {
+                //TODO calculate the score and display it in the alertDialog
+                /*
+                Sell A_shares,B_shares...H_shares Price
+                score = A_shares*n_Ashares+...+H_shares*n_Hshares + Cash in hand
+                 */
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
                 new AlertDialog.Builder(requireContext())
                         .setPositiveButton("Proceed to Next Round", new DialogInterface.OnClickListener() {
@@ -150,7 +195,7 @@ public class HomeFragment extends Fragment
                                 stockPrice.clear();
                                 shareOwned.clear();
                                 roundNo++;
-                                if(roundNo==5)
+                                if(roundNo==6)
                                     Log.d("GAME OVER","Game Over");
                                 else{
                                     getData();

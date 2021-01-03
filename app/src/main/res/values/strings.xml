@@ -2,6 +2,6 @@
     <string name="app_name">VSM 20-21</string>
     <string name="title_activity_game">VSM 20-21</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_leaderBoard">LeaderBoard</string>
+    <string name="title_powerCards">PowerCards</string>
 </resources>
