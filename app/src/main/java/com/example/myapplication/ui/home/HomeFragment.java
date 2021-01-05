@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment
     TextView timer,userAmount;
     RecyclerView stockList;
     ArrayList<Stocks> stocks = new ArrayList<>();
-    ArrayList<Double> stockPrice = new ArrayList<>();
+    public static ArrayList<Double> stockPrice = new ArrayList<>();
     ArrayList<String> stockName = new ArrayList<>();
     ArrayList<Integer> shareOwned = new ArrayList<>();
     ViewPager mViewPager;

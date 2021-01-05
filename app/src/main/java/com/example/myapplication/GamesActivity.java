@@ -22,7 +22,7 @@ public class GamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_games);
         navigationView =findViewById(R.id.bottom_nav);
         mViewPager = findViewById(R.id.view_pager);
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(4);
         setUpViewPager();
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,6 +37,9 @@ public class GamesActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_powercards:
                         mViewPager.setCurrentItem(2);
+                        break;
+                    case R.id.navigation_news:
+                        mViewPager.setCurrentItem(3);
                         break;
                 }
                 return true;
@@ -62,6 +65,9 @@ public class GamesActivity extends AppCompatActivity {
                         break;
                     case 2:
                         navigationView.getMenu().findItem(R.id.navigation_powercards);
+                        break;
+                    case 3:
+                        navigationView.getMenu().findItem(R.id.navigation_news);
                         break;
                 }
             }

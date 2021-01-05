@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.powercard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,35 +29,36 @@ public class PowerCardFragment extends Fragment {
         usepc1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usepc1.getText().toString().equals("Use")) {
+                if(usepc1.getText().toString().equals("use")) {
                     usepc1.setText("Used");
                 }else{
+                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        final Button usepc2=requireView().findViewById(R.id.usepc1);
+        final Button usepc2=requireView().findViewById(R.id.usepc2);
         usepc2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usepc2.getText().toString().equals("Use")) {
+                if(usepc2.getText().toString().equals("use")) {
                     usepc2.setText("Used");
                 }else{
+                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        final Button usepc3=requireView().findViewById(R.id.usepc1);
+        final Button usepc3=requireView().findViewById(R.id.usepc3);
         usepc3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usepc3.getText().toString().equals("Use")) {
+                if(usepc3.getText().toString().equals("use")) {
                     usepc3.setText("Used");
                 }else{
+                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
     }
 }

@@ -4,4 +4,5 @@
     <string name="title_home">Home</string>
     <string name="title_leaderBoard">LeaderBoard</string>
     <string name="title_powerCards">PowerCards</string>
+    <string name="title_newsFeed">News Feed</string>
 </resources>

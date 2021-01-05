@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
+import com.example.myapplication.ui.newsfeed.newsFeedFragment;
 import com.example.myapplication.ui.powercard.PowerCardFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter
@@ -27,6 +28,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return new LeaderboardFragment();
             case 2:
                 return new PowerCardFragment();
+            case 3:
+                return new newsFeedFragment();
             default:
                 return new HomeFragment();
         }
@@ -34,6 +37,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

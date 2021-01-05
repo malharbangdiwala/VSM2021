@@ -37,15 +37,21 @@ public class LeaderboardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String getLeaderBoard ="Select name,cash+A_shares+B_shares+C_shares+D_shares+E_shares+F_shares+G_shares+H_shares*r"+HomeFragment.roundNo+"_price as points from login,valuation where login.phoneID = valuation.phoneID order by points";
-        Log.d("Query",getLeaderBoard);
+        double priceA = HomeFragment.stockPrice.get(0);
+        double priceB = HomeFragment.stockPrice.get(1);
+        double priceC = HomeFragment.stockPrice.get(2);
+        double priceD = HomeFragment.stockPrice.get(3);
+        double priceE = HomeFragment.stockPrice.get(4);
+        double priceF = HomeFragment.stockPrice.get(5);
+        double priceG = HomeFragment.stockPrice.get(6);
+        double priceH = HomeFragment.stockPrice.get(7);
+        String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares+E_shares+F_shares+G_shares+H_shares as points from login,valuation where login.phoneID = valuation.phoneID order by points";
         try {
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(getLeaderBoard);
-            Log.d("Query",String.valueOf(rs.next()));
             while (rs.next())
             {
-                Log.d("Query",rs.getString("points"));
+                Log.d("Query",rs.getString("nameID")+rs.getDouble("points"));
             }
         }catch (Exception e)
         {
