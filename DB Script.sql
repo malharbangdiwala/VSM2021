@@ -45,7 +45,8 @@ pc2 numeric(1,0),
 pc3 numeric(1,0),
 constraint powercard_fk Foreign Key(phoneID) references login(phoneID) on update cascade);
 
-
+create table rounds(r1 numeric(1,0),r2 numeric(1,0),r3 numeric(1,0),r4 numeric(1,0),r5 numeric(1,0));
+insert into rounds values(1,1,1,1,1);
 
 
 
@@ -82,7 +83,6 @@ insert into company(company_name,r1_price) values('F',100);
 insert into company(company_name,r1_price) values('G',100);
 insert into company(company_name,r1_price) values('H',100);
 
-/*To be implemented
-Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID and phoneID = number
-Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID order by points
-*/
+
+--Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID and phoneID = number
+--Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID order by points
