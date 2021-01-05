@@ -32,10 +32,10 @@ public class GamesActivity extends AppCompatActivity {
                     case R.id.navigation_home:
                         mViewPager.setCurrentItem(0);
                         break;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_leaderboard:
                         mViewPager.setCurrentItem(1);
                         break;
-                    case R.id.navigation_notifications:
+                    case R.id.navigation_powercards:
                         mViewPager.setCurrentItem(2);
                         break;
                 }
@@ -58,10 +58,10 @@ public class GamesActivity extends AppCompatActivity {
                         navigationView.getMenu().findItem(R.id.navigation_home);
                         break;
                     case 1:
-                        navigationView.getMenu().findItem(R.id.navigation_dashboard);
+                        navigationView.getMenu().findItem(R.id.navigation_leaderboard);
                         break;
                     case 2:
-                        navigationView.getMenu().findItem(R.id.navigation_notifications);
+                        navigationView.getMenu().findItem(R.id.navigation_powercards);
                         break;
                 }
             }

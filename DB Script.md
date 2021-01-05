@@ -81,3 +81,8 @@ insert into company(company_name,r1_price) values('E',100);
 insert into company(company_name,r1_price) values('F',100);
 insert into company(company_name,r1_price) values('G',100);
 insert into company(company_name,r1_price) values('H',100);
+
+/*To be implemented
+Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID and phoneID = number
+Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID order by points
+*/

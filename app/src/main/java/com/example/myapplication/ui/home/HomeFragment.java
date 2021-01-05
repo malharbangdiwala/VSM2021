@@ -31,6 +31,7 @@ import com.example.myapplication.Stocks;
 import java.nio.channels.Selector;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class HomeFragment extends Fragment
     private int millisecValue;
     ConnectionHelper con;
     Connection connect;
-    int roundNo = 1;
+    public static int roundNo = 1;
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
-            public void onClickBuy(int position, View view)
+            public void onClickBuy(final int position, View view)
             {
                 LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
@@ -90,18 +91,46 @@ public class HomeFragment extends Fragment
                         .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO:check if that company shares are > 0 if so then update table else insert into table
+                                Integer stockB = Integer.parseInt(stockBuy.getText().toString());
+                                Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position)+Integer.parseInt(stockBuy.getText().toString())));
+                                shareOwned.set(position,stockOwnedNow);
+                                Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString())-(stockPrice.get(position)*stockB);
+                                if (cashOwnedNow<0){
+                                    Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    userAmount.setText(String.valueOf(cashOwnedNow));
+
+                                    String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                    String insertBuy = "Insert into trade values("+number+",'"+stockName.get(position)+"',"+roundNo+","+stockB+",0);";
+                                    Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
+                                    stocks.set(position,stockInstance);
+                                    adapter.resetData(stocks);
+                                    Log.d("Query",insertBuy);
+                                    try {
+                                        Statement st = connect.createStatement();
+                                        st.executeQuery(updateBuy);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    try {
+                                        Statement statement = connect.createStatement();
+                                        statement.executeQuery(insertBuy);
+                                    }catch (Exception e)
+                                    {
+
+                                    }
+                                }
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //TODO:Nothing
+                            public void onClick(DialogInterface dialog, int which)
+                            {
                             }
                         }).show();
             }
             @Override
-            public void onClickSell(int position, View view)
+            public void onClickSell(final int position, View view)
             {
                 LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
@@ -114,7 +143,33 @@ public class HomeFragment extends Fragment
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO:Check if that many amount of shares present if not display toast else check if amount = the total he has if so then delete that row else update
+                                Integer stockB = Integer.parseInt(stockSell.getText().toString());
+                                if (Integer.parseInt(stockSell.getText().toString())<=shareOwned.get(position)) {
+                                    Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
+                                    shareOwned.set(position, stockOwnedNow);
+                                    Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                                    userAmount.setText(String.valueOf(cashOwnedNow));
+                                    String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                    String insertSell = "Insert into trade values("+number+",'"+stockName.get(position)+"',"+roundNo+",0,"+stockB+");";
+                                    Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
+                                    stocks.set(position,stockInstance);
+                                    adapter.resetData(stocks);
+                                    try {
+                                        Statement st = connect.createStatement();
+                                        st.executeQuery(updateSell);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    try {
+                                        Statement statement = connect.createStatement();
+                                        statement.executeQuery(insertSell);
+                                    }catch (Exception e)
+                                    {
+
+                                    }
+                                }else {
+                                    Toast.makeText(requireContext(),"You dont have enough stocks",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -182,7 +237,6 @@ public class HomeFragment extends Fragment
             {
                 //TODO calculate the score and display it in the alertDialog
                 /*
-                Sell A_shares,B_shares...H_shares Price
                 score = A_shares*n_Ashares+...+H_shares*n_Hshares + Cash in hand
                  */
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();

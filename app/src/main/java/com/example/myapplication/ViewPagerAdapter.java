@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.myapplication.ui.dashboard.DashboardFragment;
+import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.notifications.NotificationsFragment;
+import com.example.myapplication.ui.powercard.PowerCardFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter
 {
@@ -24,9 +24,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
             case 0:
                  return new HomeFragment();
             case 1:
-                return new DashboardFragment();
+                return new LeaderboardFragment();
             case 2:
-                return new NotificationsFragment();
+                return new PowerCardFragment();
             default:
                 return new HomeFragment();
         }
