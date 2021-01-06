@@ -23,10 +23,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.ConnectionHelper;
 import com.example.myapplication.ItemClicked;
+import com.example.myapplication.News;
 import com.example.myapplication.R;
 import com.example.myapplication.SelectorActivity;
 import com.example.myapplication.StockAdapter;
 import com.example.myapplication.Stocks;
+import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
+import com.example.myapplication.ui.newsfeed.newsFeedFragment;
+
 
 import java.nio.channels.Selector;
 import java.sql.Connection;
@@ -44,10 +48,10 @@ public class HomeFragment extends Fragment
     TextView timer,userAmount;
     RecyclerView stockList;
     ArrayList<Stocks> stocks = new ArrayList<>();
-    public static ArrayList<Double> stockPrice = new ArrayList<>();
+    ArrayList<Double> stockPrice = new ArrayList<>();
     ArrayList<String> stockName = new ArrayList<>();
     ArrayList<Integer> shareOwned = new ArrayList<>();
-    ViewPager mViewPager;
+    //ViewPager mViewPager;
     StockAdapter adapter;
     String number;
     private int millisecValue;
@@ -235,10 +239,10 @@ public class HomeFragment extends Fragment
             @Override
             public void onFinish()
             {
-                //TODO calculate the score and display it in the alertDialog
-                /*
-                score = A_shares*n_Ashares+...+H_shares*n_Hshares + Cash in hand
-                 */
+                LeaderboardFragment.users.clear();
+                LeaderboardFragment.userNames.clear();
+                LeaderboardFragment.points.clear();
+                LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0),stockPrice.get(1),stockPrice.get(2),stockPrice.get(3),stockPrice.get(4),stockPrice.get(5),stockPrice.get(6),stockPrice.get(7));
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
                 new AlertDialog.Builder(requireContext())
                         .setPositiveButton("Proceed to Next Round", new DialogInterface.OnClickListener() {
@@ -254,6 +258,7 @@ public class HomeFragment extends Fragment
                                 else{
                                     getData();
                                     startContinueTimer();
+                                    News.setNewsText();
                                 }
                             }
                         }).show();

@@ -9,19 +9,30 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.ConnectionHelper;
 import com.example.myapplication.R;
+import com.example.myapplication.UserAdapter;
+import com.example.myapplication.Users;
 import com.example.myapplication.ui.home.HomeFragment;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class LeaderboardFragment extends Fragment {
     ConnectionHelper con;
-    Connection connect;
+    static Connection connect;
+    public static ArrayList<String> userNames = new ArrayList<>();
+    public static ArrayList<Double> points = new ArrayList<>();
+    RecyclerView usersLeaderBoard;
+    static UserAdapter adapter;
+    public static ArrayList<Users> users = new ArrayList<>();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -37,25 +48,34 @@ public class LeaderboardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        double priceA = HomeFragment.stockPrice.get(0);
-        double priceB = HomeFragment.stockPrice.get(1);
-        double priceC = HomeFragment.stockPrice.get(2);
-        double priceD = HomeFragment.stockPrice.get(3);
-        double priceE = HomeFragment.stockPrice.get(4);
-        double priceF = HomeFragment.stockPrice.get(5);
-        double priceG = HomeFragment.stockPrice.get(6);
-        double priceH = HomeFragment.stockPrice.get(7);
-        String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares+E_shares+F_shares+G_shares+H_shares as points from login,valuation where login.phoneID = valuation.phoneID order by points";
+        usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
+        usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new UserAdapter(users,requireContext());
+        usersLeaderBoard.setAdapter(adapter);
+    }
+    public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF,double priceG,double priceH)
+    {
+        String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares*"+priceD+"+E_shares*"+priceE+"+F_shares*"+priceF+"+G_shares*"+priceG+"+H_shares*"+priceH+" as points from login,valuation where login.phoneID = valuation.phoneID order by points";
         try {
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(getLeaderBoard);
             while (rs.next())
             {
-                Log.d("Query",rs.getString("nameID")+rs.getDouble("points"));
+                userNames.add(rs.getString("nameID"));
+                points.add(rs.getDouble("points"));
             }
+            Log.d("TAG",userNames.toString()+points.toString());
+            for (int i=0;i<userNames.size();i++)
+            {
+                Users userInstance = new Users(userNames.get(i),points.get(i));
+                users.add(userInstance);
+            }
+            Log.d("TAG",users.toString());
+            adapter.resetData(users);
         }catch (Exception e)
         {
-            Log.d("Error",e.getMessage());
+            Log.d("Error",e.getLocalizedMessage());
         }
+
     }
 }
