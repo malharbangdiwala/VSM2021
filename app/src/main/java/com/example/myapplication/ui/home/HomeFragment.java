@@ -23,10 +23,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.ConnectionHelper;
 import com.example.myapplication.ItemClicked;
+import com.example.myapplication.News;
 import com.example.myapplication.R;
 import com.example.myapplication.SelectorActivity;
 import com.example.myapplication.StockAdapter;
 import com.example.myapplication.Stocks;
+import com.example.myapplication.ui.newsfeed.newsFeedFragment;
 
 import java.nio.channels.Selector;
 import java.sql.Connection;
@@ -254,6 +256,7 @@ public class HomeFragment extends Fragment
                                 else{
                                     getData();
                                     startContinueTimer();
+                                    News.setNewsText();
                                 }
                             }
                         }).show();
