@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,10 +91,10 @@ public class HomeFragment extends Fragment
                 TextView stockNames = v.findViewById(R.id.stockName);
                 final EditText stockBuy = v.findViewById(R.id.buy_id);
                 stockNames.setText(stockName.get(position));
-                new AlertDialog.Builder(requireContext())
-                        .setView(v)
-                        .setTitle("\t\t\t\t\t\tBUY\t\t\t\t\t")
-                        .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
+                        builder.setView(v);
+                        builder.setTitle("\t\t\t\t\t\tBUY\t\t\t\t\t");
+                        builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Integer stockB = Integer.parseInt(stockBuy.getText().toString());
@@ -126,13 +127,14 @@ public class HomeFragment extends Fragment
                                     }
                                 }
                             }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which)
                             {
                             }
-                        }).show();
+                        });
+                        builder.show();
             }
             @Override
             public void onClickSell(final int position, View view)
@@ -240,34 +242,58 @@ public class HomeFragment extends Fragment
             @Override
             public void onFinish()
             {
-
                 LeaderboardFragment.users.clear();
                 LeaderboardFragment.userNames.clear();
                 LeaderboardFragment.points.clear();
                 LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0),stockPrice.get(1),stockPrice.get(2),stockPrice.get(3),stockPrice.get(4),stockPrice.get(5),stockPrice.get(6),stockPrice.get(7));
-                //TODO calculate the score and display it in the alertDialog
-                /*
-                score = A_shares*n_Ashares+...+H_shares*n_Hshares + Cash in hand
-                 */
+
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
-                new AlertDialog.Builder(requireContext())
-                        .setPositiveButton("Proceed to Next Round", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                stocks.clear();
-                                stockName.clear();
-                                stockPrice.clear();
-                                shareOwned.clear();
-                                roundNo++;
-                                if(roundNo==6)
-                                    Log.d("GAME OVER","Game Over");
-                                else{
-                                    getData();
-                                    startContinueTimer();
-                                    News.setNewsText();
-                                }
+                LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.next_round,null,false);
+                Button roundChange = v.findViewById(R.id.roundChange);
+                final AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
+                final AlertDialog optionDialog = builder.create();
+                optionDialog.setCanceledOnTouchOutside(false);
+                optionDialog.setCancelable(false);
+                optionDialog.setView(v);
+                roundChange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int nextRoundNo = roundNo+1;
+                        String queryNextRound = "Select r" +nextRoundNo+ " from rounds";
+                        System.out.println(queryNextRound);
+                        int nextRoundStart = 0;
+                        try {
+                            Statement st = connect.createStatement();
+                            ResultSet rs = st.executeQuery(queryNextRound);
+                            while (rs.next()) {
+                                Log.d("Tag",rs.getString("r"+nextRoundNo));
+                                nextRoundStart = rs.getInt("r"+nextRoundNo);
                             }
-                        }).show();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        if (nextRoundStart == 1)
+                        {
+                            stocks.clear();
+                            stockName.clear();
+                            stockPrice.clear();
+                            shareOwned.clear();
+                            roundNo++;
+                            if (roundNo == 6)
+                                Log.d("GAME OVER", "Game Over");
+                            else {
+                                getData();
+                                startContinueTimer();
+                                News.setNewsText();
+                            }
+                            optionDialog.dismiss();
+                        }else {
+                            Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                optionDialog.show();
             }
         }.start();
     }
