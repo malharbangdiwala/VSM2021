@@ -29,9 +29,13 @@ import com.example.myapplication.R;
 import com.example.myapplication.SelectorActivity;
 import com.example.myapplication.StockAdapter;
 import com.example.myapplication.Stocks;
+import com.example.myapplication.powercard3;
 import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
 import com.example.myapplication.ui.newsfeed.newsFeedFragment;
 import com.example.myapplication.ui.newsfeed.newsFeedFragment;
+import com.example.myapplication.ui.powercard.PowerCardFragment;
+
+import org.w3c.dom.Text;
 
 import java.nio.channels.Selector;
 import java.sql.Connection;
@@ -46,7 +50,8 @@ public class HomeFragment extends Fragment
 {
     SharedPreferences sharedPreferences;
     CountDownTimer countDownTimer;
-    TextView timer,userAmount;
+    TextView timer;
+    public static TextView userAmount;
     RecyclerView stockList;
     ArrayList<Stocks> stocks = new ArrayList<>();
     ArrayList<String> stockName = new ArrayList<>();
@@ -246,6 +251,18 @@ public class HomeFragment extends Fragment
                 LeaderboardFragment.userNames.clear();
                 LeaderboardFragment.points.clear();
                 LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0),stockPrice.get(1),stockPrice.get(2),stockPrice.get(3),stockPrice.get(4),stockPrice.get(5),stockPrice.get(6),stockPrice.get(7));
+
+                if(PowerCardFragment.pc3flag==1){
+                    PowerCardFragment.pc3flag=0;
+                    String reducecash="Update valuation set cash=cash-"+ powercard3.deduction+" where phoneID="+number+";";
+                    try {
+                        Statement st = connect.createStatement();
+                        st.executeQuery(reducecash);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
 
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
                 LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

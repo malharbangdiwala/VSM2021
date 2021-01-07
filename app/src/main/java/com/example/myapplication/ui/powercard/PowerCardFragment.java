@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.ConnectionHelper;
 import com.example.myapplication.News;
 import com.example.myapplication.R;
+import com.example.myapplication.powercard3;
 import com.example.myapplication.ui.home.HomeFragment;
 
 import java.sql.Connection;
@@ -33,6 +34,7 @@ public class PowerCardFragment extends Fragment {
     Connection connect;
     String number;
     public static int pc2flag;
+    public static int pc3flag;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         sharedPreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -99,7 +101,17 @@ public class PowerCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(usepc3.getText().toString().equals("use")) {
-                    //TODO Call powercard3 function
+                    pc3flag=1;
+                    Double cash=powercard3.addcash();
+                    String addcash="Update valuation set cash="+cash+" where phoneID="+number+";";
+                    Log.i("PC3 QUERY",addcash);
+                    try {
+                        Statement st = connect.createStatement();
+                        st.executeQuery(addcash);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    HomeFragment.userAmount.setText(String.valueOf(cash));
                     usepc3.setText("Used");
                     Toast.makeText(requireContext(),"Powercard3 active",Toast.LENGTH_SHORT).show();
                     String query="Update powercard set pc3=0 where phoneID="+number+";";
