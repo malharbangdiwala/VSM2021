@@ -235,26 +235,23 @@ public class HomeFragment extends Fragment
         if (roundNo!=1)
             adapter.resetData(stocks);
     }
-    private void startContinueTimer()
-    {
-        countDownTimer = new CountDownTimer(millisecValue, 1000)
-        {
+    private void startContinueTimer() {
+        countDownTimer = new CountDownTimer(millisecValue, 1000) {
             @Override
-            public void onTick(long millisUntilFinished)
-            {
+            public void onTick(long millisUntilFinished) {
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
             }
+
             @Override
-            public void onFinish()
-            {
+            public void onFinish() {
                 LeaderboardFragment.users.clear();
                 LeaderboardFragment.userNames.clear();
                 LeaderboardFragment.points.clear();
-                LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0),stockPrice.get(1),stockPrice.get(2),stockPrice.get(3),stockPrice.get(4),stockPrice.get(5),stockPrice.get(6),stockPrice.get(7));
+                LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
 
-                if(PowerCardFragment.pc3flag==1){
-                    PowerCardFragment.pc3flag=0;
-                    String reducecash="Update valuation set cash=cash-"+ powercard3.deduction+" where phoneID="+number+";";
+                if (PowerCardFragment.pc3flag == 1) {
+                    PowerCardFragment.pc3flag = 0;
+                    String reducecash = "Update valuation set cash=cash-" + powercard3.deduction + " where phoneID=" + number + ";";
                     try {
                         Statement st = connect.createStatement();
                         st.executeQuery(reducecash);
@@ -263,12 +260,53 @@ public class HomeFragment extends Fragment
                     }
                 }
 
-
                 Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View v = inflater.inflate(R.layout.next_round,null,false);
-                Button roundChange = v.findViewById(R.id.roundChange);
-                final AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
+                LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.next_round, null, false);
+
+
+                final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                roundChangeButton.setVisibility(View.VISIBLE);
+                roundChangeButton.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        int nextRoundNo = roundNo+1;
+                        String queryNextRound = "Select r" +nextRoundNo+ " from rounds";
+                        System.out.println(queryNextRound);
+                        int nextRoundStart = 0;
+                        try {
+                            Statement st = connect.createStatement();
+                            ResultSet rs = st.executeQuery(queryNextRound);
+                            while (rs.next()) {
+                                Log.d("Tag",rs.getString("r"+nextRoundNo));
+                                nextRoundStart = rs.getInt("r"+nextRoundNo);
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        if (nextRoundStart == 1)
+                        {
+                            Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                            roundChangeButton.setVisibility(View.GONE);
+                            stocks.clear();
+                            stockName.clear();
+                            stockPrice.clear();
+                            shareOwned.clear();
+                            roundNo++;
+                            if (roundNo == 6)
+                                Log.d("GAME OVER", "Game Over");
+                            else {
+                                getData();
+                                startContinueTimer();
+                                News.setNewsText();
+                            }
+                        }else {
+                            Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                //Button roundChange = v.findViewById(R.id.roundChange);
+                /*final AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
                 final AlertDialog optionDialog = builder.create();
                 optionDialog.setCanceledOnTouchOutside(false);
                 optionDialog.setCancelable(false);
@@ -310,8 +348,8 @@ public class HomeFragment extends Fragment
                         }
                     }
                 });
-                optionDialog.show();
+                optionDialog.show();*/
             }
         }.start();
-    }
+            }
 }
