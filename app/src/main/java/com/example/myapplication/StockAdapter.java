@@ -44,6 +44,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
     public int getItemCount() {
         return stocks.size();
     }
+
     public void resetData(ArrayList<Stocks> stocks) {
         this.stocks = stocks;
         this.notifyDataSetChanged();

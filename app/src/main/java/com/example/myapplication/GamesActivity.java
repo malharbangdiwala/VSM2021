@@ -24,7 +24,6 @@ public class GamesActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.view_pager);
         mViewPager.setOffscreenPageLimit(4);
         setUpViewPager();
-
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

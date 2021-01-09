@@ -264,7 +264,6 @@ public class HomeFragment extends Fragment
                 LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View v = inflater.inflate(R.layout.next_round, null, false);
 
-
                 final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
                 roundChangeButton.setVisibility(View.VISIBLE);
                 roundChangeButton.setOnClickListener(new View.OnClickListener(){
