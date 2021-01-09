@@ -12,6 +12,7 @@ public class SelectorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selector);
+        getSupportActionBar().hide();
         Button gameRound = findViewById(R.id.gameRound);
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
