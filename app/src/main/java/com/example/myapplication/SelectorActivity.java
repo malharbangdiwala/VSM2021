@@ -20,5 +20,13 @@ public class SelectorActivity extends AppCompatActivity {
             startActivity(intent);
         }
         });
+        Button trialRound = findViewById(R.id.trialRound);
+        trialRound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectorActivity.this,TrialActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -56,17 +56,20 @@ public class HomeFragment extends Fragment
     ArrayList<Stocks> stocks = new ArrayList<>();
     ArrayList<String> stockName = new ArrayList<>();
     ArrayList<Integer> shareOwned = new ArrayList<>();
-    //ViewPager mViewPager;
     public static ArrayList<Double> stockPrice = new ArrayList<>();
-    ViewPager mViewPager;
     StockAdapter adapter;
     String number;
+    int status;
     private int millisecValue;
     ConnectionHelper con;
     Connection connect;
     public static int roundNo = 1;
-    @Override
 
+    public HomeFragment(int status) {
+        this.status = status;
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sharedPreferences = this.getActivity().getSharedPreferences(MyPREFERENCES,Context.MODE_PRIVATE);
         try {
@@ -116,19 +119,19 @@ public class HomeFragment extends Fragment
                                     Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
                                     stocks.set(position,stockInstance);
                                     adapter.resetData(stocks);
-                                    Log.d("Query",insertBuy);
-                                    try {
-                                        Statement st = connect.createStatement();
-                                        st.executeQuery(updateBuy);
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-                                    try {
-                                        Statement statement = connect.createStatement();
-                                        statement.executeQuery(insertBuy);
-                                    }catch (Exception e)
-                                    {
+                                    if (status==1) {
+                                        try {
+                                            Statement st = connect.createStatement();
+                                            st.executeQuery(updateBuy);
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            Statement statement = connect.createStatement();
+                                            statement.executeQuery(insertBuy);
+                                        } catch (Exception e) {
 
+                                        }
                                     }
                                 }
                             }
@@ -166,18 +169,19 @@ public class HomeFragment extends Fragment
                                     Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
                                     stocks.set(position,stockInstance);
                                     adapter.resetData(stocks);
-                                    try {
-                                        Statement st = connect.createStatement();
-                                        st.executeQuery(updateSell);
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-                                    try {
-                                        Statement statement = connect.createStatement();
-                                        statement.executeQuery(insertSell);
-                                    }catch (Exception e)
-                                    {
+                                    if (status==1) {
+                                        try {
+                                            Statement st = connect.createStatement();
+                                            st.executeQuery(updateSell);
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            Statement statement = connect.createStatement();
+                                            statement.executeQuery(insertSell);
+                                        } catch (Exception e) {
 
+                                        }
                                     }
                                 }else {
                                     Toast.makeText(requireContext(),"You dont have enough stocks",Toast.LENGTH_SHORT).show();
@@ -244,66 +248,71 @@ public class HomeFragment extends Fragment
 
             @Override
             public void onFinish() {
-                LeaderboardFragment.users.clear();
-                LeaderboardFragment.userNames.clear();
-                LeaderboardFragment.points.clear();
-                LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+                if (status==0)
+                    Log.d("Trial","Trial Round Over");
+                else {
+                    LeaderboardFragment.users.clear();
+                    LeaderboardFragment.userNames.clear();
+                    LeaderboardFragment.points.clear();
+                    LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
 
-                if (PowerCardFragment.pc3flag == 1) {
-                    PowerCardFragment.pc3flag = 0;
-                    String reducecash = "Update valuation set cash=cash-" + powercard3.deduction + " where phoneID=" + number + ";";
-                    try {
-                        Statement st = connect.createStatement();
-                        st.executeQuery(reducecash);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                    if (PowerCardFragment.pc3flag == 1) {
+                        if (status == 1) {
+                            PowerCardFragment.pc3flag = 0;
+                            String reducecash = "Update valuation set cash=cash-" + powercard3.deduction + " where phoneID=" + number + ";";
+                            try {
+                                Statement st = connect.createStatement();
+                                st.executeQuery(reducecash);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
+
+                    Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
+                    LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View v = inflater.inflate(R.layout.next_round, null, false);
+
+                    final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                    roundChangeButton.setVisibility(View.VISIBLE);
+                    roundChangeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int nextRoundNo = roundNo + 1;
+                            String queryNextRound = "Select r" + nextRoundNo + " from rounds";
+                            System.out.println(queryNextRound);
+                            int nextRoundStart = 0;
+                            try {
+                                Statement st = connect.createStatement();
+                                ResultSet rs = st.executeQuery(queryNextRound);
+                                while (rs.next()) {
+                                    Log.d("Tag", rs.getString("r" + nextRoundNo));
+                                    nextRoundStart = rs.getInt("r" + nextRoundNo);
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            if (nextRoundStart == 1) {
+                                Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                                roundChangeButton.setVisibility(View.GONE);
+                                stocks.clear();
+                                stockName.clear();
+                                stockPrice.clear();
+                                shareOwned.clear();
+                                roundNo++;
+                                if (roundNo == 6)
+                                    Log.d("GAME OVER", "Game Over");
+                                else {
+                                    getData();
+                                    startContinueTimer();
+                                    News.setNewsText();
+                                }
+                            } else {
+                                Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
-
-                Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View v = inflater.inflate(R.layout.next_round, null, false);
-
-                final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
-                roundChangeButton.setVisibility(View.VISIBLE);
-                roundChangeButton.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        int nextRoundNo = roundNo+1;
-                        String queryNextRound = "Select r" +nextRoundNo+ " from rounds";
-                        System.out.println(queryNextRound);
-                        int nextRoundStart = 0;
-                        try {
-                            Statement st = connect.createStatement();
-                            ResultSet rs = st.executeQuery(queryNextRound);
-                            while (rs.next()) {
-                                Log.d("Tag",rs.getString("r"+nextRoundNo));
-                                nextRoundStart = rs.getInt("r"+nextRoundNo);
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                        if (nextRoundStart == 1)
-                        {
-                            Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
-                            roundChangeButton.setVisibility(View.GONE);
-                            stocks.clear();
-                            stockName.clear();
-                            stockPrice.clear();
-                            shareOwned.clear();
-                            roundNo++;
-                            if (roundNo == 6)
-                                Log.d("GAME OVER", "Game Over");
-                            else {
-                                getData();
-                                startContinueTimer();
-                                News.setNewsText();
-                            }
-                        }else {
-                            Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
                 //Button roundChange = v.findViewById(R.id.roundChange);
                 /*final AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
                 final AlertDialog optionDialog = builder.create();
@@ -350,5 +359,5 @@ public class HomeFragment extends Fragment
                 optionDialog.show();*/
             }
         }.start();
-            }
+    }
 }

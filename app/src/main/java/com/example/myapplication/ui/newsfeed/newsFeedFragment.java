@@ -31,8 +31,6 @@ public class newsFeedFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         news=requireView().findViewById(R.id.newsText);
         News.setNewsText();
-        //String setNews= News.setNewsText();
-        //news.setText(setNews);
     }
 
 }

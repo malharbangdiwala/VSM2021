@@ -5,21 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class GamesActivity extends AppCompatActivity {
-
+public class TrialActivity extends AppCompatActivity {
     private BottomNavigationView navigationView;
     private ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_games);
+        setContentView(R.layout.activity_trial);
         navigationView = findViewById(R.id.bottom_nav);
         mViewPager = findViewById(R.id.view_pager);
         mViewPager.setOffscreenPageLimit(4);
@@ -48,7 +45,7 @@ public class GamesActivity extends AppCompatActivity {
 
     private void setUpViewPager()
     {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,1);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,0);
         mViewPager.setAdapter(viewPagerAdapter);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
