@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        getSupportActionBar().hide();
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();

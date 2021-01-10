@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="#228bff"
+        android:background="@drawable/custom_button"
         android:onClick="login"
         android:text="Log in"
         android:textColor="#000523"
