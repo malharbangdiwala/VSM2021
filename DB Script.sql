@@ -1,6 +1,8 @@
 create table login(
 nameID varchar(50),
-phoneID numeric(10,0)
+phoneID numeric(10,0),
+day numeric(1,0),
+loginflag numeric(1,0)
 constraint login_pk Primary Key(phoneID));
 
 
