@@ -65,8 +65,9 @@ public class HomeFragment extends Fragment
     Connection connect;
     public static int roundNo = 1;
 
-    public HomeFragment(int status) {
+    public HomeFragment(int status,int roundNo) {
         this.status = status;
+        this.roundNo = roundNo;
     }
 
     @Override
@@ -87,7 +88,6 @@ public class HomeFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         userAmount = requireView().findViewById(R.id.userAmount);
         number = sharedPreferences.getString("number","");
-        getData();
         stockList = requireView().findViewById(R.id.stockView);
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
@@ -196,7 +196,9 @@ public class HomeFragment extends Fragment
                         }).show();
             }
         });
+        getData();
         stockList.setAdapter(adapter);
+        LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
         timer  = requireView().findViewById(R.id.timer);
         startContinueTimer();
     }

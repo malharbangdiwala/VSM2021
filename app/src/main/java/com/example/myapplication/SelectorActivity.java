@@ -4,19 +4,64 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class SelectorActivity extends AppCompatActivity {
+    ConnectionHelper con;
+    Connection connect;
+    int roundNo = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selector);
         getSupportActionBar().hide();
         Button gameRound = findViewById(R.id.gameRound);
+
+        try {
+            con = new ConnectionHelper();
+            connect = ConnectionHelper.CONN();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String whichRounds = "Select * from rounds";
+        try {
+            Statement st = connect.createStatement();
+            ResultSet rs = st.executeQuery(whichRounds);
+            if (rs.next())
+            {
+                if (rs.getInt("r1")==1)
+                {
+                    roundNo = 1;
+                }else if (rs.getInt("r2")==1)
+                {
+                    roundNo = 2;
+                }else if (rs.getInt("r3")==1)
+                {
+                    roundNo = 3;
+                }else if (rs.getInt("r4")==1)
+                {
+                    roundNo = 4;
+                }else {
+                    roundNo = 5;
+                }
+            }
+        }catch (SQLException e)
+        {
+
+        }
+
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
+            Log.d("Round No",""+roundNo);
             Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);
+            intent.putExtra("roundNoLive",roundNo);
             startActivity(intent);
         }
         });

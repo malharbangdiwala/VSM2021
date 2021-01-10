@@ -13,9 +13,11 @@ import com.example.myapplication.ui.powercard.PowerCardFragment;
 public class ViewPagerAdapter extends FragmentPagerAdapter
 {
     int status;
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior,int status) {
+    int roundNo;
+    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior,int status,int roundNo) {
         super(fm, behavior);
         this.status = status;
+        this.roundNo = roundNo;
     }
 
     @NonNull
@@ -24,7 +26,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
             switch (position)
             {
                 case 0:
-                     return new HomeFragment(status);
+                     return new HomeFragment(status,roundNo);
                 case 1:
                     return new LeaderboardFragment();
                 case 2:
@@ -32,7 +34,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 case 3:
                     return new newsFeedFragment();
                 default:
-                    return new HomeFragment(status);
+                    return new HomeFragment(status,roundNo);
             }
     }
 
