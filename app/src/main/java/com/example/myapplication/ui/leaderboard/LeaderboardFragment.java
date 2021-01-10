@@ -55,7 +55,7 @@ public class LeaderboardFragment extends Fragment {
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF,double priceG,double priceH)
     {
-        String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares*"+priceD+"+E_shares*"+priceE+"+F_shares*"+priceF+"+G_shares*"+priceG+"+H_shares*"+priceH+" as points from login,valuation where login.phoneID = valuation.phoneID order by points desc,nameID;";
+        String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares*"+priceD+"+E_shares*"+priceE+"+F_shares*"+priceF+"+G_shares*"+priceG+"+H_shares*"+priceH+" as points from login,valuation where login.phoneID = valuation.phoneID and day=1 order by points desc,nameID;";
         try {
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(getLeaderBoard);

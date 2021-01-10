@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -56,11 +57,22 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         try {
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(query);
-            if (rs.next()){
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this,SelectorActivity.class);
-                startActivity(intent);
-                finish();
+            if(rs.next()) {
+                if (rs.getInt("loginflag") == 0) {
+                    String updateLoginFlag = "Update login set loginflag = 1 where phoneID= " + number + ";";
+                    try {
+                        Statement st2 = connect.createStatement();
+                        ResultSet rs2 = st2.executeQuery(updateLoginFlag);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SelectorActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(this, "User already logged in!", Toast.LENGTH_SHORT).show();
+                    }
             }else{
                 Toast.makeText(this, "Login Unsuccessful. Try Again!", Toast.LENGTH_SHORT).show();
             }
