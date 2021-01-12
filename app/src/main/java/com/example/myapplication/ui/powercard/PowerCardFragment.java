@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.powercard;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +40,21 @@ public class PowerCardFragment extends Fragment {
     public static int pc2flag;
     public static int pc3flag;
 
+    AnimatorSet front_anim;
+    AnimatorSet front_anim1;
+    AnimatorSet back_anim;
+    AnimatorSet back_anim1;
+    boolean isFrontPc2 = true;
+    boolean isFrontPc3 = true;
+
+    LinearLayout pc2Front;
+    LinearLayout pc2Back;
+    LinearLayout pc2;
+
+    LinearLayout pc3Front;
+    LinearLayout pc3Back;
+    LinearLayout pc3;
+
     public PowerCardFragment(int status) {
         this.status = status;
     }
@@ -55,12 +73,19 @@ public class PowerCardFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final Button usepc1=requireView().findViewById(R.id.usepc1);
+        pc2 = view.findViewById(R.id.powercard2Layout);
+        pc3 = view.findViewById(R.id.powercard3Layout);
+        front_anim = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.front_animator);
+        front_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.front_animator);
+        back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.back_animator);
+        back_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.back_animator);
+
+        //final Button usepc1=requireView().findViewById(R.id.usepc1);
         number = sharedPreferences.getString("number","");
 
-        usepc1.setOnClickListener(new View.OnClickListener() {
+        /*usepc1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(usepc1.getText().toString().equals("use")) {
@@ -80,7 +105,7 @@ public class PowerCardFragment extends Fragment {
                     Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
         final Button usepc2=requireView().findViewById(R.id.usepc2);
         usepc2.setOnClickListener(new View.OnClickListener() {
@@ -141,43 +166,45 @@ public class PowerCardFragment extends Fragment {
             }
         });
 
-
-        final Button pc1=requireView().findViewById(R.id.powercard1);
-        pc1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(requireContext())
-                        .setPositiveButton("Powercard1 info", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
-            }
-        });
-
-        final Button pc2=requireView().findViewById(R.id.powercard2);
         pc2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(requireContext())
-                        .setPositiveButton("Powercard2 info", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
+                pc2Front = view.findViewById(R.id.frontpowercard2);
+                pc2Back = view.findViewById(R.id.backpowercard2);
+                if (isFrontPc2){
+                    front_anim1.setTarget(pc2Front);
+                    back_anim1.setTarget(pc2Back);
+                    front_anim1.start();
+                    back_anim1.start();
+                    isFrontPc2 = false;
+                }else {
+                    front_anim1.setTarget(pc2Back);
+                    back_anim1.setTarget(pc2Front);
+                    front_anim1.start();
+                    back_anim1.start();
+                    isFrontPc2 = true;
+                }
             }
         });
 
-        final Button pc3=requireView().findViewById(R.id.powercard3);
         pc3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(requireContext())
-                        .setPositiveButton("Powercard3 info", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
+                pc3Front = view.findViewById(R.id.powercard3front);
+                pc3Back = view.findViewById(R.id.powercard3back);
+                if (isFrontPc3){
+                    front_anim.setTarget(pc3Front);
+                    back_anim.setTarget(pc3Back);
+                    front_anim.start();
+                    back_anim.start();
+                    isFrontPc3 = false;
+                }else {
+                    front_anim.setTarget(pc3Back);
+                    back_anim.setTarget(pc3Front);
+                    front_anim.start();
+                    back_anim.start();
+                    isFrontPc3 = true;
+                }
             }
         });
     }
