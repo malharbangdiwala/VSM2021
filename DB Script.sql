@@ -42,7 +42,6 @@ constraint trade_fk2 Foreign Key(company_name) references company(company_name) 
 
 create table powercard(
 phoneID numeric(10,0),
-pc1 numeric(1,0),
 pc2 numeric(1,0),
 pc3 numeric(1,0),
 constraint powercard_fk Foreign Key(phoneID) references login(phoneID) on update cascade);
@@ -56,7 +55,7 @@ insert into rounds values(1,1,1,1,1);
 create trigger powercard_insert on login for insert
 as
 begin
-insert into powercard values((select phoneID from inserted),1,1,1);
+insert into powercard values((select phoneID from inserted),1,1);
 end;
 go
 
