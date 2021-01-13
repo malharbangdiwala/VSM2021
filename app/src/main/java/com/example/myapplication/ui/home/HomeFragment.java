@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.ConnectionHelper;
+import com.example.myapplication.GameOverActivity;
 import com.example.myapplication.ItemClicked;
 import com.example.myapplication.News;
 import com.example.myapplication.R;
@@ -261,8 +262,13 @@ public class HomeFragment extends Fragment
 
             @Override
             public void onFinish() {
-                if (status==0)
-                    Log.d("Trial","Trial Round Over");
+                if (status==0){
+                    Toast.makeText(requireContext(), "Trial Round Over", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(),GameOverActivity.class);
+                    intent.putExtra("roundType","TRIAL_ROUND");
+                    startActivity(intent);
+                    getActivity().finish();
+                }
                 else {
                     roundNo++;
                     News.setNewsText();
@@ -324,7 +330,11 @@ public class HomeFragment extends Fragment
                                 //roundNo++;
                                 if (roundNo == 6)
                                 {
-                                    Log.d("GAME OVER", "Game Over");
+                                    Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getActivity(), GameOverActivity.class);
+                                    intent.putExtra("roundType","GAME_ROUND");
+                                    startActivity(intent);
+                                    getActivity().finish();
                                 }
                                 else {
                                     getData();
