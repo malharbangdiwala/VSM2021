@@ -85,5 +85,9 @@ insert into company(company_name,r1_price) values('G',100);
 insert into company(company_name,r1_price) values('H',100);
 
 
---Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID and phoneID = number
---Select name,cash+A_shares*r1_price......+H_shares*price as points from login,valuation where login.phoneID = valuation.phoneID order by points
+--UPDATE PRICES AFTER EACH ROUND
+select company_name,sum(buy)-sum(sell) as change from trade where round_no=1 group by company_name ;
+update company set r2_price=r1_price+0.2*70 where company_name='A';
+
+--SET FLAGS FOR NEXT ROUND
+update rounds set r2=1,r1=0;
