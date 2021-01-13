@@ -13,6 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:id="@+id/frontpowercard2"
                 android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
             </LinearLayout>
             <Button
                 android:id="@+id/usepc2"
-                android:layout_toEndOf="@id/frontpowercard2"
+                android:layout_below="@id/backpowercard2"
                 android:layout_width="wrap_content"
                 android:background="@drawable/custom_button"
                 android:layout_height="wrap_content"

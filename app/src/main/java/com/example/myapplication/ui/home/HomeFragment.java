@@ -254,6 +254,7 @@ public class HomeFragment extends Fragment
                     Log.d("Trial","Trial Round Over");
                 else {
                     roundNo++;
+                    News.setNewsText();
                     /*if (roundNo == 6)
                         Log.d("GAME OVER", "Game Over");
                     else {
@@ -315,7 +316,6 @@ public class HomeFragment extends Fragment
                                 else {
                                     getData();
                                     startContinueTimer();
-                                    News.setNewsText();
                                 }
                             } else {
                                 Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
