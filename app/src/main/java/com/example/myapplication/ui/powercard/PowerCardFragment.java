@@ -154,14 +154,14 @@ public class PowerCardFragment extends Fragment {
                     front_anim1.start();
                     back_anim1.start();
                     isFrontPc2 = false;
-                    //usepc2.setVisibility(View.VISIBLE);
+                    usepc2.setVisibility(View.GONE);
                 }else {
                     front_anim1.setTarget(pc2Back);
                     back_anim1.setTarget(pc2Front);
                     front_anim1.start();
                     back_anim1.start();
                     isFrontPc2 = true;
-                    //usepc2.setVisibility(View.GONE);
+                    usepc2.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -177,12 +177,14 @@ public class PowerCardFragment extends Fragment {
                     front_anim.start();
                     back_anim.start();
                     isFrontPc3 = false;
+                    usepc3.setVisibility(View.GONE);
                 }else {
                     front_anim.setTarget(pc3Back);
                     back_anim.setTarget(pc3Front);
                     front_anim.start();
                     back_anim.start();
                     isFrontPc3 = true;
+                    usepc3.setVisibility(View.VISIBLE);
                 }
             }
         });

@@ -9,7 +9,9 @@
     <LinearLayout
         android:id="@+id/powercard2Layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -17,73 +19,97 @@
             <LinearLayout
                 android:id="@+id/frontpowercard2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="100">
 
                 <ImageView
                     android:layout_width="281dp"
-                    android:layout_height="276dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="50"
                     android:src="@drawable/ic_launcher_background" />
 
+                <Button
+                    android:id="@+id/usepc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_button"
+                    android:text="use"
+                    android:visibility="gone"/>
+
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/backpowercard2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/powercard2"
-                    android:src="@drawable/insider_trading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/insider_trading"
                     android:text="powercard2" />
             </LinearLayout>
-            <Button
-                android:id="@+id/usepc2"
-                android:layout_below="@id/backpowercard2"
-                android:layout_width="wrap_content"
-                android:background="@drawable/custom_button"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_centerInParent="true"
-                android:text="use" />
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/powercard3Layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:id="@+id/powercard3front"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="100">
 
                 <ImageView
                     android:layout_width="281dp"
-                    android:layout_height="289dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="50"
                     android:src="@drawable/ic_launcher_background" />
-
+                <Button
+                    android:id="@+id/usepc3"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_button"
+                    android:text="use" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/powercard3back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/loan_a_cap"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/loan_a_cap" />
             </LinearLayout>
-            <Button
-                android:id="@+id/usepc3"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/custom_button"
-                android:layout_toEndOf="@id/powercard3front"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="use"/>
+
         </RelativeLayout>
     </LinearLayout>
 

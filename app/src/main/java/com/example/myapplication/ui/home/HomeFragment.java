@@ -3,6 +3,7 @@ package com.example.myapplication.ui.home;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -201,6 +203,14 @@ public class HomeFragment extends Fragment
         LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
         timer  = requireView().findViewById(R.id.timer);
         startContinueTimer();
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Toast.makeText(requireContext(), "You cannot go back in a Ongoing Game", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
     private void getData()
     {
@@ -241,6 +251,7 @@ public class HomeFragment extends Fragment
         if (roundNo!=1)
             adapter.resetData(stocks);
     }
+
     private void startContinueTimer() {
         countDownTimer = new CountDownTimer(millisecValue, 1000) {
             @Override
@@ -312,7 +323,9 @@ public class HomeFragment extends Fragment
                                 shareOwned.clear();
                                 //roundNo++;
                                 if (roundNo == 6)
+                                {
                                     Log.d("GAME OVER", "Game Over");
+                                }
                                 else {
                                     getData();
                                     startContinueTimer();
