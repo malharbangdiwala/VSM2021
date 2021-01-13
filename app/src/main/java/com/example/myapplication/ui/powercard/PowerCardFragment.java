@@ -82,30 +82,7 @@ public class PowerCardFragment extends Fragment {
         back_anim = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.back_animator);
         back_anim1 = (AnimatorSet) AnimatorInflater.loadAnimator(requireContext(),R.animator.back_animator);
 
-        //final Button usepc1=requireView().findViewById(R.id.usepc1);
         number = sharedPreferences.getString("number","");
-
-        /*usepc1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(usepc1.getText().toString().equals("use")) {
-                    //TODO Call powercard1 function
-                    Toast.makeText(requireContext(),"Powercard1 active",Toast.LENGTH_SHORT).show();
-                    usepc1.setText("Used");
-                    String query="Update powercard set pc1=0 where phoneID="+number+";";
-                    if (status==1) {
-                        try {
-                            Statement st = connect.createStatement();
-                            st.executeQuery(query);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }else{
-                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
 
         final Button usepc2=requireView().findViewById(R.id.usepc2);
         usepc2.setOnClickListener(new View.OnClickListener() {

@@ -253,6 +253,14 @@ public class HomeFragment extends Fragment
                 if (status==0)
                     Log.d("Trial","Trial Round Over");
                 else {
+                    roundNo++;
+                    /*if (roundNo == 6)
+                        Log.d("GAME OVER", "Game Over");
+                    else {
+                        getData();
+                        startContinueTimer();
+                        News.setNewsText();
+                    }*/
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
@@ -301,7 +309,7 @@ public class HomeFragment extends Fragment
                                 stockName.clear();
                                 stockPrice.clear();
                                 shareOwned.clear();
-                                roundNo++;
+                                //roundNo++;
                                 if (roundNo == 6)
                                     Log.d("GAME OVER", "Game Over");
                                 else {
