@@ -26,8 +26,11 @@ import com.example.myapplication.powercard3;
 import com.example.myapplication.ui.home.HomeFragment;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.xml.transform.Result;
 
 import static com.example.myapplication.MainActivity.MyPREFERENCES;
 
@@ -88,22 +91,35 @@ public class PowerCardFragment extends Fragment {
         usepc2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usepc2.getText().toString().equals("use")) {
-                    pc2flag=1;
-                    News.setNewsText();
-                    Toast.makeText(requireContext(),"Powercard2 active",Toast.LENGTH_SHORT).show();
-                    usepc2.setText("Used");
-                    String query="Update powercard set pc2=0 where phoneID="+number+";";
-                    if (status==1) {
-                        try {
-                            Statement st = connect.createStatement();
-                            st.executeQuery(query);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                String checkpc2="Select pc2 from powercard where phoneID="+number+";";
+                ResultSet rs=null;
+                try{
+                    Statement st=connect.createStatement();
+                    rs=st.executeQuery(checkpc2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+                    if(rs.next() && rs.getInt("pc2")==1) {
+                        pc2flag=1;
+                        News.setNewsText();
+                        Toast.makeText(requireContext(),"Powercard2 active",Toast.LENGTH_SHORT).show();
+                        usepc2.setText("Used");
+                        String query="Update powercard set pc2=0 where phoneID="+number+";";
+                        if (status==1) {
+                            try {
+                                Statement st = connect.createStatement();
+                                st.executeQuery(query);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    }else{
+                        usepc2.setText("Used");
+                        Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -112,33 +128,46 @@ public class PowerCardFragment extends Fragment {
         usepc3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usepc3.getText().toString().equals("use")) {
-                    pc3flag=1;
-                    Double cash=powercard3.addcash();
-                    String addcash="Update valuation set cash="+cash+" where phoneID="+number+";";
-                    Log.i("PC3 QUERY",addcash);
-                    if (status==1) {
-                        try {
-                            Statement st = connect.createStatement();
-                            st.executeQuery(addcash);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                String checkpc3="Select pc3 from powercard where phoneID="+number+";";
+                ResultSet rs=null;
+                try{
+                    Statement st=connect.createStatement();
+                    rs=st.executeQuery(checkpc3);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+                    if(rs.next() && rs.getInt("pc3")==1) {
+                        pc3flag=1;
+                        Double cash=powercard3.addcash();
+                        String addcash="Update valuation set cash="+cash+" where phoneID="+number+";";
+                        Log.i("PC3 QUERY",addcash);
+                        if (status==1) {
+                            try {
+                                Statement st = connect.createStatement();
+                                st.executeQuery(addcash);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                    HomeFragment.userAmount.setText(String.valueOf(cash));
-                    usepc3.setText("Used");
-                    Toast.makeText(requireContext(),"Powercard3 active",Toast.LENGTH_SHORT).show();
-                    String query="Update powercard set pc3=0 where phoneID="+number+";";
-                    if (status==1) {
-                        try {
-                            Statement st = connect.createStatement();
-                            st.executeQuery(query);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+                        HomeFragment.userAmount.setText(String.valueOf(cash));
+                        usepc3.setText("Used");
+                        Toast.makeText(requireContext(),"Powercard3 active",Toast.LENGTH_SHORT).show();
+                        String query="Update powercard set pc3=0 where phoneID="+number+";";
+                        if (status==1) {
+                            try {
+                                Statement st = connect.createStatement();
+                                st.executeQuery(query);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    }else{
+                        usepc3.setText("Used");
+                        Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         });
