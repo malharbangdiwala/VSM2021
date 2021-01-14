@@ -49,38 +49,44 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public void login(View view){
         String name=nameEditText.getText().toString();
         String number=numberEditText.getText().toString();
+        Log.i("null check",name+"..."+number);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("number",number);
-        editor.apply();
-        String query="Select * from login where phoneID= "+number+";";
-        try {
-            Statement st = connect.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            if(rs.next()) {
-                if (rs.getInt("day") == 0) {
-                    Toast.makeText(this, "Cannot play today", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (rs.getInt("loginflag") == 0) {
-                        String updateLoginFlag = "Update login set loginflag = 1 where phoneID= " + number + ";";
-                        try {
-                            Statement st2 = connect.createStatement();
-                            ResultSet rs2 = st2.executeQuery(updateLoginFlag);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, SelectorActivity.class);
-                        startActivity(intent);
-                        finish();
+        if(name.equals("") || number.equals("")){
+            Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            editor.putString("number", number);
+            editor.apply();
+            String query = "Select * from login where phoneID= " + number + ";";
+            try {
+                Statement st = connect.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                if (rs.next()) {
+                    if (rs.getInt("day") == 0) {
+                        Toast.makeText(this, "Cannot play today", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "User already logged in!", Toast.LENGTH_SHORT).show();
+                        if (rs.getInt("loginflag") == 0) {
+                            String updateLoginFlag = "Update login set loginflag = 1 where phoneID= " + number + ";";
+                            try {
+                                Statement st2 = connect.createStatement();
+                                ResultSet rs2 = st2.executeQuery(updateLoginFlag);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, SelectorActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "User already logged in!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-                }else{
+                } else {
                     Toast.makeText(this, "Login Unsuccessful. Try Again!", Toast.LENGTH_SHORT).show();
                 }
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
