@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.myapplication.ui.home.HomeFragment;
 
 public class newsFeedFragment extends Fragment
 {
+    public static TextView newsroundnumber;
     public static TextView news;
     @Nullable
     @Override
@@ -30,6 +32,7 @@ public class newsFeedFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         news=requireView().findViewById(R.id.newsText);
+        newsroundnumber=requireView().findViewById(R.id.newsRoundNo);
         News.setNewsText();
     }
 

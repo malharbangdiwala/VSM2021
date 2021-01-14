@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication.ui.home.HomeFragment;
@@ -50,6 +51,7 @@ public class News {
                 break;
         }
         Log.i("News",setNews);
+        newsFeedFragment.newsroundnumber.setText("News: Round "+String.valueOf(HomeFragment.roundNo));
         newsFeedFragment.news.setText(setNews);
         return setNews;
     }
