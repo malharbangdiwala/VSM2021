@@ -47,8 +47,8 @@ public class PowerCardFragment extends Fragment {
     AnimatorSet front_anim1;
     AnimatorSet back_anim;
     AnimatorSet back_anim1;
-    boolean isFrontPc2 = true;
-    boolean isFrontPc3 = true;
+    boolean isFrontPc2 = false;
+    boolean isFrontPc3 = false;
 
     LinearLayout pc2Front;
     LinearLayout pc2Back;
