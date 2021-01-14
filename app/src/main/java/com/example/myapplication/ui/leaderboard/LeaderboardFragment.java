@@ -36,6 +36,9 @@ public class LeaderboardFragment extends Fragment {
     public static ArrayList<Users> users = new ArrayList<>();
     public static TextView leaderboardroundnumber;
     public static ImageView podium;
+    static TextView podium1;
+    static TextView podium2;
+    static TextView podium3;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -47,6 +50,9 @@ public class LeaderboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
         podium=requireView().findViewById(R.id.leaderboardPodium);
+        podium1= requireView().findViewById(R.id.podium1);
+        podium2= requireView().findViewById(R.id.podium2);
+        podium3= requireView().findViewById(R.id.podium3);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
@@ -70,7 +76,10 @@ public class LeaderboardFragment extends Fragment {
                 points.add(rs.getDouble("points"));
             }
             Log.d("TAG",userNames.toString()+points.toString());
-            for (int i=0;i<userNames.size();i++)
+            podium1.setText(userNames.get(0)+"\n"+points.get(0));
+            podium2.setText(userNames.get(1)+"\n"+points.get(1));
+            podium3.setText(userNames.get(2)+"\n"+points.get(2));
+            for (int i=3;i<userNames.size();i++)
             {
                 Users userInstance = new Users(userNames.get(i),points.get(i));
                 users.add(userInstance);

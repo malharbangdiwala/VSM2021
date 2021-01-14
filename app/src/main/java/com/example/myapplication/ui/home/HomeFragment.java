@@ -311,15 +311,15 @@ public class HomeFragment extends Fragment
                         @Override
                         public void onClick(View v) {
                             int nextRoundNo = roundNo + 1;
-                            String queryNextRound = "Select r" + nextRoundNo + " from rounds";
+                            String queryNextRound = "Select r" + roundNo + " from rounds";
                             System.out.println(queryNextRound);
                             int nextRoundStart = 0;
                             try {
                                 Statement st = connect.createStatement();
                                 ResultSet rs = st.executeQuery(queryNextRound);
                                 while (rs.next()) {
-                                    Log.d("Tag", rs.getString("r" + nextRoundNo));
-                                    nextRoundStart = rs.getInt("r" + nextRoundNo);
+                                    Log.d("Tag", rs.getString("r" + roundNo));
+                                    nextRoundStart = rs.getInt("r" + roundNo);
                                 }
                             } catch (SQLException e) {
                                 e.printStackTrace();
@@ -332,7 +332,7 @@ public class HomeFragment extends Fragment
                                 stockPrice.clear();
                                 shareOwned.clear();
                                 //roundNo++;
-                                if (roundNo == 6)
+                                if (roundNo == 5)
                                 {
                                     Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getActivity(), GameOverActivity.class);
