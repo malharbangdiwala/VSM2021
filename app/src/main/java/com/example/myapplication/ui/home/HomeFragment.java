@@ -273,13 +273,13 @@ public class HomeFragment extends Fragment
                 else {
                     roundNo++;
                     News.setNewsText();
-                    /*if (roundNo == 6)
-                        Log.d("GAME OVER", "Game Over");
-                    else {
-                        getData();
-                        startContinueTimer();
-                        News.setNewsText();
-                    }*/
+                    if (roundNo == 6) {
+                        Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), GameOverActivity.class);
+                        intent.putExtra("roundType","GAME_ROUND");
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
@@ -302,15 +302,12 @@ public class HomeFragment extends Fragment
                     }
 
                     Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
-                    LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View v = inflater.inflate(R.layout.next_round, null, false);
 
                     final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
                     roundChangeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            int nextRoundNo = roundNo + 1;
                             String queryNextRound = "Select r" + roundNo + " from rounds";
                             System.out.println(queryNextRound);
                             int nextRoundStart = 0;
@@ -324,76 +321,21 @@ public class HomeFragment extends Fragment
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            if (nextRoundStart == 1 || roundNo==6) {
+                            if (nextRoundStart == 1 ) {
                                 Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
                                 roundChangeButton.setVisibility(View.GONE);
                                 stocks.clear();
                                 stockName.clear();
                                 stockPrice.clear();
                                 shareOwned.clear();
-                                //roundNo++;
-                                if (roundNo == 6)
-                                {
-                                    Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity(), GameOverActivity.class);
-                                    intent.putExtra("roundType","GAME_ROUND");
-                                    startActivity(intent);
-                                    getActivity().finish();
-                                }
-                                else {
-                                    getData();
-                                    startContinueTimer();
-                                }
+                                getData();
+                                startContinueTimer();
                             } else {
                                 Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
-                //Button roundChange = v.findViewById(R.id.roundChange);
-                /*final AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
-                final AlertDialog optionDialog = builder.create();
-                optionDialog.setCanceledOnTouchOutside(false);
-                optionDialog.setCancelable(false);
-                optionDialog.setView(v);
-                roundChange.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int nextRoundNo = roundNo+1;
-                        String queryNextRound = "Select r" +nextRoundNo+ " from rounds";
-                        System.out.println(queryNextRound);
-                        int nextRoundStart = 0;
-                        try {
-                            Statement st = connect.createStatement();
-                            ResultSet rs = st.executeQuery(queryNextRound);
-                            while (rs.next()) {
-                                Log.d("Tag",rs.getString("r"+nextRoundNo));
-                                nextRoundStart = rs.getInt("r"+nextRoundNo);
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                        if (nextRoundStart == 1)
-                        {
-                            stocks.clear();
-                            stockName.clear();
-                            stockPrice.clear();
-                            shareOwned.clear();
-                            roundNo++;
-                            if (roundNo == 6)
-                                Log.d("GAME OVER", "Game Over");
-                            else {
-                                getData();
-                                startContinueTimer();
-                                News.setNewsText();
-                            }
-                            optionDialog.dismiss();
-                        }else {
-                            Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                optionDialog.show();*/
             }
         }.start();
     }
