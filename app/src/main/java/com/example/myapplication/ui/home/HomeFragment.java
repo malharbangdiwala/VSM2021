@@ -324,7 +324,7 @@ public class HomeFragment extends Fragment
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            if (nextRoundStart == 1) {
+                            if (nextRoundStart == 1 || roundNo==6) {
                                 Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
                                 roundChangeButton.setVisibility(View.GONE);
                                 stocks.clear();
@@ -332,7 +332,7 @@ public class HomeFragment extends Fragment
                                 stockPrice.clear();
                                 shareOwned.clear();
                                 //roundNo++;
-                                if (roundNo == 5)
+                                if (roundNo == 6)
                                 {
                                     Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getActivity(), GameOverActivity.class);
