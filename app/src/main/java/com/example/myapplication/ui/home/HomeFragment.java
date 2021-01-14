@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment
                     LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                     LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
                     homeroundno.setText("Round "+String.valueOf(roundNo));
-
+                    LeaderboardFragment.podium.setVisibility(View.VISIBLE);
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
                             PowerCardFragment.pc3flag = 0;

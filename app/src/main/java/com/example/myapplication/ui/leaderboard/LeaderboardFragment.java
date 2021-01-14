@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class LeaderboardFragment extends Fragment {
     static UserAdapter adapter;
     public static ArrayList<Users> users = new ArrayList<>();
     public static TextView leaderboardroundnumber;
+    public static ImageView podium;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -44,6 +46,7 @@ public class LeaderboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
+        podium=requireView().findViewById(R.id.leaderboardPodium);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
@@ -57,8 +60,6 @@ public class LeaderboardFragment extends Fragment {
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF,double priceG,double priceH)
     {
-        //leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(HomeFragment.roundNo));
-        //leaderboardroundnumber.setVisibility(View.VISIBLE);
         String getLeaderBoard ="Select nameID,cash+A_shares*"+priceA+"+B_shares*"+priceB+"+C_shares*"+priceC+"+D_shares*"+priceD+"+E_shares*"+priceE+"+F_shares*"+priceF+"+G_shares*"+priceG+"+H_shares*"+priceH+" as points from login,valuation where login.phoneID = valuation.phoneID and day=1 order by points desc,nameID;";
         try {
             Statement st = connect.createStatement();
