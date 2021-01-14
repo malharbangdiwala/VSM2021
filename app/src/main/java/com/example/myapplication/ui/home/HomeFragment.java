@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment
     ConnectionHelper con;
     Connection connect;
     public static int roundNo = 1;
-
+    TextView homeroundno;
     public HomeFragment(int status,int roundNo) {
         this.status = status;
         this.roundNo = roundNo;
@@ -90,6 +90,7 @@ public class HomeFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         userAmount = requireView().findViewById(R.id.userAmount);
+        homeroundno=requireView().findViewById(R.id.homeRoundNo);
         number = sharedPreferences.getString("number","");
         stockList = requireView().findViewById(R.id.stockView);
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -282,7 +283,10 @@ public class HomeFragment extends Fragment
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
+                    LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
+                    LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                     LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+                    homeroundno.setText("Round "+String.valueOf(roundNo));
 
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
