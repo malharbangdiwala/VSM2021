@@ -34,6 +34,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
         holder.name.setText(user.get(position).getName());
         holder.points.setText(user.get(position).getPoints().toString());
+        holder.ranks.setText(String.valueOf(position+4));
     }
 
     @Override
@@ -46,9 +47,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
         this.notifyDataSetChanged();
     }
     class UserHolder extends RecyclerView.ViewHolder {
-        TextView name,points;
+        TextView name,points,ranks;
         public UserHolder(@NonNull View itemView) {
             super(itemView);
+            ranks = itemView.findViewById(R.id.rank);
             name = itemView.findViewById(R.id.userName);
             points = itemView.findViewById(R.id.pointsUser);
         }
