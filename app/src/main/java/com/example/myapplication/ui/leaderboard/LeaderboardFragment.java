@@ -90,6 +90,5 @@ public class LeaderboardFragment extends Fragment {
         {
             Log.d("Error",e.getLocalizedMessage());
         }
-
     }
 }
