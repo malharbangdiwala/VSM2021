@@ -45,6 +45,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.example.myapplication.MainActivity.MyPREFERENCES;
@@ -68,6 +69,8 @@ public class HomeFragment extends Fragment
     Connection connect;
     public static int roundNo = 1;
     TextView homeroundno;
+    DecimalFormat df = new DecimalFormat();
+
     public HomeFragment(int status,int roundNo) {
         this.status = status;
         this.roundNo = roundNo;
@@ -89,11 +92,13 @@ public class HomeFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        df.setMinimumFractionDigits(2);
         userAmount = requireView().findViewById(R.id.userAmount);
         homeroundno=requireView().findViewById(R.id.homeRoundNo);
         number = sharedPreferences.getString("number","");
         stockList = requireView().findViewById(R.id.stockView);
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        homeroundno.setText("Round "+String.valueOf(roundNo));
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -109,32 +114,33 @@ public class HomeFragment extends Fragment
                         builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Integer stockB = Integer.parseInt(stockBuy.getText().toString());
-                                Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position)+Integer.parseInt(stockBuy.getText().toString())));
-                                shareOwned.set(position,stockOwnedNow);
-                                Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString())-(stockPrice.get(position)*stockB);
-                                if (cashOwnedNow<0){
-                                    Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    userAmount.setText(String.valueOf(cashOwnedNow));
+                                if (!stockBuy.getText().toString().equals("")) {
+                                    Integer stockB = Integer.parseInt(stockBuy.getText().toString());
+                                    Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
+                                    shareOwned.set(position, stockOwnedNow);
+                                    Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
+                                    if (cashOwnedNow < 0) {
+                                        Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        userAmount.setText(String.valueOf(df.format(cashOwnedNow)));
+                                        String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                        String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
+                                        Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                        stocks.set(position, stockInstance);
+                                        adapter.resetData(stocks);
+                                        if (status == 1) {
+                                            try {
+                                                Statement st = connect.createStatement();
+                                                st.executeQuery(updateBuy);
+                                            } catch (SQLException e) {
+                                                e.printStackTrace();
+                                            }
+                                            try {
+                                                Statement statement = connect.createStatement();
+                                                statement.executeQuery(insertBuy);
+                                            } catch (Exception e) {
 
-                                    String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
-                                    String insertBuy = "Insert into trade values("+number+",'"+stockName.get(position)+"',"+roundNo+","+stockB+",0);";
-                                    Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
-                                    stocks.set(position,stockInstance);
-                                    adapter.resetData(stocks);
-                                    if (status==1) {
-                                        try {
-                                            Statement st = connect.createStatement();
-                                            st.executeQuery(updateBuy);
-                                        } catch (SQLException e) {
-                                            e.printStackTrace();
-                                        }
-                                        try {
-                                            Statement statement = connect.createStatement();
-                                            statement.executeQuery(insertBuy);
-                                        } catch (Exception e) {
-
+                                            }
                                         }
                                     }
                                 }
@@ -162,33 +168,35 @@ public class HomeFragment extends Fragment
                         .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Integer stockB = Integer.parseInt(stockSell.getText().toString());
-                                if (Integer.parseInt(stockSell.getText().toString())<=shareOwned.get(position)) {
-                                    Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
-                                    shareOwned.set(position, stockOwnedNow);
-                                    Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
-                                    userAmount.setText(String.valueOf(cashOwnedNow));
-                                    String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
-                                    String insertSell = "Insert into trade values("+number+",'"+stockName.get(position)+"',"+roundNo+",0,"+stockB+");";
-                                    Stocks stockInstance = new Stocks(stockName.get(position),stockPrice.get(position),shareOwned.get(position));
-                                    stocks.set(position,stockInstance);
-                                    adapter.resetData(stocks);
-                                    if (status==1) {
-                                        try {
-                                            Statement st = connect.createStatement();
-                                            st.executeQuery(updateSell);
-                                        } catch (SQLException e) {
-                                            e.printStackTrace();
-                                        }
-                                        try {
-                                            Statement statement = connect.createStatement();
-                                            statement.executeQuery(insertSell);
-                                        } catch (Exception e) {
+                                if (!stockSell.getText().toString().equals("")) {
+                                    Integer stockB = Integer.parseInt(stockSell.getText().toString());
+                                    if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
+                                        Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
+                                        shareOwned.set(position, stockOwnedNow);
+                                        Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                                        userAmount.setText(String.valueOf(df.format(cashOwnedNow)));
+                                        String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                        String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
+                                        Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                        stocks.set(position, stockInstance);
+                                        adapter.resetData(stocks);
+                                        if (status == 1) {
+                                            try {
+                                                Statement st = connect.createStatement();
+                                                st.executeQuery(updateSell);
+                                            } catch (SQLException e) {
+                                                e.printStackTrace();
+                                            }
+                                            try {
+                                                Statement statement = connect.createStatement();
+                                                statement.executeQuery(insertSell);
+                                            } catch (Exception e) {
 
+                                            }
                                         }
+                                    } else {
+                                        Toast.makeText(requireContext(), "You dont have enough stocks", Toast.LENGTH_SHORT).show();
                                     }
-                                }else {
-                                    Toast.makeText(requireContext(),"You dont have enough stocks",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
@@ -202,7 +210,12 @@ public class HomeFragment extends Fragment
         });
         getData();
         stockList.setAdapter(adapter);
+        /*LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
+        LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
         LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+        homeroundno.setText("Round "+String.valueOf(roundNo));
+        LeaderboardFragment.podium.setVisibility(View.VISIBLE);*/
+        //LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
         timer  = requireView().findViewById(R.id.timer);
         startContinueTimer();
 
@@ -273,13 +286,6 @@ public class HomeFragment extends Fragment
                 else {
                     roundNo++;
                     News.setNewsText();
-                    /*if (roundNo == 6) {
-                        Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), GameOverActivity.class);
-                        intent.putExtra("roundType","GAME_ROUND");
-                        startActivity(intent);
-                        getActivity().finish();
-                    }*/
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();

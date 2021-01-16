@@ -26,6 +26,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static com.example.myapplication.ui.home.HomeFragment.roundNo;
+import static com.example.myapplication.ui.home.HomeFragment.stockPrice;
+
 public class LeaderboardFragment extends Fragment {
     ConnectionHelper con;
     static Connection connect;
@@ -63,6 +66,11 @@ public class LeaderboardFragment extends Fragment {
         usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new UserAdapter(users,requireContext());
         usersLeaderBoard.setAdapter(adapter);
+        if (roundNo!=1){
+        leaderboardroundnumber.setVisibility(View.VISIBLE);
+        leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
+        refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+        LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF,double priceG,double priceH)
     {

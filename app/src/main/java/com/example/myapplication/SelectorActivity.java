@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ public class SelectorActivity extends AppCompatActivity {
     ConnectionHelper con;
     Connection connect;
     int roundNo = 1;
+    int flag = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class SelectorActivity extends AppCompatActivity {
             {
                 if (rs.getInt("r1")==1)
                 {
+                    flag = 1;
                     roundNo = 1;
                 }else if (rs.getInt("r2")==1)
                 {
@@ -47,7 +51,7 @@ public class SelectorActivity extends AppCompatActivity {
                 }else if (rs.getInt("r4")==1)
                 {
                     roundNo = 4;
-                }else {
+                }else if (rs.getInt("r5")==1){
                     roundNo = 5;
                 }
             }
@@ -59,9 +63,13 @@ public class SelectorActivity extends AppCompatActivity {
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
             Log.d("Round No",""+roundNo);
+            if (flag==0&& roundNo==1) {
+                Toast.makeText(SelectorActivity.this, "Not Strated", Toast.LENGTH_SHORT).show();
+            }else {
             Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);
             intent.putExtra("roundNoLive",roundNo);
             startActivity(intent);
+            }
         }
         });
         Button trialRound = findViewById(R.id.trialRound);
