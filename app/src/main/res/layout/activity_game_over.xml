@@ -59,12 +59,12 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodium"
+        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodiumFinal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/leaderboardPodium"
-        app:layout_constraintVertical_bias="0.033" />
+        app:layout_constraintTop_toTopOf="@+id/leaderboardPodiumFinal"
+        app:layout_constraintVertical_bias="0.003" />
 
     <TextView
         android:id="@+id/podium2Final"
@@ -75,10 +75,12 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodium"
+        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodiumFinal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/leaderboardPodium"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/leaderboardPodiumFinal"
+        app:layout_constraintVertical_bias="0.084"/>
 
     <TextView
         android:id="@+id/podium3Final"
@@ -89,10 +91,13 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodium"
+        app:layout_constraintBottom_toBottomOf="@+id/leaderboardPodiumFinal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/leaderboardPodium"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintTop_toTopOf="@+id/leaderboardPodiumFinal"
+        app:layout_constraintVertical_bias="0.142"
+        />
 
     <Button
         android:id="@+id/overButton"

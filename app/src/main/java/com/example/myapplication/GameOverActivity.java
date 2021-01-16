@@ -76,7 +76,7 @@ public class GameOverActivity extends AppCompatActivity {
                 Statement st = connect.createStatement();
                 ResultSet rs = st.executeQuery(queryCompanyDetails);
                 while (rs.next()){
-                    stockPrice.add(rs.getDouble("r5_price"));
+                    stockPrice.add(rs.getDouble("r6_price"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
