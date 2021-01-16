@@ -12,7 +12,8 @@ r1_price numeric(6,2),
 r2_price numeric(6,2),
 r3_price numeric(6,2),
 r4_price numeric(6,2),
-r5_price numeric(6,2)
+r5_price numeric(6,2),
+r6_price numeric(6,2)
 constraint company_pk Primary Key(company_name));
 
 
