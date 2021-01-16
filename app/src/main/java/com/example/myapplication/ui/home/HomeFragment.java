@@ -273,21 +273,22 @@ public class HomeFragment extends Fragment
                 else {
                     roundNo++;
                     News.setNewsText();
-                    if (roundNo == 6) {
+                    /*if (roundNo == 6) {
                         Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), GameOverActivity.class);
                         intent.putExtra("roundType","GAME_ROUND");
                         startActivity(intent);
                         getActivity().finish();
-                    }
+                    }*/
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
+                    if (roundNo!=6){
                     LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
                     LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                     LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
                     homeroundno.setText("Round "+String.valueOf(roundNo));
-                    LeaderboardFragment.podium.setVisibility(View.VISIBLE);
+                    LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
                             PowerCardFragment.pc3flag = 0;
@@ -310,28 +311,36 @@ public class HomeFragment extends Fragment
                         public void onClick(View v) {
                             String queryNextRound = "Select r" + roundNo + " from rounds";
                             System.out.println(queryNextRound);
-                            int nextRoundStart = 0;
-                            try {
-                                Statement st = connect.createStatement();
-                                ResultSet rs = st.executeQuery(queryNextRound);
-                                while (rs.next()) {
-                                    Log.d("Tag", rs.getString("r" + roundNo));
-                                    nextRoundStart = rs.getInt("r" + roundNo);
+                            if (roundNo == 6) {
+                                Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), GameOverActivity.class);
+                                intent.putExtra("roundType","GAME_ROUND");
+                                startActivity(intent);
+                                getActivity().finish();
+                            }else {
+                                int nextRoundStart = 0;
+                                try {
+                                    Statement st = connect.createStatement();
+                                    ResultSet rs = st.executeQuery(queryNextRound);
+                                    while (rs.next()) {
+                                        Log.d("Tag", rs.getString("r" + roundNo));
+                                        nextRoundStart = rs.getInt("r" + roundNo);
+                                    }
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                            if (nextRoundStart == 1 ) {
-                                Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
-                                roundChangeButton.setVisibility(View.GONE);
-                                stocks.clear();
-                                stockName.clear();
-                                stockPrice.clear();
-                                shareOwned.clear();
-                                getData();
-                                startContinueTimer();
-                            } else {
-                                Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                                if (nextRoundStart == 1) {
+                                    Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                                    roundChangeButton.setVisibility(View.GONE);
+                                    stocks.clear();
+                                    stockName.clear();
+                                    stockPrice.clear();
+                                    shareOwned.clear();
+                                    getData();
+                                    startContinueTimer();
+                                } else {
+                                    Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
