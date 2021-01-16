@@ -87,7 +87,8 @@ insert into company(company_name,r1_price) values('H',100);
 
 
 --UPDATE PRICES AFTER EACH ROUND
-select company_name,sum(buy)-sum(sell) as change from trade where round_no=1 group by company_name ;
+select company_name,sum(buy)-sum(sell) as change from trade,login where round_no=1 and(trade.phoneID=login.phoneID and day=1) group by company_name ;
+
 update company set r2_price=r1_price+0.2*70 where company_name='A';
 
 --SET FLAGS FOR NEXT ROUND
