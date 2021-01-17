@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.leaderboard;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static com.example.myapplication.MainActivity.MyPREFERENCES;
 import static com.example.myapplication.ui.home.HomeFragment.roundNo;
 import static com.example.myapplication.ui.home.HomeFragment.stockPrice;
 
@@ -42,6 +45,10 @@ public class LeaderboardFragment extends Fragment {
     static TextView podium1;
     static TextView podium2;
     static TextView podium3;
+    SharedPreferences sharedPreferences;
+    static String name;
+    static int playerPosition = 0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -51,6 +58,8 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        sharedPreferences = requireActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        name = sharedPreferences.getString("name","");
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
         podium=requireView().findViewById(R.id.leaderboardPodium);
         podium1= requireView().findViewById(R.id.podium1);
@@ -64,8 +73,10 @@ public class LeaderboardFragment extends Fragment {
         }
         usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
         usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new UserAdapter(users,requireContext());
+        adapter = new UserAdapter(users,requireContext(),name);
         usersLeaderBoard.setAdapter(adapter);
+        if (playerPosition!=0)
+            usersLeaderBoard.scrollToPosition(playerPosition);
         if (roundNo!=1){
         leaderboardroundnumber.setVisibility(View.VISIBLE);
         leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
@@ -89,6 +100,8 @@ public class LeaderboardFragment extends Fragment {
             podium3.setText(userNames.get(2)+"\n"+points.get(2));
             for (int i=3;i<userNames.size();i++)
             {
+                if (userNames.get(i).equals(name))
+                    playerPosition = i;
                 Users userInstance = new Users(userNames.get(i),points.get(i));
                 users.add(userInstance);
             }
@@ -96,7 +109,7 @@ public class LeaderboardFragment extends Fragment {
             adapter.resetData(users);
         }catch (Exception e)
         {
-            Log.d("Error",e.getLocalizedMessage());
+            Log.d("Error",e.getMessage());
         }
     }
 }

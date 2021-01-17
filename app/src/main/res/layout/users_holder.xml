@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewUser"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -9,19 +10,22 @@
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="5dp"
     app:cardElevation="9dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="100">
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardRank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="10"
             app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center">
+            app:cardCornerRadius="5dp">
 
             <TextView
                 android:id="@+id/rank"
@@ -29,36 +33,40 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="1"
-                android:textColor="@android:color/white"
                 android:textAlignment="center"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="10"/>
+            android:layout_weight="10" />
+
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="30"
-            android:text="Divya"
             android:gravity="center"
+            android:text="Divya"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="20"/>
+            android:layout_weight="20" />
+
         <TextView
             android:id="@+id/pointsUser"
-            android:layout_marginLeft="10dp"
-            android:textAlignment="center"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
             android:text="100000"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
     </LinearLayout>

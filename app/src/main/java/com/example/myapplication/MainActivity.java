@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         }
         else {
             editor.putString("number", number);
+            editor.putString("name",name);
             editor.apply();
             String query = "Select * from login where phoneID= " + number + ";";
             try {

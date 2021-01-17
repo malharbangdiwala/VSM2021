@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import static com.example.myapplication.MainActivity.MyPREFERENCES;
 
 public class GameOverActivity extends AppCompatActivity {
 
@@ -31,7 +35,8 @@ public class GameOverActivity extends AppCompatActivity {
     ArrayList<Double> points = new ArrayList<>();
     UserAdapter adapter;
     ArrayList<Double> stockPrice = new ArrayList<>();
-
+    String name;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,6 +49,9 @@ public class GameOverActivity extends AppCompatActivity {
         podium_one_f = findViewById(R.id.podium1Final);
         podium_two_f = findViewById(R.id.podium2Final);
         podium_three_f = findViewById(R.id.podium3Final);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        name = sharedPreferences.getString("name","");
 
         Intent intent = getIntent();
         String roundType = intent.getStringExtra("roundType");
@@ -109,7 +117,7 @@ public class GameOverActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
-            adapter = new UserAdapter(users,getApplicationContext());
+            adapter = new UserAdapter(users,getApplicationContext(),name);
             leaderBoardFinal.setAdapter(adapter);
         }
     }
