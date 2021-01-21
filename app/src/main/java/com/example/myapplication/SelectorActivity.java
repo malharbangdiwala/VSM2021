@@ -32,39 +32,40 @@ public class SelectorActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String whichRounds = "Select * from rounds";
-        try {
-            Statement st = connect.createStatement();
-            ResultSet rs = st.executeQuery(whichRounds);
-            if (rs.next())
-            {
-                if (rs.getInt("r1")==1)
-                {
-                    flag = 1;
-                    roundNo = 1;
-                }else if (rs.getInt("r2")==1)
-                {
-                    roundNo = 2;
-                }else if (rs.getInt("r3")==1)
-                {
-                    roundNo = 3;
-                }else if (rs.getInt("r4")==1)
-                {
-                    roundNo = 4;
-                }else if (rs.getInt("r5")==1){
-                    roundNo = 5;
-                }
-            }
-        }catch (SQLException e)
-        {
 
-        }
 
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
+            String whichRounds = "Select * from rounds";
+            try {
+                Statement st = connect.createStatement();
+                ResultSet rs = st.executeQuery(whichRounds);
+                if (rs.next())
+                {
+                    if (rs.getInt("r1")==1)
+                    {
+                        flag = 1;
+                        roundNo = 1;
+                    }else if (rs.getInt("r2")==1)
+                    {
+                        roundNo = 2;
+                    }else if (rs.getInt("r3")==1)
+                    {
+                        roundNo = 3;
+                    }else if (rs.getInt("r4")==1)
+                    {
+                        roundNo = 4;
+                    }else if (rs.getInt("r5")==1){
+                        roundNo = 5;
+                    }
+                }
+            }catch (SQLException e)
+            {
+
+            }
             Log.d("Round No",""+roundNo);
             if (flag==0&& roundNo==1) {
-                Toast.makeText(SelectorActivity.this, "Not Strated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectorActivity.this, "Not Started", Toast.LENGTH_SHORT).show();
             }else {
             Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);
             intent.putExtra("roundNoLive",roundNo);
