@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment
                                     if (cashOwnedNow < 0) {
                                         Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        userAmount.setText(String.valueOf(df.format(cashOwnedNow)));
+                                        userAmount.setText(String.valueOf((cashOwnedNow)));
                                         String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                         String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
                                         Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
@@ -174,7 +174,7 @@ public class HomeFragment extends Fragment
                                         Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
                                         shareOwned.set(position, stockOwnedNow);
                                         Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
-                                        userAmount.setText(String.valueOf(df.format(cashOwnedNow)));
+                                        userAmount.setText(String.valueOf((cashOwnedNow)));
                                         String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                         String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
                                         Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
