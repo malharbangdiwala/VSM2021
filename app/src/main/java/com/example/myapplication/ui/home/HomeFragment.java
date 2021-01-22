@@ -283,12 +283,12 @@ public class HomeFragment extends Fragment
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
-                    if (roundNo!=6){
-                    LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
-                    LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
-                    LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+                    //if (roundNo!=6){
+                    //LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
+                    //LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
+                    //LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
                     homeroundno.setText("Round "+String.valueOf(roundNo));
-                    LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
+                    //LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
                             PowerCardFragment.pc3flag = 0;
@@ -337,6 +337,18 @@ public class HomeFragment extends Fragment
                                     stockPrice.clear();
                                     shareOwned.clear();
                                     getData();
+
+
+                                    LeaderboardFragment.users.clear();
+                                    LeaderboardFragment.userNames.clear();
+                                    LeaderboardFragment.points.clear();
+                                    if (roundNo!=6){
+                                        LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
+                                        LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
+                                        LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+                                        LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
+
+
                                     startContinueTimer();
                                 } else {
                                     Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
