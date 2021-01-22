@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         nameEditText=findViewById(R.id.nameEditText);
         numberEditText=findViewById(R.id.numberEditText);
         passwordEditText=findViewById(R.id.passwordEditText);
-        numberEditText.setOnKeyListener(this);
+        passwordEditText.setOnKeyListener(this);
 
     }
     @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         }
         else {
             editor.putString("number", number);
-            editor.putString("name",name);
+            editor.putString("name",name.toLowerCase());
             editor.apply();
             String query = "Select * from login where phoneID= " + number+"and upper(nameID)= '"+name +"' and password="+password+" ;";
             try {

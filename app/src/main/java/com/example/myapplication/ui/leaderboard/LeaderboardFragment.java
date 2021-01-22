@@ -60,6 +60,7 @@ public class LeaderboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = requireActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         name = sharedPreferences.getString("name","");
+        Log.d("Name",name);
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
         podium=requireView().findViewById(R.id.leaderboardPodium);
         podium1= requireView().findViewById(R.id.podium1);
