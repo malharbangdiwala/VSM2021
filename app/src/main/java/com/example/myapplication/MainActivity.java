@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public void login(View view){
         String name=nameEditText.getText().toString().toUpperCase();
         String number=numberEditText.getText().toString();
-        int password=Integer.parseInt(passwordEditText.getText().toString());
+        String password=passwordEditText.getText().toString();
         Log.i("null check",name+"..."+number);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(name.equals("") || number.equals("")){
+        if(name.equals("") || number.equals("")||password.equals("")){
             Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show();
         }
         else {
