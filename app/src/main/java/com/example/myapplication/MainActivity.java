@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     Connection connect;
     EditText nameEditText;
     EditText numberEditText;
+    EditText passwordEditText;
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
 
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         }
         nameEditText=findViewById(R.id.nameEditText);
         numberEditText=findViewById(R.id.numberEditText);
+        passwordEditText=findViewById(R.id.passwordEditText);
         numberEditText.setOnKeyListener(this);
+
     }
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent){
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public void login(View view){
         String name=nameEditText.getText().toString().toUpperCase();
         String number=numberEditText.getText().toString();
+        int password=Integer.parseInt(passwordEditText.getText().toString());
         Log.i("null check",name+"..."+number);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if(name.equals("") || number.equals("")){
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             editor.putString("number", number);
             editor.putString("name",name);
             editor.apply();
-            String query = "Select * from login where phoneID= " + number+"and upper(nameID)= '"+name +"' ;";
+            String query = "Select * from login where phoneID= " + number+"and upper(nameID)= '"+name +"' and password="+password+" ;";
             try {
                 Statement st = connect.createStatement();
                 ResultSet rs = st.executeQuery(query);
