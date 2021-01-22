@@ -2,6 +2,7 @@ create table login(
 nameID varchar(50),
 phoneID numeric(10,0),
 day numeric(1,0),
+password int identity(1,1) Not Null,
 loginflag numeric(1,0)
 constraint login_pk Primary Key(phoneID));
 
