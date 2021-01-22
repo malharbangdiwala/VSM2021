@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         return false;
     }
     public void login(View view){
-        String name=nameEditText.getText().toString();
+        String name=nameEditText.getText().toString().toUpperCase();
         String number=numberEditText.getText().toString();
         Log.i("null check",name+"..."+number);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             editor.putString("number", number);
             editor.putString("name",name);
             editor.apply();
-            String query = "Select * from login where phoneID= " + number + ";";
+            String query = "Select * from login where phoneID= " + number+"and upper(nameID)= '"+name +"' ;";
             try {
                 Statement st = connect.createStatement();
                 ResultSet rs = st.executeQuery(query);
