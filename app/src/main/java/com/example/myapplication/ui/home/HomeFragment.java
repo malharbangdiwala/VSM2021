@@ -117,11 +117,11 @@ public class HomeFragment extends Fragment
                                 if (!stockBuy.getText().toString().equals("")) {
                                     Integer stockB = Integer.parseInt(stockBuy.getText().toString());
                                     Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
-                                    shareOwned.set(position, stockOwnedNow);
                                     Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
                                     if (cashOwnedNow < 0) {
                                         Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
                                     } else {
+                                        shareOwned.set(position, stockOwnedNow);
                                         userAmount.setText(String.valueOf((cashOwnedNow)));
                                         String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                         String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
