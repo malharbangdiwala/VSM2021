@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.example.myapplication.MainActivity.MyPREFERENCES;
 
@@ -69,6 +72,9 @@ public class HomeFragment extends Fragment
     Connection connect;
     public static int roundNo = 1;
     TextView homeroundno;
+    Random rand = new Random();
+
+    ArrayList<Drawable> memes = new ArrayList<>();
     DecimalFormat df = new DecimalFormat();
 
     public HomeFragment(int status,int roundNo) {
@@ -304,8 +310,15 @@ public class HomeFragment extends Fragment
 
                     Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
 
-                    final Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                    final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
+                    ArrayList<Integer> memesID = new ArrayList<>();
+                    for (int i=1;i<=10;i++)
+                    {
+                        memesID.add(getResources().getIdentifier("meme"+i,"drawable","com.example.myapplication"));
+                        memes.add(getResources().getDrawable(memesID.get(i-1)));
+                    }
+                    roundChangeButton.setBackground(memes.get(rand.nextInt(9)));
                     roundChangeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -330,7 +343,7 @@ public class HomeFragment extends Fragment
                                     e.printStackTrace();
                                 }
                                 if (nextRoundStart == 1) {
-                                    Button roundChangeButton = (Button) requireView().findViewById(R.id.roundChangeButton);
+                                    Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                                     roundChangeButton.setVisibility(View.GONE);
                                     stocks.clear();
                                     stockName.clear();
@@ -352,6 +365,7 @@ public class HomeFragment extends Fragment
                                     startContinueTimer();
                                 } else {
                                     Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
+                                    roundChangeButton.setBackground(memes.get(rand.nextInt(9)));
                                 }
                             }
                         }

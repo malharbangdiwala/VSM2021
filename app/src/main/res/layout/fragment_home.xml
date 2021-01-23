@@ -50,7 +50,6 @@
         android:id="@+id/roundChangeButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#000523"
         android:text="Click to begin next round"
         android:textColor="#228BFF"
         android:textSize="24sp"
