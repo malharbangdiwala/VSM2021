@@ -367,7 +367,8 @@ public class HomeFragment extends Fragment
                                         LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
                                         LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                                         LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
-                                        LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
+                                        //LeaderboardFragment.podium.setVisibility(View.VISIBLE);
+                                        }
 
 
                                     startContinueTimer();

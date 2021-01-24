@@ -62,10 +62,10 @@ public class LeaderboardFragment extends Fragment {
         name = sharedPreferences.getString("name","");
         Log.d("Name",name);
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
-        podium=requireView().findViewById(R.id.leaderboardPodium);
-        podium1= requireView().findViewById(R.id.podium1);
-        podium2= requireView().findViewById(R.id.podium2);
-        podium3= requireView().findViewById(R.id.podium3);
+        //podium=requireView().findViewById(R.id.leaderboardPodium);
+        //podium1= requireView().findViewById(R.id.podium1);
+        //podium2= requireView().findViewById(R.id.podium2);
+        //podium3= requireView().findViewById(R.id.podium3);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
@@ -82,7 +82,8 @@ public class LeaderboardFragment extends Fragment {
         leaderboardroundnumber.setVisibility(View.VISIBLE);
         leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
         refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
-        LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
+        //LeaderboardFragment.podium.setVisibility(View.VISIBLE);
+        }
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF,double priceG,double priceH)
     {
@@ -96,10 +97,10 @@ public class LeaderboardFragment extends Fragment {
                 points.add(rs.getDouble("points"));
             }
             Log.d("TAG",userNames.toString()+points.toString());
-            podium1.setText(userNames.get(0)+"\n"+points.get(0));
-            podium2.setText(userNames.get(1)+"\n"+points.get(1));
-            podium3.setText(userNames.get(2)+"\n"+points.get(2));
-            for (int i=3;i<userNames.size();i++)
+            //podium1.setText(userNames.get(0)+"\n"+points.get(0));
+            //podium2.setText(userNames.get(1)+"\n"+points.get(1));
+            //podium3.setText(userNames.get(2)+"\n"+points.get(2));
+            for (int i=0;i<userNames.size();i++)
             {
                 if (userNames.get(i).equals(name))
                     playerPosition = i;

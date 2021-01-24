@@ -39,6 +39,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
+        if(position==0){
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#FFD700"));
+            holder.ranks.setBackgroundColor(Color.parseColor("#FFD700"));
+            holder.cardRank.setCardBackgroundColor(Color.parseColor("#FFD700"));
+        }
+        else if(position==1){
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
+            holder.ranks.setBackgroundColor(Color.parseColor("#C0C0C0"));
+            holder.cardRank.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
+        }
+        else if(position==2){
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#CD7F32"));
+            holder.ranks.setBackgroundColor(Color.parseColor("#CD7F32"));
+            holder.cardRank.setCardBackgroundColor(Color.parseColor("#CD7F32"));
+        }
         if (user.get(position).getName().equals(name)){
             holder.cardView.setCardBackgroundColor(Color.parseColor("#228BFF"));
             holder.ranks.setBackgroundColor(Color.parseColor("#228BFF"));
@@ -46,7 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
         }
         holder.name.setText(user.get(position).getName());
         holder.points.setText(user.get(position).getPoints().toString());
-        holder.ranks.setText(String.valueOf(position+4));
+        holder.ranks.setText(String.valueOf(position+1)+".");
     }
 
     @Override
