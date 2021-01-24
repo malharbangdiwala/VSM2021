@@ -121,31 +121,35 @@ public class HomeFragment extends Fragment
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!stockBuy.getText().toString().equals("")) {
-                                    Integer stockB = Integer.parseInt(stockBuy.getText().toString());
-                                    Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
-                                    Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
-                                    if (cashOwnedNow < 0) {
+                                    if (stockBuy.getText().toString().length() >= 10)
                                         Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        shareOwned.set(position, stockOwnedNow);
-                                        userAmount.setText(String.valueOf((cashOwnedNow)));
-                                        String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
-                                        String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
-                                        Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
-                                        stocks.set(position, stockInstance);
-                                        adapter.resetData(stocks);
-                                        if (status == 1) {
-                                            try {
-                                                Statement st = connect.createStatement();
-                                                st.executeQuery(updateBuy);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                Statement statement = connect.createStatement();
-                                                statement.executeQuery(insertBuy);
-                                            } catch (Exception e) {
+                                    else {
+                                        Integer stockB = Integer.parseInt(stockBuy.getText().toString());
+                                        Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
+                                        Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
+                                        if (cashOwnedNow < 0) {
+                                            Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            shareOwned.set(position, stockOwnedNow);
+                                            userAmount.setText(String.valueOf((cashOwnedNow)));
+                                            String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                            String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
+                                            Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                            stocks.set(position, stockInstance);
+                                            adapter.resetData(stocks);
+                                            if (status == 1) {
+                                                try {
+                                                    Statement st = connect.createStatement();
+                                                    st.executeQuery(updateBuy);
+                                                } catch (SQLException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                try {
+                                                    Statement statement = connect.createStatement();
+                                                    statement.executeQuery(insertBuy);
+                                                } catch (Exception e) {
 
+                                                }
                                             }
                                         }
                                     }
@@ -175,33 +179,37 @@ public class HomeFragment extends Fragment
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!stockSell.getText().toString().equals("")) {
-                                    Integer stockB = Integer.parseInt(stockSell.getText().toString());
-                                    if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
-                                        Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
-                                        shareOwned.set(position, stockOwnedNow);
-                                        Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
-                                        userAmount.setText(String.valueOf((cashOwnedNow)));
-                                        String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
-                                        String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
-                                        Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
-                                        stocks.set(position, stockInstance);
-                                        adapter.resetData(stocks);
-                                        if (status == 1) {
-                                            try {
-                                                Statement st = connect.createStatement();
-                                                st.executeQuery(updateSell);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                Statement statement = connect.createStatement();
-                                                statement.executeQuery(insertSell);
-                                            } catch (Exception e) {
-
-                                            }
-                                        }
-                                    } else {
+                                    if (stockSell.getText().toString().length() >= 10)
                                         Toast.makeText(requireContext(), "You dont have enough stocks", Toast.LENGTH_SHORT).show();
+                                    else {
+                                        Integer stockB = Integer.parseInt(stockSell.getText().toString());
+                                        if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
+                                            Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
+                                            shareOwned.set(position, stockOwnedNow);
+                                            Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                                            userAmount.setText(String.valueOf((cashOwnedNow)));
+                                            String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                                            String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
+                                            Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                            stocks.set(position, stockInstance);
+                                            adapter.resetData(stocks);
+                                            if (status == 1) {
+                                                try {
+                                                    Statement st = connect.createStatement();
+                                                    st.executeQuery(updateSell);
+                                                } catch (SQLException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                try {
+                                                    Statement statement = connect.createStatement();
+                                                    statement.executeQuery(insertSell);
+                                                } catch (Exception e) {
+
+                                                }
+                                            }
+                                        } else {
+                                            Toast.makeText(requireContext(), "You dont have enough stocks", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
