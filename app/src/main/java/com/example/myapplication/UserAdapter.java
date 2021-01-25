@@ -42,22 +42,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
         if(position==0){
             holder.cardView.setCardBackgroundColor(Color.parseColor("#FFD700"));
             holder.ranks.setBackgroundColor(Color.parseColor("#FFD700"));
-            holder.cardRank.setCardBackgroundColor(Color.parseColor("#FFD700"));
         }
         else if(position==1){
             holder.cardView.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
             holder.ranks.setBackgroundColor(Color.parseColor("#C0C0C0"));
-            holder.cardRank.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
         }
         else if(position==2){
             holder.cardView.setCardBackgroundColor(Color.parseColor("#CD7F32"));
             holder.ranks.setBackgroundColor(Color.parseColor("#CD7F32"));
-            holder.cardRank.setCardBackgroundColor(Color.parseColor("#CD7F32"));
         }
         if (user.get(position).getName().equals(name)){
             holder.cardView.setCardBackgroundColor(Color.parseColor("#228BFF"));
             holder.ranks.setBackgroundColor(Color.parseColor("#228BFF"));
-            holder.cardRank.setCardBackgroundColor(Color.parseColor("#228BFF"));
         }
         holder.name.setText(user.get(position).getName());
         holder.points.setText(user.get(position).getPoints().toString());
@@ -75,14 +71,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
     }
     class UserHolder extends RecyclerView.ViewHolder {
         TextView name,points,ranks;
-        CardView cardView,cardRank;
+        CardView cardView;
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             ranks = itemView.findViewById(R.id.rank);
             name = itemView.findViewById(R.id.userName);
             points = itemView.findViewById(R.id.pointsUser);
             cardView = itemView.findViewById(R.id.cardViewUser);
-            cardRank = itemView.findViewById(R.id.cardRank);
         }
     }
 }
