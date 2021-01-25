@@ -26,8 +26,6 @@ public class GameOverActivity extends AppCompatActivity {
 
     private Button next;
     private RecyclerView leaderBoardFinal;
-    ImageView podiumF;
-    TextView podium_one_f,podium_two_f,podium_three_f;
     ConnectionHelper con;
     Connection connect;
     ArrayList<Users> users = new ArrayList<>();
@@ -45,10 +43,6 @@ public class GameOverActivity extends AppCompatActivity {
         next = findViewById(R.id.overButton);
         leaderBoardFinal = findViewById(R.id.userLeaderBoardViewFinal);
         leaderBoardFinal.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        podiumF = findViewById(R.id.leaderboardPodiumFinal);
-        podium_one_f = findViewById(R.id.podium1Final);
-        podium_two_f = findViewById(R.id.podium2Final);
-        podium_three_f = findViewById(R.id.podium3Final);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         name = sharedPreferences.getString("name","");
@@ -58,10 +52,6 @@ public class GameOverActivity extends AppCompatActivity {
         if (roundType.equals("TRIAL_ROUND"))
         {
             leaderBoardFinal.setVisibility(View.INVISIBLE);
-            podiumF.setVisibility(View.INVISIBLE);
-            podium_one_f.setVisibility(View.INVISIBLE);
-            podium_two_f.setVisibility(View.INVISIBLE);
-            podium_three_f.setVisibility(View.INVISIBLE);
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,10 +95,7 @@ public class GameOverActivity extends AppCompatActivity {
                     userNames.add(rs.getString("nameID"));
                     points.add(rs.getDouble("points"));
                 }
-                podium_one_f.setText(userNames.get(0)+"\n"+points.get(0));
-                podium_two_f.setText(userNames.get(1)+"\n"+points.get(1));
-                podium_three_f.setText(userNames.get(2)+"\n"+points.get(2));
-                for (int i=3;i<userNames.size();i++)
+                for (int i=0;i<userNames.size();i++)
                 {
                     Users userInstance = new Users(userNames.get(i),points.get(i));
                     users.add(userInstance);
