@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:layout_marginTop="10dp"
+    android:weightSum="100"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
 
@@ -14,11 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="50"
         android:layout_marginTop="30dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/frontpowercard2"
@@ -72,25 +74,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp">
+        android:layout_weight="50"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/powercard3front"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:weightSum="100">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:layout_weight="50"
                     android:src="@drawable/loan_a_capdesc" />
 
                 <Button
@@ -100,6 +103,7 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
+                    android:layout_weight="1"
                     android:textColor="#FFFFFF"
                     android:textSize="25dp"
                     android:visibility="gone" />
