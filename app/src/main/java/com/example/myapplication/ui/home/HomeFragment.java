@@ -297,12 +297,7 @@ public class HomeFragment extends Fragment
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
-                    //if (roundNo!=6){
-                    //LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
-                    //LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
-                    //LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
                     homeroundno.setText("Round "+String.valueOf(roundNo));
-                    //LeaderboardFragment.podium.setVisibility(View.VISIBLE);}
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
                             PowerCardFragment.pc3flag = 0;
@@ -320,13 +315,13 @@ public class HomeFragment extends Fragment
 
                     final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
-                    ArrayList<Integer> memesID = new ArrayList<>();
-                    for (int i=1;i<=10;i++)
-                    {
-                        memesID.add(getResources().getIdentifier("meme"+i,"drawable","com.example.myapplication"));
-                        memes.add(getResources().getDrawable(memesID.get(i-1)));
-                    }
-                    roundChangeButton.setBackground(memes.get(rand.nextInt(9)));
+//                    ArrayList<Integer> memesID = new ArrayList<>();
+//                    for (int i=1;i<=10;i++)
+//                    {
+//                        memesID.add(getResources().getIdentifier("meme"+i,"drawable","com.example.myapplication"));
+//                        memes.add(getResources().getDrawable(memesID.get(i-1)));
+//                    }
+                    roundChangeButton.setBackground(getResources().getDrawable(getResources().getIdentifier("meme9","drawable","com.example.myapplication")));
                     roundChangeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -367,14 +362,13 @@ public class HomeFragment extends Fragment
                                         LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
                                         LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                                         LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
-                                        //LeaderboardFragment.podium.setVisibility(View.VISIBLE);
-                                        }
+                                    }
 
 
                                     startContinueTimer();
                                 } else {
                                     Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
-                                    roundChangeButton.setBackground(memes.get(rand.nextInt(9)));
+
                                 }
                             }
                         }

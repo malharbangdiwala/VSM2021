@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="true"
     android:layout_marginTop="10dp"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
@@ -12,7 +13,8 @@
         android:id="@+id/powercard2Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,7 +33,7 @@
                     android:layout_height="220dp"
                     android:layout_gravity="center"
                     android:layout_weight="50"
-                    android:src="@drawable/insider_trading_desc" />
+                    android:src="@drawable/insider_trading_description" />
 
                 <Button
                     android:id="@+id/usepc2"
@@ -40,6 +42,8 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -68,8 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="25dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -88,7 +91,7 @@
                     android:layout_height="220dp"
                     android:layout_gravity="center"
                     android:layout_weight="50"
-                    android:src="@drawable/loan_a_cap_desc" />
+                    android:src="@drawable/loan_a_capdesc" />
 
                 <Button
                     android:id="@+id/usepc3"
@@ -97,6 +100,8 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25dp"
                     android:visibility="gone" />
             </LinearLayout>
 
