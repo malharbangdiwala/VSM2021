@@ -32,7 +32,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp"
+                    android:layout_height="225dp"
                     android:layout_gravity="center"
                     android:layout_weight="50"
                     android:src="@drawable/insider_trading_description" />
@@ -40,7 +40,7 @@
                 <Button
                     android:id="@+id/usepc2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
@@ -91,7 +91,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="225dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:src="@drawable/loan_a_capdesc" />
@@ -99,7 +99,7 @@
                 <Button
                     android:id="@+id/usepc3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
