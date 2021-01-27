@@ -29,23 +29,29 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:weightSum="100">
-
-                <ImageView
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="225dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="50"
-                    android:src="@drawable/insider_trading_description" />
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="50"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insider_trading_description" />
+
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/usepc2"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
                     android:textColor="#FFFFFF"
-                    android:textSize="25sp"
+                    android:textSize="20dp"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -57,14 +63,19 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/powercard2"
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/insidertrade"
-                    android:text="powercard2" />
+                    app:cardCornerRadius="20dp">
+                    <ImageView
+                        android:id="@+id/powercard2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insidertrade"
+                        android:text="powercard2" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -88,24 +99,28 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="225dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/loan_a_capdesc" />
-
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="220dp"
+                        android:scaleType="fitXY"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/loan_a_capdesc" />
+                </androidx.cardview.widget.CardView>
                 <Button
                     android:id="@+id/usepc3"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="@drawable/custom_button"
                     android:text="use"
                     android:layout_weight="1"
                     android:textColor="#FFFFFF"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -116,12 +131,17 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <ImageView
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/loanacap" />
+                    app:cardCornerRadius="25dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/loanacap" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
         </RelativeLayout>
