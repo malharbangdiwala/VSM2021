@@ -25,6 +25,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.powercard3;
 import com.example.myapplication.ui.home.HomeFragment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -140,6 +142,9 @@ public class PowerCardFragment extends Fragment {
                     if(rs.next() && rs.getInt("pc3")==1) {
                         pc3flag=1;
                         Double cash=powercard3.addcash();
+                        BigDecimal bd = BigDecimal.valueOf(cash);
+                        bd.setScale(2, RoundingMode.HALF_UP);
+                        cash = bd.doubleValue();
                         String addcash="Update valuation set cash="+cash+" where phoneID="+number+";";
                         Log.i("PC3 QUERY",addcash);
                         if (status==1) {
@@ -150,6 +155,7 @@ public class PowerCardFragment extends Fragment {
                                 e.printStackTrace();
                             }
                         }
+                        Log.d("Tag",cash+"");
                         HomeFragment.userAmount.setText(String.valueOf(cash));
                         usepc3.setText("Used");
                         Toast.makeText(requireContext(),"Powercard3 active",Toast.LENGTH_SHORT).show();
