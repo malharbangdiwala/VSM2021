@@ -32,7 +32,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="220dp"
+                    android:layout_height="250dp"
                     android:layout_gravity="center"
                     android:layout_weight="50"
                     android:src="@drawable/insider_trading_description" />
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/insider_trading"
+                    android:src="@drawable/insidertrade"
                     android:text="powercard2" />
             </LinearLayout>
         </RelativeLayout>
@@ -91,7 +91,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="250dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:src="@drawable/loan_a_capdesc" />
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/loan_a_cap" />
+                    android:src="@drawable/loanacap" />
             </LinearLayout>
 
         </RelativeLayout>

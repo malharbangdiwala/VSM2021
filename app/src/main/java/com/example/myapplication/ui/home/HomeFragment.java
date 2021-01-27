@@ -368,7 +368,6 @@ public class HomeFragment extends Fragment
                                     startContinueTimer();
                                 } else {
                                     Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();
-
                                 }
                             }
                         }
