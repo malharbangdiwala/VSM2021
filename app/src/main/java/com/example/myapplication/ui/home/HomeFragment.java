@@ -327,15 +327,26 @@ public class HomeFragment extends Fragment
                         public void onClick(View v) {
                             String queryNextRound = "Select r" + roundNo + " from rounds";
                             System.out.println(queryNextRound);
-                            if (roundNo == 6) {
+                            int nextRoundStart = 0;
+                            try {
+                                Statement st = connect.createStatement();
+                                ResultSet rs = st.executeQuery(queryNextRound);
+                                while (rs.next()) {
+                                    Log.d("Tag", rs.getString("r" + roundNo));
+                                    nextRoundStart = rs.getInt("r" + roundNo);
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            if (roundNo == 6 && nextRoundStart==1) {
                                 Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), GameOverActivity.class);
                                 intent.putExtra("roundType","GAME_ROUND");
                                 startActivity(intent);
                                 getActivity().finish();
                             }else {
-                                int nextRoundStart = 0;
-                                try {
+                                //int nextRoundStart = 0;
+                                /*try {
                                     Statement st = connect.createStatement();
                                     ResultSet rs = st.executeQuery(queryNextRound);
                                     while (rs.next()) {
@@ -344,7 +355,7 @@ public class HomeFragment extends Fragment
                                     }
                                 } catch (SQLException e) {
                                     e.printStackTrace();
-                                }
+                                }*/
                                 if (nextRoundStart == 1) {
                                     Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                                     roundChangeButton.setVisibility(View.GONE);
