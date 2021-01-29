@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         Log.i("null check",name+"..."+number);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if(name.equals("") || number.equals("")||password.equals("")){
-            Toast.makeText(this, "Fill all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill all the fields!", Toast.LENGTH_SHORT).show();
         }
         else {
             editor.putString("number", number);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 ResultSet rs = st.executeQuery(query);
                 if (rs.next()) {
                     if (rs.getInt("day") == 0) {
-                        Toast.makeText(this, "Cannot play today", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Your registered slot is not today!", Toast.LENGTH_SHORT).show();
                     } else {
                         if (rs.getInt("loginflag") == 0) {
                             String updateLoginFlag = "Update login set loginflag = 0 where phoneID= " + number + ";";
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, SelectorActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(this, "User already logged in!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "This user has already logged in!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {

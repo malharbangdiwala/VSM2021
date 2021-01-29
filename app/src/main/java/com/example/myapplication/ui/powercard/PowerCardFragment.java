@@ -110,7 +110,7 @@ public class PowerCardFragment extends Fragment {
                                     if(rs.next() && rs.getInt("pc2")==1) {
                                         pc2flag=1;
                                         News.setNewsText();
-                                        Toast.makeText(requireContext(),"Powercard2 active",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(),"This power card is now active!",Toast.LENGTH_SHORT).show();
                                         usepc2.setText("Used");
                                         String query="Update powercard set pc2=0 where phoneID="+number+";";
                                         if (status==1) {
@@ -123,7 +123,7 @@ public class PowerCardFragment extends Fragment {
                                         }
                                     }else{
                                         usepc2.setText("Used");
-                                        Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(),"This power card has already been used!",Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (SQLException e) {
                                     e.printStackTrace();
@@ -176,7 +176,7 @@ public class PowerCardFragment extends Fragment {
                                         Log.d("Tag",cash+"");
                                         HomeFragment.userAmount.setText(String.valueOf(cash));
                                         usepc3.setText("Used");
-                                        Toast.makeText(requireContext(),"Powercard3 active",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(),"This power card is now active!",Toast.LENGTH_SHORT).show();
                                         String query="Update powercard set pc3=0 where phoneID="+number+";";
                                         if (status==1) {
                                             try {
@@ -188,7 +188,7 @@ public class PowerCardFragment extends Fragment {
                                         }
                                     }else{
                                         usepc3.setText("Used");
-                                        Toast.makeText(requireContext(),"You have used this",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(),"This power card has already been used!",Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (SQLException e) {
                                     e.printStackTrace();

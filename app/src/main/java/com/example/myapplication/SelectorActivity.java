@@ -65,7 +65,7 @@ public class SelectorActivity extends AppCompatActivity {
             }
             Log.d("Round No",""+roundNo);
             if (flag==0&& roundNo==1) {
-                Toast.makeText(SelectorActivity.this, "Not Started", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectorActivity.this, "Next round hasn't started yet!", Toast.LENGTH_SHORT).show();
             }else {
             Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);
             intent.putExtra("roundNoLive",roundNo);

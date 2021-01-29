@@ -122,13 +122,13 @@ public class HomeFragment extends Fragment
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!stockBuy.getText().toString().equals("")) {
                                     if (stockBuy.getText().toString().length() >= 10)
-                                        Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "You don't have enough money!", Toast.LENGTH_SHORT).show();
                                     else {
                                         Integer stockB = Integer.parseInt(stockBuy.getText().toString());
                                         Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
                                         Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
                                         if (cashOwnedNow < 0) {
-                                            Toast.makeText(requireContext(), "Not money", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(requireContext(), "You don't have enough money!", Toast.LENGTH_SHORT).show();
                                         } else {
                                             shareOwned.set(position, stockOwnedNow);
                                             userAmount.setText(String.valueOf((cashOwnedNow)));
@@ -180,7 +180,7 @@ public class HomeFragment extends Fragment
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!stockSell.getText().toString().equals("")) {
                                     if (stockSell.getText().toString().length() >= 10)
-                                        Toast.makeText(requireContext(), "You dont have enough stocks", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "You don't have enough stocks!", Toast.LENGTH_SHORT).show();
                                     else {
                                         Integer stockB = Integer.parseInt(stockSell.getText().toString());
                                         if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
@@ -208,7 +208,7 @@ public class HomeFragment extends Fragment
                                                 }
                                             }
                                         } else {
-                                            Toast.makeText(requireContext(), "You dont have enough stocks", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(requireContext(), "You don't have enough stocks!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -230,7 +230,7 @@ public class HomeFragment extends Fragment
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Toast.makeText(requireContext(), "You cannot go back in a Ongoing Game", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "You cannot go back at this stage!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -285,7 +285,7 @@ public class HomeFragment extends Fragment
             @Override
             public void onFinish() {
                 if (status==0){
-                    Toast.makeText(requireContext(), "Trial Round Over", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "The Trial Round is Over!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(),GameOverActivity.class);
                     intent.putExtra("roundType","TRIAL_ROUND");
                     startActivity(intent);
@@ -311,7 +311,7 @@ public class HomeFragment extends Fragment
                         }
                     }
 
-                    Toast.makeText(requireContext(), "Round Finished proceed to next Round", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Round Finished.Proceed to the next round!", Toast.LENGTH_SHORT).show();
 
                     final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
@@ -339,7 +339,7 @@ public class HomeFragment extends Fragment
                                 e.printStackTrace();
                             }
                             if (roundNo == 6 && nextRoundStart==1) {
-                                Toast.makeText(requireContext(), "Game Over", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), "Game Over!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), GameOverActivity.class);
                                 intent.putExtra("roundType","GAME_ROUND");
                                 startActivity(intent);
