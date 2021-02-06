@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000523"
+    android:background="@color/BgColour"
     tools:context=".GamesActivity">
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

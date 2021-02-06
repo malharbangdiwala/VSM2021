@@ -114,14 +114,15 @@
                         android:layout_gravity="center"
                         android:src="@drawable/loan_a_capdesc" />
                 </androidx.cardview.widget.CardView>
+
                 <Button
                     android:id="@+id/usepc3"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:layout_weight="1"
                     android:background="@drawable/custom_button"
                     android:text="use"
-                    android:layout_weight="1"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
                     android:visibility="gone" />

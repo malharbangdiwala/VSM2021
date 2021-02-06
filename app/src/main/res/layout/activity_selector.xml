@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000523"
+    android:background="@color/BgColour"
     tools:context=".SelectorActivity">
 
     <Button
@@ -12,13 +12,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="280dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_button"
         android:text="Trial Round"
         android:textColor="#FFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sponsor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_button"
+        android:text="Our sponsors"
+        android:textColor="#FFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

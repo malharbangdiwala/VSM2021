@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +69,7 @@ public class HomeFragment extends Fragment
     StockAdapter adapter;
     String number;
     int status;
+    TextView totalSum;
     private int millisecValue;
     ConnectionHelper con;
     Connection connect;
@@ -171,6 +174,7 @@ public class HomeFragment extends Fragment
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
                 TextView stockNames = v.findViewById(R.id.stockName);
                 final EditText stockSell = v.findViewById(R.id.buy_id);
+                totalSum = v.findViewById(R.id.total);
                 stockNames.setText(stockName.get(position));
                 new AlertDialog.Builder(requireContext())
                         .setView(v)
@@ -182,6 +186,21 @@ public class HomeFragment extends Fragment
                                     if (stockSell.getText().toString().length() >= 10)
                                         Toast.makeText(requireContext(), "You don't have enough stocks!", Toast.LENGTH_SHORT).show();
                                     else {
+                                        stockSell.addTextChangedListener(new TextWatcher() {
+                                            @Override
+                                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                            }
+
+                                            @Override
+                                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
+                                            }
+
+                                            @Override
+                                            public void afterTextChanged(Editable s) {
+                                            }
+                                        });
                                         Integer stockB = Integer.parseInt(stockSell.getText().toString());
                                         if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
                                             Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
@@ -345,17 +364,6 @@ public class HomeFragment extends Fragment
                                 startActivity(intent);
                                 getActivity().finish();
                             }else {
-                                //int nextRoundStart = 0;
-                                /*try {
-                                    Statement st = connect.createStatement();
-                                    ResultSet rs = st.executeQuery(queryNextRound);
-                                    while (rs.next()) {
-                                        Log.d("Tag", rs.getString("r" + roundNo));
-                                        nextRoundStart = rs.getInt("r" + roundNo);
-                                    }
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                }*/
                                 if (nextRoundStart == 1) {
                                     Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                                     roundChangeButton.setVisibility(View.GONE);
@@ -372,7 +380,7 @@ public class HomeFragment extends Fragment
                                     if (roundNo!=6){
                                         LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
                                         LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
-                                        LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5), stockPrice.get(6), stockPrice.get(7));
+                                        LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5));
                                     }
 
 
