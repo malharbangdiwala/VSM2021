@@ -116,7 +116,26 @@ public class HomeFragment extends Fragment
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
                 TextView stockNames = v.findViewById(R.id.stockName);
                 final EditText stockBuy = v.findViewById(R.id.buy_id);
+                totalSum = v.findViewById(R.id.total);
                 stockNames.setText(stockName.get(position));
+                stockBuy.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (!s.toString().equals(""))
+                            totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
+                        else
+                            totalSum.setText("0");
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
                 AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
                         builder.setView(v);
                         builder.setTitle("\t\t\t\t\t\tBUY\t\t\t\t\t");
@@ -176,6 +195,24 @@ public class HomeFragment extends Fragment
                 final EditText stockSell = v.findViewById(R.id.buy_id);
                 totalSum = v.findViewById(R.id.total);
                 stockNames.setText(stockName.get(position));
+                stockSell.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (!s.toString().equals(""))
+                        totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
+                        else
+                            totalSum.setText("0");
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
                 new AlertDialog.Builder(requireContext())
                         .setView(v)
                         .setTitle("\t\t\t\t\t\tSell\t\t\t\t\t")
@@ -186,21 +223,6 @@ public class HomeFragment extends Fragment
                                     if (stockSell.getText().toString().length() >= 10)
                                         Toast.makeText(requireContext(), "You don't have enough stocks!", Toast.LENGTH_SHORT).show();
                                     else {
-                                        stockSell.addTextChangedListener(new TextWatcher() {
-                                            @Override
-                                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                                            }
-
-                                            @Override
-                                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                                totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
-                                            }
-
-                                            @Override
-                                            public void afterTextChanged(Editable s) {
-                                            }
-                                        });
                                         Integer stockB = Integer.parseInt(stockSell.getText().toString());
                                         if (Integer.parseInt(stockSell.getText().toString()) <= shareOwned.get(position)) {
                                             Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));

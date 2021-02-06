@@ -108,4 +108,10 @@ public class GameOverActivity extends AppCompatActivity {
             leaderBoardFinal.setAdapter(adapter);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
