@@ -81,5 +81,14 @@ public class SelectorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button sponsor = findViewById(R.id.sponsor);
+        sponsor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectorActivity.this,Sponsor.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
