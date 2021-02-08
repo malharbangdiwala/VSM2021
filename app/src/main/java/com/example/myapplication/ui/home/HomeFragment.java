@@ -5,29 +5,34 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.ConnectionHelper;
 import com.example.myapplication.GameOverActivity;
 import com.example.myapplication.ItemClicked;
@@ -114,10 +119,8 @@ public class HomeFragment extends Fragment
             {
                 LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
-                TextView stockNames = v.findViewById(R.id.stockName);
                 final EditText stockBuy = v.findViewById(R.id.buy_id);
                 totalSum = v.findViewById(R.id.total);
-                stockNames.setText(stockName.get(position));
                 stockBuy.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -127,7 +130,7 @@ public class HomeFragment extends Fragment
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (!s.toString().equals(""))
-                            totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
+                            totalSum.setText("Funds Required :"+String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
                         else
                             totalSum.setText("0");
                     }
@@ -138,7 +141,13 @@ public class HomeFragment extends Fragment
                 });
                 AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
                         builder.setView(v);
-                        builder.setTitle("\t\t\t\t\t\tBUY\t\t\t\t\t");
+                        TextView title = new TextView(getContext());
+                        title.setText("BUY "+stockName.get(position));
+                        title.setPadding(10,10,10,10);
+                        title.setGravity(Gravity.CENTER);
+                        title.setTextSize(20);
+                        title.setTypeface(Typeface.DEFAULT_BOLD);
+                        builder.setCustomTitle(title);
                         builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -191,10 +200,8 @@ public class HomeFragment extends Fragment
             {
                 LayoutInflater inflater =(LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View v = inflater.inflate(R.layout.buy_stocks,null,false);
-                TextView stockNames = v.findViewById(R.id.stockName);
                 final EditText stockSell = v.findViewById(R.id.buy_id);
                 totalSum = v.findViewById(R.id.total);
-                stockNames.setText(stockName.get(position));
                 stockSell.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -353,16 +360,13 @@ public class HomeFragment extends Fragment
                     }
 
                     Toast.makeText(requireContext(), "Round Finished.Proceed to the next round!", Toast.LENGTH_SHORT).show();
+                    final TextView funds = requireView().findViewById(R.id.textView3);
 
-                    final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
+                    final ImageView roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
-//                    ArrayList<Integer> memesID = new ArrayList<>();
-//                    for (int i=1;i<=10;i++)
-//                    {
-//                        memesID.add(getResources().getIdentifier("meme"+i,"drawable","com.example.myapplication"));
-//                        memes.add(getResources().getDrawable(memesID.get(i-1)));
-//                    }
-                    roundChangeButton.setBackground(getResources().getDrawable(getResources().getIdentifier("meme9","drawable","com.example.myapplication")));
+                    Glide.with(getContext()).load(R.drawable.loader).into(roundChangeButton);
+                    funds.setVisibility(View.INVISIBLE);
+                    homeroundno.setVisibility(View.INVISIBLE);
                     roundChangeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -387,15 +391,15 @@ public class HomeFragment extends Fragment
                                 getActivity().finish();
                             }else {
                                 if (nextRoundStart == 1) {
-                                    Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
+                                    ImageView roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                                     roundChangeButton.setVisibility(View.GONE);
+                                    funds.setVisibility(View.VISIBLE);
+                                    homeroundno.setVisibility(View.VISIBLE);
                                     stocks.clear();
                                     stockName.clear();
                                     stockPrice.clear();
                                     shareOwned.clear();
                                     getData();
-
-
                                     LeaderboardFragment.users.clear();
                                     LeaderboardFragment.userNames.clear();
                                     LeaderboardFragment.points.clear();

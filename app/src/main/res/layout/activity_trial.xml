@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#000523"
+    android:background="@color/BgColour"
     android:layout_height="match_parent"
     tools:context=".TrialActivity">
     <androidx.viewpager.widget.ViewPager
@@ -17,8 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"/>
+        android:background="@color/design_default_color_on_primary"
+        app:itemBackground="@color/design_default_color_on_primary"
+        app:itemIconTint="#228CFD"
+        app:itemTextColor="#228CFD"
+        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

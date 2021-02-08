@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginTop="10dp"
     android:elevation="9dp"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="#FF0A1D59"
     app:cardCornerRadius="9dp"
     app:cardElevation="9dp">
 
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +29,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_round_plain"
-                android:text="BUY" />
+                android:text="BUY"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/sell"
@@ -38,7 +40,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_round_plain"
-                android:text="SELL" />
+                android:text="SELL"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -95,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="50dp"
                         android:text="Owned"
                         android:textColor="#FFF"
                         android:textSize="19sp" />
@@ -104,7 +107,7 @@
                         android:id="@+id/owned"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="50dp"
                         android:text="Owned by me"
                         android:textColor="#FFF"
                         android:textSize="19sp" />
