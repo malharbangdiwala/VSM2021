@@ -19,6 +19,7 @@ public class newsFeedFragment extends Fragment
 {
     public static TextView newsroundnumber;
     public static TextView news;
+    public static TextView timer;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -32,6 +33,7 @@ public class newsFeedFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         news=requireView().findViewById(R.id.newsText);
+        timer = requireView().findViewById(R.id.timer1);
         newsroundnumber=requireView().findViewById(R.id.newsRoundNo);
         News.setNewsText();
     }

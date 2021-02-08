@@ -328,6 +328,8 @@ public class HomeFragment extends Fragment
             @Override
             public void onTick(long millisUntilFinished) {
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
+                newsFeedFragment.timer.setText(String.valueOf(millisUntilFinished / 1000));
+                LeaderboardFragment.timers.setText(String.valueOf(millisUntilFinished / 1000));
             }
 
             @Override

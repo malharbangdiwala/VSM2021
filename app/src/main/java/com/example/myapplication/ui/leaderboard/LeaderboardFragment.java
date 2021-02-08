@@ -40,6 +40,7 @@ public class LeaderboardFragment extends Fragment {
     RecyclerView usersLeaderBoard,toppersLeaderBoard;
     static UserAdapter adapter;
     static UserAdapter adapterTopper;
+    public static TextView timers;
     public static ArrayList<Users> users = new ArrayList<>();
     public static ArrayList<Users> toppers = new ArrayList<>();
     public static TextView leaderboardroundnumber;
@@ -69,6 +70,7 @@ public class LeaderboardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        timers = requireView().findViewById(R.id.timer2);
         usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
         usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new UserAdapter(users,requireContext(),name,1);
