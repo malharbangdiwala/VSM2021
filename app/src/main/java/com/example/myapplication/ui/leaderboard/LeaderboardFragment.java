@@ -37,9 +37,11 @@ public class LeaderboardFragment extends Fragment {
     static Connection connect;
     public static ArrayList<String> userNames = new ArrayList<>();
     public static ArrayList<Double> points = new ArrayList<>();
-    RecyclerView usersLeaderBoard;
+    RecyclerView usersLeaderBoard,toppersLeaderBoard;
     static UserAdapter adapter;
+    static UserAdapter adapterTopper;
     public static ArrayList<Users> users = new ArrayList<>();
+    public static ArrayList<Users> toppers = new ArrayList<>();
     public static TextView leaderboardroundnumber;
     public static ImageView podium;
     static TextView podium1;
@@ -60,12 +62,7 @@ public class LeaderboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = requireActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         name = sharedPreferences.getString("name","");
-        Log.d("Name",name);
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
-        //podium=requireView().findViewById(R.id.leaderboardPodium);
-        //podium1= requireView().findViewById(R.id.podium1);
-        //podium2= requireView().findViewById(R.id.podium2);
-        //podium3= requireView().findViewById(R.id.podium3);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
@@ -74,15 +71,20 @@ public class LeaderboardFragment extends Fragment {
         }
         usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
         usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new UserAdapter(users,requireContext(),name);
+        adapter = new UserAdapter(users,requireContext(),name,1);
         usersLeaderBoard.setAdapter(adapter);
-        if (playerPosition!=0)
+
+        toppersLeaderBoard = requireView().findViewById(R.id.winner);
+        toppersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapterTopper = new UserAdapter(users,requireContext(),name,0);
+        toppersLeaderBoard.setAdapter(adapterTopper);
+
+        if (!(playerPosition>=3))
             usersLeaderBoard.scrollToPosition(playerPosition);
         if (roundNo!=1){
         leaderboardroundnumber.setVisibility(View.VISIBLE);
         leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
         refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5));
-        //LeaderboardFragment.podium.setVisibility(View.VISIBLE);
         }
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF)
@@ -96,19 +98,19 @@ public class LeaderboardFragment extends Fragment {
                 userNames.add(rs.getString("nameID"));
                 points.add(rs.getDouble("points"));
             }
-            Log.d("TAG",userNames.toString()+points.toString());
-            //podium1.setText(userNames.get(0)+"\n"+points.get(0));
-            //podium2.setText(userNames.get(1)+"\n"+points.get(1));
-            //podium3.setText(userNames.get(2)+"\n"+points.get(2));
+
             for (int i=0;i<userNames.size();i++)
             {
                 if (userNames.get(i).equals(name))
                     playerPosition = i;
                 Users userInstance = new Users(userNames.get(i),points.get(i));
-                users.add(userInstance);
+                if(i>=3)
+                    users.add(userInstance);
+                else
+                    toppers.add(userInstance);
             }
-            Log.d("TAG",users.toString());
             adapter.resetData(users);
+            adapterTopper.resetData(toppers);
         }catch (Exception e)
         {
             Log.d("Error",e.getMessage());

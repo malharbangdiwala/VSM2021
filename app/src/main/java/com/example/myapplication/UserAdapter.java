@@ -22,12 +22,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
     Context context;
     ViewGroup parent;
     String name;
+    int type;
 
-    public UserAdapter(ArrayList<Users> user,Context context,String name)
+    public UserAdapter(ArrayList<Users> user,Context context,String name,int type)
     {
         this.user = user;
         this.context = context;
         this.name = name;
+        this.type = type;
     }
     @NonNull
     @Override
@@ -39,25 +41,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        if(position==0){
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#FFD700"));
-            holder.ranks.setBackgroundColor(Color.parseColor("#FFD700"));
-        }
-        else if(position==1){
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
-            holder.ranks.setBackgroundColor(Color.parseColor("#C0C0C0"));
-        }
-        else if(position==2){
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#CD7F32"));
-            holder.ranks.setBackgroundColor(Color.parseColor("#CD7F32"));
-        }
-        if (user.get(position).getName().equals(name)){
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#228BFF"));
-            holder.ranks.setBackgroundColor(Color.parseColor("#228BFF"));
+        if(type==0) {
+            if (position == 0) {
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#FFD700"));
+                holder.ranks.setBackgroundColor(Color.parseColor("#FFD700"));
+            } else if (position == 1) {
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#C0C0C0"));
+                holder.ranks.setBackgroundColor(Color.parseColor("#C0C0C0"));
+            } else if (position == 2) {
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#CD7F32"));
+                holder.ranks.setBackgroundColor(Color.parseColor("#CD7F32"));
+            }
+            holder.ranks.setText(String.valueOf(position + 1) + ".");
+        }else {
+            if (user.get(position).getName().equals(name)) {
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#228BFF"));
+                holder.ranks.setBackgroundColor(Color.parseColor("#228BFF"));
+            }
+            holder.ranks.setText(String.valueOf(position + 4) + ".");
         }
         holder.name.setText(user.get(position).getName());
         holder.points.setText(user.get(position).getPoints().toString());
-        holder.ranks.setText(String.valueOf(position+1)+".");
     }
 
     @Override
