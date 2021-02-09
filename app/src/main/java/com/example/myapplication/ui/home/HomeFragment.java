@@ -129,7 +129,11 @@ public class HomeFragment extends Fragment
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (!s.toString().equals(""))
+                        if(s.toString().length()>=10)
+                        {
+                          totalSum.setText("You don't have enough money!");
+                        }
+                        else if (!s.toString().equals(""))
                             totalSum.setText("Funds Required :"+String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
                         else
                             totalSum.setText("0");
@@ -210,7 +214,11 @@ public class HomeFragment extends Fragment
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (!s.toString().equals(""))
+                        if(s.toString().length()>=10)
+                        {
+                            totalSum.setText("You don't have enough stocks!");
+                        }
+                        else if (!s.toString().equals(""))
                         totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
                         else
                             totalSum.setText("0");
