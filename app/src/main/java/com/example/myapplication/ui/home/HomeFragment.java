@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 31000;
+        millisecValue = 31500;
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -117,6 +117,12 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
         IncDec.add(-1);
+        stockName.add("UTOPIA ENERGY");
+        stockName.add("AIR UTOPIA");
+        stockName.add("UTOPIA FASHION");
+        stockName.add("UTOPIA TECHNOLOGIES");
+        stockName.add("UTOPIA AGRO");
+        stockName.add("UTOPIA BEVERAGES");
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -344,7 +350,7 @@ public class HomeFragment extends Fragment
             int i = 0;
             while (rs.next())
             {
-                stockName.add(rs.getString("company_name"));
+                //stockName.add(rs.getString("company_name"));
                 stockPrice.add(rs.getDouble(columnPrice));
                 if (roundNo>1) {
                     if(rs.getDouble(columnPrevious)<stockPrice.get(i))
@@ -454,7 +460,7 @@ public class HomeFragment extends Fragment
                                     funds.setVisibility(View.VISIBLE);
                                     homeroundno.setVisibility(View.VISIBLE);
                                     stocks.clear();
-                                    stockName.clear();
+                                    //stockName.clear();
                                     stockPrice.clear();
                                     shareOwned.clear();
                                     IncDec.clear();
