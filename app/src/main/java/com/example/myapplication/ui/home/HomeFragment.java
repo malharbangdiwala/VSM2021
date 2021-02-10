@@ -52,6 +52,7 @@ import com.example.myapplication.ui.powercard.PowerCardFragment;
 import org.w3c.dom.Text;
 
 import java.nio.channels.Selector;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment
     ArrayList<String> stockName = new ArrayList<>();
     ArrayList<Integer> shareOwned = new ArrayList<>();
     ArrayList<Integer> IncDec = new ArrayList<>();
+    ArrayList<String> nameStock = new ArrayList<>();
     public static ArrayList<Double> stockPrice = new ArrayList<>();
     StockAdapter adapter;
     String number;
@@ -98,7 +100,7 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 31500;
+        millisecValue = 31000;
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -117,12 +119,13 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
         IncDec.add(-1);
-        stockName.add("UTOPIA ENERGY");
-        stockName.add("AIR UTOPIA");
-        stockName.add("UTOPIA FASHION");
-        stockName.add("UTOPIA TECHNOLOGIES");
-        stockName.add("UTOPIA AGRO");
-        stockName.add("UTOPIA BEVERAGES");
+
+        nameStock.add("UTOPIA ENERGY");
+        nameStock.add("AIR UTOPIA");
+        nameStock.add("UTOPIA FASHION");
+        nameStock.add("UTOPIA TECHNOLOGIES");
+        nameStock.add("UTOPIA AGRO");
+        nameStock.add("UTOPIA BEVERAGES");
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -156,7 +159,7 @@ public class HomeFragment extends Fragment
                 AlertDialog.Builder builder =new AlertDialog.Builder(requireContext(),R.style.AlertTheme);
                         builder.setView(v);
                         TextView title = new TextView(getContext());
-                        title.setText("Buy "+stockName.get(position));
+                        title.setText("Buy "+nameStock.get(position));
                         title.setPadding(10,10,10,10);
                         title.setGravity(Gravity.CENTER);
                         title.setTextSize(20);
@@ -179,7 +182,7 @@ public class HomeFragment extends Fragment
                                             userAmount.setText(String.valueOf((cashOwnedNow)));
                                             String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                             String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
-                                            Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                            Stocks stockInstance = new Stocks(nameStock.get(position), stockPrice.get(position), shareOwned.get(position));
                                             stocks.set(position, stockInstance);
                                             adapter.resetData(stocks,IncDec);
                                             if (status == 1) {
@@ -248,7 +251,7 @@ public class HomeFragment extends Fragment
                 AlertDialog.Builder builder =new AlertDialog.Builder(requireContext(),R.style.AlertTheme);
                         builder.setView(v);
                         TextView title = new TextView(getContext());
-                        title.setText("SELL "+stockName.get(position));
+                        title.setText("SELL "+nameStock.get(position));
                         title.setPadding(10,10,10,10);
                         title.setGravity(Gravity.CENTER);
                         title.setTextSize(20);
@@ -269,7 +272,7 @@ public class HomeFragment extends Fragment
                                             userAmount.setText(String.valueOf((cashOwnedNow)));
                                             String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                             String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
-                                            Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
+                                            Stocks stockInstance = new Stocks(nameStock.get(position), stockPrice.get(position), shareOwned.get(position));
                                             stocks.set(position, stockInstance);
                                             adapter.resetData(stocks,IncDec);
                                             if (status == 1) {
@@ -350,7 +353,7 @@ public class HomeFragment extends Fragment
             int i = 0;
             while (rs.next())
             {
-                //stockName.add(rs.getString("company_name"));
+                stockName.add(rs.getString("company_name"));
                 stockPrice.add(rs.getDouble(columnPrice));
                 if (roundNo>1) {
                     if(rs.getDouble(columnPrevious)<stockPrice.get(i))
@@ -378,7 +381,7 @@ public class HomeFragment extends Fragment
         }
         for (int i=0;i<stockName.size();i++)
         {
-            Stocks stockInstance = new Stocks(stockName.get(i),stockPrice.get(i),shareOwned.get(i));
+            Stocks stockInstance = new Stocks(nameStock.get(i),stockPrice.get(i),shareOwned.get(i));
             stocks.add(stockInstance);
         }
         if (roundNo!=1)
@@ -460,7 +463,7 @@ public class HomeFragment extends Fragment
                                     funds.setVisibility(View.VISIBLE);
                                     homeroundno.setVisibility(View.VISIBLE);
                                     stocks.clear();
-                                    //stockName.clear();
+                                    stockName.clear();
                                     stockPrice.clear();
                                     shareOwned.clear();
                                     IncDec.clear();
