@@ -20,10 +20,9 @@
 
     <TextView
         android:id="@+id/leaderboardRoundNo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:gravity="center_horizontal"
         android:text="Leaderboard: Round 1"
         android:textColor="#FFFFFF"
@@ -32,7 +31,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timer2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025" />
 
@@ -53,8 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="30"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
@@ -62,6 +60,6 @@
         app:layout_constraintBottom_toTopOf="@+id/winner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.652" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

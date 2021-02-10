@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
     Context context;
     ItemClicked itemClicked;
     ViewGroup parent;
+    ArrayList<Integer> IncDec;
 
-    public StockAdapter(ArrayList<Stocks> stocks, Context context,ItemClicked itemClicked) {
+    public StockAdapter(ArrayList<Stocks> stocks, Context context,ItemClicked itemClicked,ArrayList<Integer> IncDec) {
         this.stocks = stocks;
         this.context = context;
         this.itemClicked = itemClicked;
+        this.IncDec = IncDec;
     }
     @NonNull
     @Override
@@ -38,6 +41,18 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
         holder.shareN.setText(stocks.get(position).getShareName());
         holder.shareP.setText(stocks.get(position).getSharePrice().toString());
         holder.shareOwned.setText(stocks.get(position).getShareOwned().toString());
+        if (IncDec.get(position)==1) {
+            holder.shareP.setTextColor(Color.GREEN);
+            holder.shareOwned.setTextColor(Color.GREEN);
+        }
+        else if (IncDec.get(position)==0) {
+            holder.shareP.setTextColor(Color.RED);
+            holder.shareOwned.setTextColor(Color.RED);
+        }else
+        {
+            holder.shareP.setTextColor(Color.WHITE);
+            holder.shareOwned.setTextColor(Color.WHITE);
+        }
     }
 
     @Override
@@ -45,8 +60,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
         return stocks.size();
     }
 
-    public void resetData(ArrayList<Stocks> stocks) {
+    public void resetData(ArrayList<Stocks> stocks,ArrayList<Integer> IncDec) {
         this.stocks = stocks;
+        this.IncDec = IncDec;
         this.notifyDataSetChanged();
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,6 +72,7 @@ public class HomeFragment extends Fragment
     ArrayList<Stocks> stocks = new ArrayList<>();
     ArrayList<String> stockName = new ArrayList<>();
     ArrayList<Integer> shareOwned = new ArrayList<>();
+    ArrayList<Integer> IncDec = new ArrayList<>();
     public static ArrayList<Double> stockPrice = new ArrayList<>();
     StockAdapter adapter;
     String number;
@@ -80,10 +83,6 @@ public class HomeFragment extends Fragment
     Connection connect;
     public static int roundNo = 1;
     TextView homeroundno;
-    Random rand = new Random();
-
-    ArrayList<Drawable> memes = new ArrayList<>();
-    DecimalFormat df = new DecimalFormat();
 
     public HomeFragment(int status,int roundNo) {
         this.status = status;
@@ -99,20 +98,25 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 30100;
+        millisecValue = 31000;
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        df.setMinimumFractionDigits(2);
         userAmount = requireView().findViewById(R.id.userAmount);
         homeroundno=requireView().findViewById(R.id.homeRoundNo);
         number = sharedPreferences.getString("number","");
         stockList = requireView().findViewById(R.id.stockView);
         stockList.setLayoutManager(new LinearLayoutManager(requireContext()));
         homeroundno.setText("Round "+String.valueOf(roundNo));
+        IncDec.add(-1);
+        IncDec.add(-1);
+        IncDec.add(-1);
+        IncDec.add(-1);
+        IncDec.add(-1);
+        IncDec.add(-1);
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -143,10 +147,10 @@ public class HomeFragment extends Fragment
                     public void afterTextChanged(Editable s) {
                     }
                 });
-                AlertDialog.Builder builder =new AlertDialog.Builder(requireContext());
+                AlertDialog.Builder builder =new AlertDialog.Builder(requireContext(),R.style.AlertTheme);
                         builder.setView(v);
                         TextView title = new TextView(getContext());
-                        title.setText("BUY "+stockName.get(position));
+                        title.setText("Buy "+stockName.get(position));
                         title.setPadding(10,10,10,10);
                         title.setGravity(Gravity.CENTER);
                         title.setTextSize(20);
@@ -171,7 +175,7 @@ public class HomeFragment extends Fragment
                                             String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
                                             Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
                                             stocks.set(position, stockInstance);
-                                            adapter.resetData(stocks);
+                                            adapter.resetData(stocks,IncDec);
                                             if (status == 1) {
                                                 try {
                                                     Statement st = connect.createStatement();
@@ -197,7 +201,14 @@ public class HomeFragment extends Fragment
                             {
                             }
                         });
-                        builder.show();
+                        Rect displayRectangle = new Rect();
+                        Window window = requireActivity().getWindow();
+                        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.getWindow().setLayout((int)(displayRectangle.width() *
+                                0.9f),ViewGroup.LayoutParams.WRAP_CONTENT);
+                        alertDialog.show();
             }
             @Override
             public void onClickSell(final int position, View view)
@@ -228,10 +239,16 @@ public class HomeFragment extends Fragment
                     public void afterTextChanged(Editable s) {
                     }
                 });
-                new AlertDialog.Builder(requireContext())
-                        .setView(v)
-                        .setTitle("\t\t\t\t\t\tSell\t\t\t\t\t")
-                        .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder =new AlertDialog.Builder(requireContext(),R.style.AlertTheme);
+                        builder.setView(v);
+                        TextView title = new TextView(getContext());
+                        title.setText("SELL "+stockName.get(position));
+                        title.setPadding(10,10,10,10);
+                        title.setGravity(Gravity.CENTER);
+                        title.setTextSize(20);
+                        title.setTypeface(Typeface.DEFAULT_BOLD);
+                        builder.setCustomTitle(title);
+                        builder.setPositiveButton("Sell", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!stockSell.getText().toString().equals("")) {
@@ -248,7 +265,7 @@ public class HomeFragment extends Fragment
                                             String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
                                             Stocks stockInstance = new Stocks(stockName.get(position), stockPrice.get(position), shareOwned.get(position));
                                             stocks.set(position, stockInstance);
-                                            adapter.resetData(stocks);
+                                            adapter.resetData(stocks,IncDec);
                                             if (status == 1) {
                                                 try {
                                                     Statement st = connect.createStatement();
@@ -269,18 +286,36 @@ public class HomeFragment extends Fragment
                                     }
                                 }
                             }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
-                        }).show();
+                        });
+
+                        Rect displayRectangle = new Rect();
+                        Window window = requireActivity().getWindow();
+                        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.getWindow().setLayout((int)(displayRectangle.width() * 0.9f),ViewGroup.LayoutParams.WRAP_CONTENT);
+                        alertDialog.show();
+            }
+        },IncDec);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getData();
             }
         });
-        getData();
+        thread.start();
         stockList.setAdapter(adapter);
         timer  = requireView().findViewById(R.id.timer);
+        while (thread.isAlive())
+        {
+            Log.d("Wait","Waiting");
+        }
         startContinueTimer();
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
@@ -301,10 +336,25 @@ public class HomeFragment extends Fragment
             Statement userSt = connect.createStatement();
             ResultSet userRs = userSt.executeQuery(userPortfolioDetails);
             String columnPrice = "r"+roundNo+"_price";
+            String columnPrevious = "";
+            if(roundNo>1) {
+                int prev = roundNo - 1;
+                columnPrevious = "r" + prev + "_price";
+            }
+            int i = 0;
             while (rs.next())
             {
                 stockName.add(rs.getString("company_name"));
                 stockPrice.add(rs.getDouble(columnPrice));
+                if (roundNo>1) {
+                    if(rs.getDouble(columnPrevious)<stockPrice.get(i))
+                        IncDec.add(1);
+                    else if(rs.getDouble(columnPrevious)>stockPrice.get(0))
+                        IncDec.add(0);
+                    else
+                        IncDec.add(-1);
+                }
+                i++;
             }
             while (userRs.next())
             {
@@ -315,8 +365,6 @@ public class HomeFragment extends Fragment
                 shareOwned.add(userRs.getInt("D_shares"));
                 shareOwned.add(userRs.getInt("E_shares"));
                 shareOwned.add(userRs.getInt("F_shares"));
-                shareOwned.add(userRs.getInt("G_shares"));
-                shareOwned.add(userRs.getInt("H_shares"));
             }
         }catch (Exception e)
         {
@@ -328,7 +376,7 @@ public class HomeFragment extends Fragment
             stocks.add(stockInstance);
         }
         if (roundNo!=1)
-            adapter.resetData(stocks);
+            adapter.resetData(stocks,IncDec);
     }
 
     private void startContinueTimer() {
@@ -409,6 +457,7 @@ public class HomeFragment extends Fragment
                                     stockName.clear();
                                     stockPrice.clear();
                                     shareOwned.clear();
+                                    IncDec.clear();
                                     getData();
                                     LeaderboardFragment.users.clear();
                                     LeaderboardFragment.userNames.clear();

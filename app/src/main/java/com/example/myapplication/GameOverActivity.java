@@ -25,13 +25,14 @@ import static com.example.myapplication.MainActivity.MyPREFERENCES;
 public class GameOverActivity extends AppCompatActivity {
 
     private Button next;
-    private RecyclerView leaderBoardFinal;
+    private RecyclerView leaderBoardFinal,toppersLeaderBoard;
     ConnectionHelper con;
     Connection connect;
     ArrayList<Users> users = new ArrayList<>();
+    ArrayList<Users> toppers = new ArrayList<>();
     ArrayList<String> userNames = new ArrayList<>();
     ArrayList<Double> points = new ArrayList<>();
-    UserAdapter adapter;
+    UserAdapter adapter,adapterTopper;
     ArrayList<Double> stockPrice = new ArrayList<>();
     String name;
     SharedPreferences sharedPreferences;
@@ -41,8 +42,13 @@ public class GameOverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
         next = findViewById(R.id.overButton);
+        int playerPosition=0;
+
         leaderBoardFinal = findViewById(R.id.userLeaderBoardViewFinal);
+        toppersLeaderBoard = findViewById(R.id.winner);
+
         leaderBoardFinal.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        toppersLeaderBoard.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         name = sharedPreferences.getString("name","");
@@ -93,17 +99,27 @@ public class GameOverActivity extends AppCompatActivity {
                     userNames.add(rs.getString("nameID"));
                     points.add(rs.getDouble("points"));
                 }
+
                 for (int i=0;i<userNames.size();i++)
                 {
+                    if (userNames.get(i).equals(name))
+                        playerPosition = i;
                     Users userInstance = new Users(userNames.get(i),points.get(i));
-                    users.add(userInstance);
+                    if(i>=3)
+                        users.add(userInstance);
+                    else
+                        toppers.add(userInstance);
                 }
             }catch (Exception e)
             {
                 e.printStackTrace();
             }
-            adapter = new UserAdapter(users,getApplicationContext(),name,0);
+            adapter = new UserAdapter(users,getApplicationContext(),name,1);
+            adapterTopper =new UserAdapter(toppers,getApplicationContext(),name,0);
             leaderBoardFinal.setAdapter(adapter);
+            toppersLeaderBoard.setAdapter(adapterTopper);
+            if (!(playerPosition>=3))
+                leaderBoardFinal.scrollToPosition(playerPosition);
         }
     }
 

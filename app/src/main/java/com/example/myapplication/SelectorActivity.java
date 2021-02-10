@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -19,13 +20,14 @@ public class SelectorActivity extends AppCompatActivity {
     Connection connect;
     int roundNo = 1;
     int flag = 0;
+    ProgressBar pB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selector);
         Button gameRound = findViewById(R.id.gameRound);
-
+        pB = findViewById(R.id.progressBar);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();
@@ -36,6 +38,7 @@ public class SelectorActivity extends AppCompatActivity {
 
         gameRound.setOnClickListener(new View.OnClickListener() {@Override
         public void onClick(View v) {
+            pB.setVisibility(View.VISIBLE);
             String whichRounds = "Select * from rounds";
             try {
                 Statement st = connect.createStatement();
@@ -77,6 +80,7 @@ public class SelectorActivity extends AppCompatActivity {
         trialRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pB.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(SelectorActivity.this,TrialActivity.class);
                 startActivity(intent);
             }
