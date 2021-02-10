@@ -114,8 +114,8 @@ public class GameOverActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
-            adapter = new UserAdapter(users,getApplicationContext(),name,1);
-            adapterTopper =new UserAdapter(toppers,getApplicationContext(),name,0);
+            adapter = new UserAdapter(users,getApplicationContext(),playerPosition,1);
+            adapterTopper =new UserAdapter(toppers,getApplicationContext(),playerPosition,0);
             leaderBoardFinal.setAdapter(adapter);
             toppersLeaderBoard.setAdapter(adapterTopper);
             if (!(playerPosition>=3))

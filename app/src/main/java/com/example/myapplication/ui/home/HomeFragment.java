@@ -469,8 +469,10 @@ public class HomeFragment extends Fragment
                                     IncDec.clear();
                                     getData();
                                     LeaderboardFragment.users.clear();
+                                    LeaderboardFragment.toppers.clear();
                                     LeaderboardFragment.userNames.clear();
                                     LeaderboardFragment.points.clear();
+                                    LeaderboardFragment.playerPosition = 0;
                                     if (roundNo!=6){
                                         LeaderboardFragment.leaderboardroundnumber.setVisibility(View.VISIBLE);
                                         LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));

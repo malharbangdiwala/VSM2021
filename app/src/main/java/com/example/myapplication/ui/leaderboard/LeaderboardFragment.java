@@ -50,7 +50,7 @@ public class LeaderboardFragment extends Fragment {
     static TextView podium3;
     SharedPreferences sharedPreferences;
     static String name;
-    static int playerPosition = 0;
+    public static int playerPosition = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,12 +73,12 @@ public class LeaderboardFragment extends Fragment {
         timers = requireView().findViewById(R.id.timer2);
         usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
         usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new UserAdapter(users,requireContext(),name,1);
+        adapter = new UserAdapter(users,requireContext(),playerPosition,1);
         usersLeaderBoard.setAdapter(adapter);
 
         toppersLeaderBoard = requireView().findViewById(R.id.winner);
         toppersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapterTopper = new UserAdapter(users,requireContext(),name,0);
+        adapterTopper = new UserAdapter(users,requireContext(),playerPosition,0);
         toppersLeaderBoard.setAdapter(adapterTopper);
 
         if (!(playerPosition>=3))
@@ -103,16 +103,17 @@ public class LeaderboardFragment extends Fragment {
 
             for (int i=0;i<userNames.size();i++)
             {
-                if (userNames.get(i).equals(name))
+                if (userNames.get(i).equals(name)) {
                     playerPosition = i;
+                }
                 Users userInstance = new Users(userNames.get(i),points.get(i));
                 if(i>=3)
                     users.add(userInstance);
                 else
                     toppers.add(userInstance);
             }
-            adapter.resetData(users);
-            adapterTopper.resetData(toppers);
+            adapter.resetData(users,playerPosition);
+            adapterTopper.resetData(toppers,playerPosition);
         }catch (Exception e)
         {
             Log.d("Error",e.getMessage());
