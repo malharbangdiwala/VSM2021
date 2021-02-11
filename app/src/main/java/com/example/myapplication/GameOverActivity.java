@@ -67,7 +67,7 @@ public class GameOverActivity extends AppCompatActivity {
                 }
             });
         }else {
-            next.setVisibility(View.INVISIBLE);
+            next.setVisibility(View.VISIBLE);
             try {
                 con = new ConnectionHelper();
                 connect = ConnectionHelper.CONN();
@@ -116,10 +116,11 @@ public class GameOverActivity extends AppCompatActivity {
             }
             adapter = new UserAdapter(users,getApplicationContext(),playerPosition,1);
             adapterTopper =new UserAdapter(toppers,getApplicationContext(),playerPosition,0);
-            leaderBoardFinal.setAdapter(adapter);
-            toppersLeaderBoard.setAdapter(adapterTopper);
             if (!(playerPosition>=3))
                 leaderBoardFinal.scrollToPosition(playerPosition);
+            leaderBoardFinal.setAdapter(adapter);
+            toppersLeaderBoard.setAdapter(adapterTopper);
+
         }
     }
 
