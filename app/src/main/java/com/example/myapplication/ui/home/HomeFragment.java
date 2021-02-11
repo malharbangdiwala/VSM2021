@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -392,6 +393,11 @@ public class HomeFragment extends Fragment
         countDownTimer = new CountDownTimer(millisecValue, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                if(millisUntilFinished<5000){
+                    timer.setTextColor(Color.RED);
+                    newsFeedFragment.timer.setTextColor(Color.RED);
+                    LeaderboardFragment.timers.setTextColor(Color.RED);
+                }
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
                 newsFeedFragment.timer.setText(String.valueOf(millisUntilFinished / 1000));
                 LeaderboardFragment.timers.setText(String.valueOf(millisUntilFinished / 1000));

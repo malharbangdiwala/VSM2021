@@ -67,7 +67,7 @@ public class GameOverActivity extends AppCompatActivity {
                 }
             });
         }else {
-            next.setVisibility(View.VISIBLE);
+            next.setVisibility(View.INVISIBLE);
             try {
                 con = new ConnectionHelper();
                 connect = ConnectionHelper.CONN();
