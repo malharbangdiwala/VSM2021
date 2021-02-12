@@ -47,10 +47,10 @@ public class News {
                 break;
             case 4:
                 setNews.clear();
-                setNews.add("SPITian’s make UTOPIA proud after successfully single headedly creating the greatest AI technology available .");
+                setNews.add("SPITian’s make UTOPIA proud after successfully creating the greatest ever AI technology single handedly.");
                 setNews.add("In the latest audit, Dr. Utopia gets accused of allegedly involved in diverting funds received for research in subsidiary companies.");
                 setNews.add("Government incentivises the use of Solar Panels.");
-                setNews.add("Banks witness in significant increase in number of NPA(non-performing assets");
+                setNews.add("Banks witness in significant increase in number of NPA(non-performing assets).");
                 if(PowerCardFragment.pc2flag==1){
                     setNews.add("UTOPIA plans to sign Paris Agreement again due to backlash by other governments.");
                     PowerCardFragment.pc2flag=0;
