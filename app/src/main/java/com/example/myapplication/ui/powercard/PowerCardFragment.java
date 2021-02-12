@@ -24,6 +24,7 @@ import com.example.myapplication.News;
 import com.example.myapplication.R;
 import com.example.myapplication.powercard3;
 import com.example.myapplication.ui.home.HomeFragment;
+import com.example.myapplication.ui.newsfeed.newsFeedFragment;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -109,7 +110,8 @@ public class PowerCardFragment extends Fragment {
                                 try {
                                     if(rs.next() && rs.getInt("pc2")==1) {
                                         pc2flag=1;
-                                        News.setNewsText();
+                                        newsFeedFragment.newList =News.setNewsText();
+                                        newsFeedFragment.adapter.resetData(newsFeedFragment.newList);
                                         Toast.makeText(requireContext(),"This power card is now active!",Toast.LENGTH_SHORT).show();
                                         usepc2.setText("Used");
                                         String query="Update powercard set pc2=0 where phoneID="+number+";";

@@ -38,7 +38,7 @@ public class LeaderboardFragment extends Fragment {
     static Connection connect;
     public static ArrayList<String> userNames = new ArrayList<>();
     public static ArrayList<Double> points = new ArrayList<>();
-    RecyclerView usersLeaderBoard,toppersLeaderBoard;
+    static RecyclerView usersLeaderBoard,toppersLeaderBoard;
     static UserAdapter adapter;
     static UserAdapter adapterTopper;
     public static TextView timers;
@@ -113,6 +113,8 @@ public class LeaderboardFragment extends Fragment {
                 else
                     toppers.add(userInstance);
             }
+            if (!(playerPosition>=3))
+                usersLeaderBoard.scrollToPosition(playerPosition);
             adapter.resetData(users,playerPosition);
             adapterTopper.resetData(toppers,playerPosition);
         }catch (Exception e)

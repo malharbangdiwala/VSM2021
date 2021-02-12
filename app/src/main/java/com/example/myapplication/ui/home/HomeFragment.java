@@ -393,7 +393,7 @@ public class HomeFragment extends Fragment
         countDownTimer = new CountDownTimer(millisecValue, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(millisUntilFinished<5000){
+                if(millisUntilFinished<=10000){
                     timer.setTextColor(Color.RED);
                     newsFeedFragment.timer.setTextColor(Color.RED);
                     LeaderboardFragment.timers.setTextColor(Color.RED);
@@ -414,10 +414,14 @@ public class HomeFragment extends Fragment
                 }
                 else {
                     roundNo++;
-                    News.setNewsText();
+                    ArrayList<String> news = News.setNewsText();
+                    newsFeedFragment.adapter.resetData(news);
                     LeaderboardFragment.users.clear();
                     LeaderboardFragment.userNames.clear();
                     LeaderboardFragment.points.clear();
+                    timer.setTextColor(Color.WHITE);
+                    newsFeedFragment.timer.setTextColor(Color.WHITE);
+                    LeaderboardFragment.timers.setTextColor(Color.WHITE);
                     homeroundno.setText("Round "+String.valueOf(roundNo));
                     if (PowerCardFragment.pc3flag == 1) {
                         if (status == 1) {
