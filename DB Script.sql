@@ -27,8 +27,8 @@ C_shares numeric(6,0),
 D_shares numeric(6,0),
 E_shares numeric(6,0),
 F_shares numeric(6,0),
-G_shares numeric(6,0),
-H_shares numeric(6,0),
+--G_shares numeric(6,0),
+--H_shares numeric(6,0),
 constraint valuation_fk Foreign Key(phoneID) references login(phoneID) on update cascade);
 
 
@@ -48,7 +48,7 @@ pc2 numeric(1,0),
 pc3 numeric(1,0),
 constraint powercard_fk Foreign Key(phoneID) references login(phoneID) on update cascade);
 
-create table rounds(r1 numeric(1,0),r2 numeric(1,0),r3 numeric(1,0),r4 numeric(1,0),r5 numeric(1,0));
+create table rounds(r1 numeric(1,0),r2 numeric(1,0),r3 numeric(1,0),r4 numeric(1,0),r5 numeric(1,0),r6 numeric(1,0));
 insert into rounds values(1,1,1,1,1);
 
 
@@ -74,7 +74,7 @@ go
 
 
 
-insert into login values('Malhar',9004044310);
+--insert into login values('Malhar',9004044310);
 
 
 insert into company(company_name,r1_price) values('A',100);
@@ -83,8 +83,8 @@ insert into company(company_name,r1_price) values('C',100);
 insert into company(company_name,r1_price) values('D',100);
 insert into company(company_name,r1_price) values('E',100);
 insert into company(company_name,r1_price) values('F',100);
-insert into company(company_name,r1_price) values('G',100);
-insert into company(company_name,r1_price) values('H',100);
+--insert into company(company_name,r1_price) values('G',100);
+--insert into company(company_name,r1_price) values('H',100);
 
 
 --UPDATE PRICES AFTER EACH ROUND
