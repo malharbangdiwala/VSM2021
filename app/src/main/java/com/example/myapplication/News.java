@@ -26,7 +26,7 @@ public class News {
                 break;
             case 2:
                 setNews.clear();
-                setNews.add("Government awards tendon to Dr. Utopia for privatisation of Air Utopia.");
+                setNews.add("Government awards tendor to Dr. Utopia for privatisation of Air Utopia.");
                 setNews.add("Election Results are OUT , Xi Zie wins the throne with an overwhelming majority. His first action plan is to revise the policy on Immigration of Utopia Workers and reduce investment into Utopian MSE.");
                 setNews.add("Students from SPIT are developing a game changing AI to smoothen the cryptocurrency transactions.");
                 if(PowerCardFragment.pc2flag==1){
