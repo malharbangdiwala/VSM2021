@@ -121,12 +121,12 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
 
-        nameStock.add("UTOPIA ENERGY");
+        nameStock.add("UTOPIA BANK");
+        nameStock.add("DR. PHARMA");
+        nameStock.add("UTOPIA TECH");
+        nameStock.add("UTOPIA CHEMICAL");
+        nameStock.add("UTOPIA STEEL");
         nameStock.add("AIR UTOPIA");
-        nameStock.add("UTOPIA FASHION");
-        nameStock.add("UTOPIA TECHNOLOGIES");
-        nameStock.add("UTOPIA AGRO");
-        nameStock.add("UTOPIA BEVERAGES");
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
