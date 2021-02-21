@@ -73,12 +73,13 @@ public class LeaderboardFragment extends Fragment {
         }
         timers = requireView().findViewById(R.id.timer2);
         usersLeaderBoard = requireView().findViewById(R.id.userLeaderBoardView);
-        usersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
+        usersLeaderBoard.setLayoutManager(new LeaderBoardLinearLayoutManager(requireContext()));
         adapter = new UserAdapter(users,requireContext(),playerPosition,1);
         usersLeaderBoard.setAdapter(adapter);
 
         toppersLeaderBoard = requireView().findViewById(R.id.winner);
-        toppersLeaderBoard.setLayoutManager(new LinearLayoutManager(requireContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        toppersLeaderBoard.setLayoutManager(layoutManager);
         adapterTopper = new UserAdapter(users,requireContext(),playerPosition,0);
         toppersLeaderBoard.setAdapter(adapterTopper);
 
@@ -120,6 +121,27 @@ public class LeaderboardFragment extends Fragment {
         }catch (Exception e)
         {
             Log.d("Error",e.getMessage());
+        }
+    }
+}
+class LeaderBoardLinearLayoutManager extends LinearLayoutManager{
+
+    public LeaderBoardLinearLayoutManager(Context context) {
+        super(context);
+    }
+
+    @Override
+    public boolean isAutoMeasureEnabled() {
+        return false;
+    }
+
+    @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        try {
+            super.onLayoutChildren(recycler, state);
+        }catch (IndexOutOfBoundsException e)
+        {
+            Log.d("Tag",""+e.getLocalizedMessage());
         }
     }
 }
