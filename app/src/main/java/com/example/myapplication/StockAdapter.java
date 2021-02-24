@@ -43,15 +43,15 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockHolder>
         holder.shareOwned.setText(stocks.get(position).getShareOwned().toString());
         if (IncDec.get(position)==1) {
             holder.shareP.setTextColor(Color.GREEN);
-            holder.shareOwned.setTextColor(Color.GREEN);
+            //holder.shareOwned.setTextColor(Color.GREEN);
         }
         else if (IncDec.get(position)==0) {
             holder.shareP.setTextColor(Color.RED);
-            holder.shareOwned.setTextColor(Color.RED);
+            //holder.shareOwned.setTextColor(Color.RED);
         }else
         {
             holder.shareP.setTextColor(Color.WHITE);
-            holder.shareOwned.setTextColor(Color.WHITE);
+            //holder.shareOwned.setTextColor(Color.WHITE);
         }
     }
 

@@ -240,9 +240,9 @@ public class HomeFragment extends Fragment
                             totalSum.setText("You don't have enough stocks!");
                         }
                         else if (!s.toString().equals(""))
-                        totalSum.setText(String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
+                        totalSum.setText("Funds Gained: "+String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
                         else
-                            totalSum.setText("0");
+                            totalSum.setText("Funds Gained: 0");
                     }
 
                     @Override
