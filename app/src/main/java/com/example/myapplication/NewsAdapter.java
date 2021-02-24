@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -37,8 +38,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>
         if(position==0 && News.newscolorflag==1)
         {
             News.newscolorflag=0;
-            //TODO Set background colour
-            //holder.news.setBackgroundColor(Color.parseColor("FFFFFF"));
+            holder.newsCard.setBackgroundColor(Color.parseColor("FFFFFF"));
         }
         holder.news.setText(news.get(position));
     }
@@ -56,9 +56,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>
 
     class NewsHolder extends RecyclerView.ViewHolder{
         TextView news;
+        CardView newsCard;
         public NewsHolder(@NonNull View itemView) {
             super(itemView);
             news = itemView.findViewById(R.id.newsText);
+            newsCard = itemView.findViewById(R.id.cardViewNews);
         }
     }
 }
