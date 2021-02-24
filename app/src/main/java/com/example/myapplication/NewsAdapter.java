@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull NewsHolder holder, int position) {
+
+        if(position==0 && News.newscolorflag==1)
+        {
+            News.newscolorflag=0;
+            //TODO Set background colour
+            //holder.news.setBackgroundColor(Color.parseColor("FFFFFF"));
+        }
         holder.news.setText(news.get(position));
     }
 
