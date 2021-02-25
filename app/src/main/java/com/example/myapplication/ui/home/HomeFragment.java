@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -87,6 +88,8 @@ public class HomeFragment extends Fragment
     public static int roundNo = 1;
     TextView homeroundno;
 
+    MediaPlayer mediaPlayer;
+    public HomeFragment(){}
     public HomeFragment(int status,int roundNo) {
         this.status = status;
         this.roundNo = roundNo;
@@ -103,11 +106,13 @@ public class HomeFragment extends Fragment
         }
         millisecValue = 31000;
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mediaPlayer=MediaPlayer.create(this.getActivity(),R.raw.timer);
         userAmount = requireView().findViewById(R.id.userAmount);
         homeroundno=requireView().findViewById(R.id.homeRoundNo);
         number = sharedPreferences.getString("number","");
@@ -121,12 +126,12 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
 
-        nameStock.add("UTOPIA BANK");
-        nameStock.add("DR. PHARMA");
-        nameStock.add("UTOPIA TECH");
-        nameStock.add("UTOPIA CHEMICAL");
-        nameStock.add("UTOPIA STEEL");
         nameStock.add("AIR UTOPIA");
+        nameStock.add("DR. PHARMA");
+        nameStock.add("STEEL WORKS");
+        nameStock.add("THE BANK");
+        nameStock.add("TECH GIANT");
+        nameStock.add("CHEMICAL COMPANY");
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -393,6 +398,11 @@ public class HomeFragment extends Fragment
         countDownTimer = new CountDownTimer(millisecValue, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+
+                if(millisUntilFinished<11000)
+                {
+                    mediaPlayer.start();
+                }
                 if(millisUntilFinished<=10000){
                     timer.setTextColor(Color.RED);
                     newsFeedFragment.timer.setTextColor(Color.RED);
@@ -438,7 +448,7 @@ public class HomeFragment extends Fragment
 
                     Toast.makeText(requireContext(), "Round Finished.Proceed to the next round!", Toast.LENGTH_SHORT).show();
                     final TextView funds = requireView().findViewById(R.id.textView3);
-
+                    //Todo REMOVE LINE 442-444;471-472 And add yt video
                     final ImageView roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     roundChangeButton.setVisibility(View.VISIBLE);
                     Glide.with(getContext()).load(R.drawable.loader).into(roundChangeButton);
