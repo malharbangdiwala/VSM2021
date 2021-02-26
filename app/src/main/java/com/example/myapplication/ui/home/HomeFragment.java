@@ -24,8 +24,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -87,6 +89,9 @@ public class HomeFragment extends Fragment
     Connection connect;
     public static int roundNo = 1;
     TextView homeroundno;
+
+
+
 
     MediaPlayer mediaPlayer;
     public HomeFragment(){}
@@ -449,11 +454,38 @@ public class HomeFragment extends Fragment
                     Toast.makeText(requireContext(), "Round Finished.Proceed to the next round!", Toast.LENGTH_SHORT).show();
                     final TextView funds = requireView().findViewById(R.id.textView3);
                     //Todo REMOVE LINE 442-444;471-472 And add yt video
-                    final ImageView roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
-                    roundChangeButton.setVisibility(View.VISIBLE);
-                    Glide.with(getContext()).load(R.drawable.loader).into(roundChangeButton);
+                    Log.i("Video insert","Round:"+roundNo);
+                    final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
+                    final TextView timertext=requireView().findViewById(R.id.timer);
+                    final TextView fundstext=requireView().findViewById(R.id.textView3);
+                    final RecyclerView stockviewtext=requireView().findViewById(R.id.stockView);
+                    final VideoView videoView=(VideoView)requireView().findViewById(R.id.videoView);
+                    final TextView useramounttext=requireView().findViewById(R.id.userAmount);
+
+                    if(roundNo==2)
+                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afteronedayone);
+                    else if (roundNo==3)
+                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.aftertwodayone);
+                    else if (roundNo==4)
+                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afterthreedayone);
+                    else if (roundNo==5)
+                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afterfourdayone);
+                    else if (roundNo==6)
+                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afteronedayone);
+
+                    MediaController mediaController=new MediaController(getActivity());
+                    mediaController.setAnchorView(videoView);
+                    videoView.setMediaController(mediaController);
+                    videoView.start();
+                    videoView.setVisibility(View.VISIBLE);
                     funds.setVisibility(View.INVISIBLE);
                     homeroundno.setVisibility(View.INVISIBLE);
+                    timertext.setVisibility(View.INVISIBLE);
+                    fundstext.setVisibility(View.INVISIBLE);
+                    roundChangeButton.setVisibility(View.VISIBLE);
+                    stockviewtext.setVisibility(View.INVISIBLE);
+                    useramounttext.setVisibility(View.INVISIBLE);
+
                     roundChangeButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -478,10 +510,18 @@ public class HomeFragment extends Fragment
                                 getActivity().finish();
                             }else {
                                 if (nextRoundStart == 1) {
-                                    ImageView roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
+                                    Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
+
                                     roundChangeButton.setVisibility(View.GONE);
+                                    videoView.setVisibility(View.GONE);
                                     funds.setVisibility(View.VISIBLE);
                                     homeroundno.setVisibility(View.VISIBLE);
+                                    stockviewtext.setVisibility(View.VISIBLE);
+                                    timertext.setVisibility(View.VISIBLE);
+                                    fundstext.setVisibility(View.VISIBLE);
+                                    useramounttext.setVisibility(View.VISIBLE);
+
+
                                     stocks.clear();
                                     stockName.clear();
                                     stockPrice.clear();
