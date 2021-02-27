@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>
         if(position==0 && News.newscolorflag==1)
         {
             News.newscolorflag=0;
-            holder.newsCard.setBackgroundColor(Color.parseColor("FFFFFF"));
+            Log.d("Here","I am here");
+            holder.newsCard.setBackgroundColor(Color.parseColor("#FF0A1D59"));
         }
         holder.news.setText(news.get(position));
     }

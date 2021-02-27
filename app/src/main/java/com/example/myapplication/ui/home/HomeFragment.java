@@ -413,6 +413,11 @@ public class HomeFragment extends Fragment
                     newsFeedFragment.timer.setTextColor(Color.RED);
                     LeaderboardFragment.timers.setTextColor(Color.RED);
                 }
+                if (millisUntilFinished<=1000)
+                {
+                    LeaderboardFragment.usersLeaderBoard.setVisibility(View.GONE);
+                    LeaderboardFragment.toppersLeaderBoard.setVisibility(View.GONE);
+                }
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
                 newsFeedFragment.timer.setText(String.valueOf(millisUntilFinished / 1000));
                 LeaderboardFragment.timers.setText(String.valueOf(millisUntilFinished / 1000));
@@ -520,7 +525,8 @@ public class HomeFragment extends Fragment
                                     timertext.setVisibility(View.VISIBLE);
                                     fundstext.setVisibility(View.VISIBLE);
                                     useramounttext.setVisibility(View.VISIBLE);
-
+                                    LeaderboardFragment.usersLeaderBoard.setVisibility(View.VISIBLE);
+                                    LeaderboardFragment.toppersLeaderBoard.setVisibility(View.VISIBLE);
 
                                     stocks.clear();
                                     stockName.clear();
@@ -538,8 +544,6 @@ public class HomeFragment extends Fragment
                                         LeaderboardFragment.leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
                                         LeaderboardFragment.refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5));
                                     }
-
-
                                     startContinueTimer();
                                 } else {
                                     Toast.makeText(requireContext(), "Next Round hasn't started yet", Toast.LENGTH_SHORT).show();

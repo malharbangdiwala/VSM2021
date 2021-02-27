@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,7 @@ public class newsFeedFragment extends Fragment
     public static TextView timer;
     public static ArrayList<String> newList = new ArrayList<>();
     public static NewsAdapter adapter;
-
+    public static CardView newsCard;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -42,6 +43,7 @@ public class newsFeedFragment extends Fragment
         news=requireView().findViewById(R.id.newsText);
         timer = requireView().findViewById(R.id.timer1);
         newsroundnumber=requireView().findViewById(R.id.newsRoundNo);
+        newsCard = requireView().findViewById(R.id.cardViewNews);
 
         newList = News.setNewsText();
         news.setLayoutManager(new LinearLayoutManager(requireContext()));
