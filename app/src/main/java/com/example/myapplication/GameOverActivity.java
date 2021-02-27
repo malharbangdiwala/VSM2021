@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -128,5 +129,26 @@ public class GameOverActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+}
+class BoardLinearLayoutManager extends LinearLayoutManager{
+
+    public BoardLinearLayoutManager(Context context) {
+        super(context);
+    }
+
+    @Override
+    public boolean isAutoMeasureEnabled() {
+        return false;
+    }
+
+    @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        try {
+            super.onLayoutChildren(recycler, state);
+        }catch (IndexOutOfBoundsException e)
+        {
+            Log.d("Tag",""+e.getLocalizedMessage());
+        }
     }
 }
