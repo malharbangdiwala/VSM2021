@@ -32,6 +32,9 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Company Name"
+            android:fontFamily="@font/dosis_semibold"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -42,6 +45,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="Type of Sponsor"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:textSize="18sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

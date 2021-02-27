@@ -415,6 +415,7 @@ public class HomeFragment extends Fragment
                 }
                 if (millisUntilFinished<=1000)
                 {
+                    LeaderboardFragment.leaderboardRefreshText.setVisibility(View.VISIBLE);
                     LeaderboardFragment.usersLeaderBoard.setVisibility(View.GONE);
                     LeaderboardFragment.toppersLeaderBoard.setVisibility(View.GONE);
                 }
@@ -458,7 +459,6 @@ public class HomeFragment extends Fragment
 
                     Toast.makeText(requireContext(), "Round Finished.Proceed to the next round!", Toast.LENGTH_SHORT).show();
                     final TextView funds = requireView().findViewById(R.id.textView3);
-                    //Todo REMOVE LINE 442-444;471-472 And add yt video
                     Log.i("Video insert","Round:"+roundNo);
                     final Button roundChangeButton =  requireView().findViewById(R.id.roundChangeButton);
                     final TextView timertext=requireView().findViewById(R.id.timer);
@@ -525,6 +525,7 @@ public class HomeFragment extends Fragment
                                     timertext.setVisibility(View.VISIBLE);
                                     fundstext.setVisibility(View.VISIBLE);
                                     useramounttext.setVisibility(View.VISIBLE);
+                                    LeaderboardFragment.leaderboardRefreshText.setVisibility(View.INVISIBLE);
                                     LeaderboardFragment.usersLeaderBoard.setVisibility(View.VISIBLE);
                                     LeaderboardFragment.toppersLeaderBoard.setVisibility(View.VISIBLE);
 

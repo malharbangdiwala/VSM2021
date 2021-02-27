@@ -49,6 +49,7 @@ public class LeaderboardFragment extends Fragment {
     static TextView podium1;
     static TextView podium2;
     static TextView podium3;
+    public static TextView leaderboardRefreshText;
     SharedPreferences sharedPreferences;
     static String name;
     public static int playerPosition = 0;
@@ -65,6 +66,7 @@ public class LeaderboardFragment extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         name = sharedPreferences.getString("name","");
         leaderboardroundnumber=requireView().findViewById(R.id.leaderboardRoundNo);
+        leaderboardRefreshText=requireView().findViewById(R.id.leaderboardRefreshText);
         try {
             con = new ConnectionHelper();
             connect = ConnectionHelper.CONN();

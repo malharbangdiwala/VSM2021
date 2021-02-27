@@ -24,11 +24,11 @@ public class Sponsor extends AppCompatActivity {
         RecyclerView sponsors = findViewById(R.id.sponsorRV);
         sponsors.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
 
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.logo),"VSM","Title Sponsor"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.logo),"VSM","Title Sponsor"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.logo),"VSM","Title Sponsor"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.logo),"VSM","Title Sponsor"));
-
+        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorticker),"TICKER BY FINOLOGY","Title Sponsor"));
+        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsoredupeer),"EDUPEER","Associate Sponsor"));
+        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorelm),"ELEARNMARKETS","Knowledge Partner"));
+        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorstockedge),"STOCKEDGE","Knowledge Partner"));
+        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsordta),"DERIVATIVE TRADING ACADEMY","Channel Partner"));
         SponsorAdapter adapter = new SponsorAdapter(sponsorsList,getApplicationContext());
         sponsors.setAdapter(adapter);
     }
