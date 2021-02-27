@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 31000;
+        millisecValue = 30000*4;
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }

@@ -92,11 +92,11 @@ public class LeaderboardFragment extends Fragment {
 
         if (!(playerPosition>=3))
             usersLeaderBoard.scrollToPosition(playerPosition);
-        if (roundNo!=1){
+        //if (roundNo!=1){
         leaderboardroundnumber.setVisibility(View.VISIBLE);
         leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
         refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5));
-        }
+        //}
     }
     public static void refreshLeaderBoard(double priceA,double priceB,double priceC,double priceD,double priceE,double priceF)
     {
