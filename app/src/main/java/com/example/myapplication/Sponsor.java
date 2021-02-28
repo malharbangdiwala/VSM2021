@@ -14,23 +14,32 @@ import java.util.ArrayList;
 public class Sponsor extends AppCompatActivity {
 
     ArrayList<Sponsors> sponsorsList;
+    ArrayList<Sponsors> sponsorsOther;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponsor);
         sponsorsList = new ArrayList<>();
+        sponsorsOther = new ArrayList<>();
 
         RecyclerView sponsors = findViewById(R.id.sponsorRV);
         sponsors.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
 
+        RecyclerView sponsorOther = findViewById(R.id.sponsorKRV);
+        sponsorOther.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+
         sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorticker),"TICKER BY FINOLOGY","Title Sponsor"));
         sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsoredupeer),"EDUPEER","Associate Sponsor"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorelm),"ELEARNMARKETS","Knowledge Partner"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorstockedge),"STOCKEDGE","Knowledge Partner"));
-        sponsorsList.add(new Sponsors(getResources().getDrawable(R.drawable.sponsordta),"DERIVATIVE TRADING ACADEMY","Channel Partner"));
         SponsorAdapter adapter = new SponsorAdapter(sponsorsList,getApplicationContext());
         sponsors.setAdapter(adapter);
+
+        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorelm),"ELEARNMARKETS","Knowledge Partner"));
+        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorstockedge),"STOCKEDGE","Knowledge Partner"));
+        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsordta),"DERIVATIVE TRADING ACADEMY","Channel Partner"));
+        SponsorAdapter adapterOther = new SponsorAdapter(sponsorsOther,getApplicationContext());
+        sponsorOther.setAdapter(adapterOther);
+
     }
 
     @Override
