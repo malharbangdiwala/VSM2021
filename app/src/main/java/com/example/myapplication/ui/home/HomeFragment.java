@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 30000*4;
+        millisecValue = 30000;
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -482,6 +482,10 @@ public class HomeFragment extends Fragment
                     mediaController.setAnchorView(videoView);
                     videoView.setMediaController(mediaController);
                     videoView.start();
+                    videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.setLooping(true);}
+                    });
                     videoView.setVisibility(View.VISIBLE);
                     funds.setVisibility(View.INVISIBLE);
                     homeroundno.setVisibility(View.INVISIBLE);
