@@ -221,6 +221,41 @@ public class HomeFragment extends Fragment
                             {
                             }
                         });
+                builder.setNeutralButton("Buy All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+                        Integer stockB = (int)(Double.parseDouble(userAmount.getText().toString())/stockPrice.get(position));
+                        Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + stockB));
+                        Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
+                        if (cashOwnedNow < 0) {
+                            Toast.makeText(requireContext(), "You don't have enough money!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            shareOwned.set(position, stockOwnedNow);
+                            userAmount.setText(String.valueOf((cashOwnedNow)));
+                            String updateBuy = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                            String insertBuy = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + "," + stockB + ",0);";
+                            Stocks stockInstance = new Stocks(nameStock.get(position), stockPrice.get(position), shareOwned.get(position));
+                            stocks.set(position, stockInstance);
+                            adapter.resetData(stocks,IncDec);
+                            if (status == 1) {
+                                try {
+                                    Statement st = connect.createStatement();
+                                    st.executeQuery(updateBuy);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    Statement statement = connect.createStatement();
+                                    statement.executeQuery(insertBuy);
+                                } catch (Exception e) {
+
+                                }
+                            }
+                        }
+                    }
+                });
                         Rect displayRectangle = new Rect();
                         Window window = requireActivity().getWindow();
                         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
@@ -313,6 +348,36 @@ public class HomeFragment extends Fragment
 
                             }
                         });
+                builder.setNeutralButton("Sell all", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Integer stockB = Integer.parseInt(shareOwned.get(position).toString());
+                        stockSell.setText(String.valueOf(shareOwned.get(position)));
+                        Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - shareOwned.get(position)));
+                        shareOwned.set(position, stockOwnedNow);
+                        Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                        userAmount.setText(String.valueOf((cashOwnedNow)));
+                        String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
+                        String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
+                        Stocks stockInstance = new Stocks(nameStock.get(position), stockPrice.get(position), shareOwned.get(position));
+                        stocks.set(position, stockInstance);
+                        adapter.resetData(stocks, IncDec);
+                        if (status == 1) {
+                            try {
+                                Statement st = connect.createStatement();
+                                st.executeQuery(updateSell);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                Statement statement = connect.createStatement();
+                                statement.executeQuery(insertSell);
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                });
 
                         Rect displayRectangle = new Rect();
                         Window window = requireActivity().getWindow();
