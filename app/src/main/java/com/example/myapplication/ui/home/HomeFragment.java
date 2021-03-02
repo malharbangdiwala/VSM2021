@@ -55,6 +55,8 @@ import com.example.myapplication.ui.powercard.PowerCardFragment;
 
 import org.w3c.dom.Text;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.channels.Selector;
 import java.sql.Array;
 import java.sql.Connection;
@@ -82,7 +84,7 @@ public class HomeFragment extends Fragment
     public static ArrayList<Double> stockPrice = new ArrayList<>();
     StockAdapter adapter;
     String number;
-    int status;
+    public static int status;
     TextView totalSum;
     private int millisecValue;
     ConnectionHelper con;
@@ -186,6 +188,9 @@ public class HomeFragment extends Fragment
                                         Integer stockB = Integer.parseInt(stockBuy.getText().toString());
                                         Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + Integer.parseInt(stockBuy.getText().toString())));
                                         Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
+                                        BigDecimal bd = BigDecimal.valueOf(cashOwnedNow);
+                                        bd = bd.setScale(2, RoundingMode.HALF_UP);
+                                        cashOwnedNow = bd.doubleValue();
                                         if (cashOwnedNow < 0) {
                                             Toast.makeText(requireContext(), "You don't have enough money!", Toast.LENGTH_SHORT).show();
                                         } else {
@@ -229,6 +234,9 @@ public class HomeFragment extends Fragment
                         Integer stockB = (int)(Double.parseDouble(userAmount.getText().toString())/stockPrice.get(position));
                         Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) + stockB));
                         Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) - (stockPrice.get(position) * stockB);
+                        BigDecimal bd = BigDecimal.valueOf(cashOwnedNow);
+                        bd = bd.setScale(2, RoundingMode.HALF_UP);
+                        cashOwnedNow = bd.doubleValue();
                         if (cashOwnedNow < 0) {
                             Toast.makeText(requireContext(), "You don't have enough money!", Toast.LENGTH_SHORT).show();
                         } else {
@@ -315,6 +323,9 @@ public class HomeFragment extends Fragment
                                             Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - Integer.parseInt(stockSell.getText().toString())));
                                             shareOwned.set(position, stockOwnedNow);
                                             Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                                            BigDecimal bd = BigDecimal.valueOf(cashOwnedNow);
+                                            bd = bd.setScale(2, RoundingMode.HALF_UP);
+                                            cashOwnedNow = bd.doubleValue();
                                             userAmount.setText(String.valueOf((cashOwnedNow)));
                                             String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                                             String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
@@ -356,6 +367,9 @@ public class HomeFragment extends Fragment
                         Integer stockOwnedNow = Integer.parseInt(String.valueOf(shareOwned.get(position) - shareOwned.get(position)));
                         shareOwned.set(position, stockOwnedNow);
                         Double cashOwnedNow = Double.parseDouble(userAmount.getText().toString()) + (stockPrice.get(position) * stockB);
+                        BigDecimal bd = BigDecimal.valueOf(cashOwnedNow);
+                        bd = bd.setScale(2, RoundingMode.HALF_UP);
+                        cashOwnedNow = bd.doubleValue();
                         userAmount.setText(String.valueOf((cashOwnedNow)));
                         String updateSell = "Update valuation set " + stockName.get(position) + "_shares =" + stockOwnedNow + ",cash =" + cashOwnedNow + "where phoneID=" + number;
                         String insertSell = "Insert into trade values(" + number + ",'" + stockName.get(position) + "'," + roundNo + ",0," + stockB + ");";
@@ -531,18 +545,20 @@ public class HomeFragment extends Fragment
                     final RecyclerView stockviewtext=requireView().findViewById(R.id.stockView);
                     final VideoView videoView=(VideoView)requireView().findViewById(R.id.videoView);
                     final TextView useramounttext=requireView().findViewById(R.id.userAmount);
-
-                    if(roundNo==2)
-                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afteronedayone);
-                    else if (roundNo==3)
-                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.aftertwodayone);
-                    else if (roundNo==4)
-                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afterthreedayone);
-                    else if (roundNo==5)
-                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afterfourdayone);
-                    else if (roundNo==6)
-                        videoView.setVideoPath("android.resource://"+getActivity().getPackageName()+"/"+R.raw.afteronedayone);
-
+                    if (News.day==1) {
+                        if (roundNo == 2)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afteronedayone);
+                        else if (roundNo == 3)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.aftertwodayone);
+                        else if (roundNo == 4)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afterthreedayone);
+                        else if (roundNo == 5)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afterfourdayone);
+                        else if (roundNo == 6)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afteronedayone);
+                    }else{
+                        //TODO Add Videos For Day 2
+                    }
                     MediaController mediaController=new MediaController(getActivity());
                     mediaController.setAnchorView(videoView);
                     videoView.setMediaController(mediaController);

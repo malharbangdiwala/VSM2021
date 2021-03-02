@@ -95,6 +95,7 @@ public class LeaderboardFragment extends Fragment {
         //if (roundNo!=1){
         leaderboardroundnumber.setVisibility(View.VISIBLE);
         leaderboardroundnumber.setText("Leaderboard: Round "+String.valueOf(roundNo));
+        if (HomeFragment.status==1)
         refreshLeaderBoard(stockPrice.get(0), stockPrice.get(1), stockPrice.get(2), stockPrice.get(3), stockPrice.get(4), stockPrice.get(5));
         //}
     }
