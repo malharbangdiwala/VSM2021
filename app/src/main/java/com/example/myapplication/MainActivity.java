@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                     if (rs.getInt("day") == 0) {
                         Toast.makeText(this, "Your registered slot is not today!", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (rs.getInt("loginflag") == 1) {
+                        if (rs.getInt("loginflag") == 0) {
                             String updateLoginFlag = "Update login set loginflag = 1 where phoneID= " + number + ";";
                             try {
                                 Statement st2 = connect.createStatement();

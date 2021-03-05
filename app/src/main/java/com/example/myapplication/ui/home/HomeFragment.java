@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-        millisecValue = 30000;
+        millisecValue = 30000*5;
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -555,15 +555,15 @@ public class HomeFragment extends Fragment
                     final TextView useramounttext=requireView().findViewById(R.id.userAmount);
                     if (News.day==1) {
                         if (roundNo == 2)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afteronedayone);
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.oneone);
                         else if (roundNo == 3)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.aftertwodayone);
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onetwo);
                         else if (roundNo == 4)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afterthreedayone);
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onethree);
                         else if (roundNo == 5)
                             videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afterfourdayone);
                         else if (roundNo == 6)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.afteronedayone);
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefive);
                     }else{
                         //TODO Add Videos For Day 2
                     }
