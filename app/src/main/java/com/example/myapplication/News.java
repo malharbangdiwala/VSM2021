@@ -49,7 +49,7 @@ public class News {
                         setNews.add("Dr.Pharma is looking for foreign investors.");
                         setNews.add("Chances for the conservative party to win the elections seems pretty high.");
                         if (PowerCardFragment.pc2flag == 1) {
-                            setNews.add(0, "Union of IT workers plans to declare strike due to long working hours and increasing deadline pressure.");
+                            setNews.add(0, "Finology enters the high competition battle zone “FINTECH” ");
                             PowerCardFragment.pc2flag = 0;
                         }
                         break;
@@ -85,20 +85,20 @@ public class News {
                         setNews.add("Government incentivises the use of Solar Panels.");
                         setNews.add("Increase in the number of NPA(non-performing assets) for Banks.");
                         if (PowerCardFragment.pc2flag == 1) {
-                            setNews.add(0, "The Fintech industry is about to boom.");
+                            setNews.add(0, "The Fintech industry is about to revolutionize.");
                             PowerCardFragment.pc2flag = 0;
                             newscolorflag = 1;
                         }
                         break;
                     case 5:
                         setNews.clear();
-                        setNews.add("Tech Giant opens a fintech subsidiary Finology.");
+                        setNews.add("Finology works with SEBI, NSE and The Bank to change the Fintech space forever.");
                         setNews.add("Finology has become the most popular brand to learn and invest in the share market.");
                         setNews.add("Utopians are free from all radiations caused by Ununbaktoniom.");
                         setNews.add("Xi Zie signs a peace treaty with Utopia.");
                         setNews.add("Another steel mine discovered in Utopia.");
                         if (PowerCardFragment.pc2flag == 1) {
-                            setNews.add(0, "Utopia plans to sign Paris Agreement again due to backlash by other governments.\n");
+                            setNews.add(0, "Utopia plans to sign Paris Agreement again due to backlash by other governments.");
                             PowerCardFragment.pc2flag = 0;
                         }
                         break;

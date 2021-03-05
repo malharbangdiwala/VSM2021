@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment
         nameStock.add("DR. PHARMA");
         nameStock.add("STEEL WORKS");
         nameStock.add("THE BANK");
-        nameStock.add("TECH GIANT");
+        nameStock.add("FINOLOGY");
         nameStock.add("CHEMICAL COMPANY");
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
