@@ -39,7 +39,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="50"
                         android:scaleType="fitXY"
-                        android:src="@drawable/insiderdesc" />
+                        android:src="@drawable/insiderdescription" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
@@ -112,7 +112,7 @@
                         android:scaleType="fitXY"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:src="@drawable/loanacapdesc" />
+                        android:src="@drawable/loanacapdescription" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
