@@ -68,6 +68,7 @@ public class SelectorActivity extends AppCompatActivity {
             }
             Log.d("Round No",""+roundNo);
             if (flag==0&& roundNo==1) {
+                pB.setVisibility(View.GONE);
                 Toast.makeText(SelectorActivity.this, "Next round hasn't started yet!", Toast.LENGTH_SHORT).show();
             }else {
             Intent intent = new Intent(SelectorActivity.this, GamesActivity.class);

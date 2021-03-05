@@ -159,9 +159,13 @@ public class HomeFragment extends Fragment
                         {
                           totalSum.setText("You don't have enough money!");
                         }
-                        else if (!s.toString().equals(""))
-                            totalSum.setText("Funds Required :"+String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
-                        else
+                        else if (!s.toString().equals("")) {
+                            double cash = Integer.parseInt(s.toString()) * stockPrice.get(position);
+                            BigDecimal bd = BigDecimal.valueOf(cash);
+                            bd = bd.setScale(2, RoundingMode.HALF_UP);
+                            cash = bd.doubleValue();
+                            totalSum.setText("Funds Required :"+cash );
+                        }else
                             totalSum.setText("0");
                     }
 
@@ -292,9 +296,13 @@ public class HomeFragment extends Fragment
                         {
                             totalSum.setText("You don't have enough stocks!");
                         }
-                        else if (!s.toString().equals(""))
-                        totalSum.setText("Funds Gained: "+String.valueOf(Integer.parseInt(s.toString())*stockPrice.get(position)));
-                        else
+                        else if (!s.toString().equals("")) {
+                            double cash = Integer.parseInt(s.toString()) * stockPrice.get(position);
+                            BigDecimal bd = BigDecimal.valueOf(cash);
+                            bd = bd.setScale(2, RoundingMode.HALF_UP);
+                            cash = bd.doubleValue();
+                            totalSum.setText("Funds Gained: " + cash);
+                        }else
                             totalSum.setText("Funds Gained: 0");
                     }
 
