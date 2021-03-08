@@ -106,10 +106,78 @@ public class News {
                         break;
                 }
             } else if (day == 2) {
-                //TODO: Add news for day 2
+                switch (HomeFragment.roundNo) {
+                    case 1:
+                        setNews.clear();
+                        setNews.add("Auto parts to be made in UTOPIA.");
+                        setNews.add("Government bans a controversial documentary.");
+                        setNews.add("Infra might not win the bid to construct the tunnel.");
+                        setNews.add("Scarce rainfall in UTOPIA.");
+                        if (PowerCardFragment.pc2flag == 1) {
+                            setNews.add(0, "Is FMCG making children work in their factories? ");
+                            PowerCardFragment.pc2flag = 0;
+                        }
+                        break;
+                    case 2:
+                        setNews.clear();
+                        setNews.add("Temporary suspension of leadership in FMCG.");
+                        setNews.add("Protest against the government in support of freedom of speech.");
+                        setNews.add("Farmers in a major debt crisis.");
+                        setNews.add("Collaboration of schools with Finology.");
+                        if (PowerCardFragment.pc2flag == 1) {
+                            setNews.add(0, "Finology to raise 10M ?");
+                            PowerCardFragment.pc2flag = 0;
+                            newscolorflag = 1;
+                        }
+                        break;
+                    case 3:
+                        setNews.clear();
+                        setNews.add("Automobile engine test fails.");
+                        setNews.add("Import and traffic duties increased.");
+                        setNews.add("Farmers beg banks to reduce interest rates.");
+                        setNews.add("FMCG’s new CEO makes great claims for future growth.");
+                        if (PowerCardFragment.pc2flag == 1) {
+                            setNews.add(0, "New green metro project underway?");
+                            PowerCardFragment.pc2flag = 0;
+                            newscolorflag = 1;
+                        }
+                        break;
+                    case 4:
+                        setNews.clear();
+                        setNews.add("Hybrid crop which survives on minimal water requirement synthesised successfully.");
+                        setNews.add("Industrial belt destroyed after mega-earthquake.");
+                        setNews.add("15M fundings received by Finology.");
+                        setNews.add("Bingee shows interest to acquire Blockbuster.");
+                        if (PowerCardFragment.pc2flag == 1) {
+                            setNews.add(0, "Auto comes back into the game with all new electric self driving sedan?");
+                            PowerCardFragment.pc2flag = 0;
+                            newscolorflag = 1;
+                        }
+                        break;
+                    case 5:
+                        setNews.clear();
+                        setNews.add("FMCG head faces backlash over his latest decision to expand to alcoholic beverages and smoking industry.");
+                        setNews.add("Government un-bans the controversial documentary.");
+                        setNews.add("Festive boom for auto sector.");
+                        setNews.add("Re-construction of all factories completed.");
+                        setNews.add("Another steel mine discovered in Utopia.");
+                        if (PowerCardFragment.pc2flag == 1) {
+                            setNews.add(0, "Infra hires brilliant engineers from SPCE to plan the tunnel project and finally wins the bid !");
+                            PowerCardFragment.pc2flag = 0;
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
+            } else {
+                setNews.clear();
+                setNews.add("Airline Sector may soon be privatized.");
+                setNews.add("Government un-bans the controversial documentary.");
+                if (PowerCardFragment.pc2flag == 1) {
+                    setNews.add(0, "IPL to begin from 9th April.");
+                }
             }
-        }else{
-            setNews.add("ABC");
         }
         newsFeedFragment.newsroundnumber.setText("News: Round "+String.valueOf(HomeFragment.roundNo));
         //newsFeedFragment.news.setText(setNews);
