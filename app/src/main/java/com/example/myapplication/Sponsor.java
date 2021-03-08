@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,9 +35,9 @@ public class Sponsor extends AppCompatActivity {
         SponsorAdapter adapter = new SponsorAdapter(sponsorsList,getApplicationContext());
         sponsors.setAdapter(adapter);
 
-        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorelm),"ELEARNMARKETS","Knowledge Partner"));
-        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorstockedge),"STOCKEDGE","Knowledge Partner"));
+        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorelm),"ELEARN-MARKETS","Knowledge Partner"));
         sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsordta),"DERIVATIVE TRADING ACADEMY","Channel Partner"));
+        sponsorsOther.add(new Sponsors(getResources().getDrawable(R.drawable.sponsorstockedge),"STOCKEDGE","Knowledge Partner"));
         SponsorAdapter adapterOther = new SponsorAdapter(sponsorsOther,getApplicationContext());
         sponsorOther.setAdapter(adapterOther);
 

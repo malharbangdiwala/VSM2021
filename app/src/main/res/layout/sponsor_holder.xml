@@ -21,6 +21,7 @@
             android:id="@+id/sponsorImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="fitXY"
             android:src="@drawable/logo" />
 
         <TextView
@@ -45,7 +46,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="Type of Sponsor"
-            android:textColor="#FFFFFF"
+            android:textColor="#fffabf"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
             android:fontFamily="@font/roboto_condensed_regular"
             android:textSize="18sp" />
     </RelativeLayout>
