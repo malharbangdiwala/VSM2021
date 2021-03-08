@@ -565,7 +565,16 @@ public class HomeFragment extends Fragment
                         else if (roundNo == 6)
                             videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefive);
                     }else{
-                        //TODO Add Videos For Day 2
+                        if (roundNo == 2)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twoone);
+                        else if (roundNo == 3)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twotwo);
+                        else if (roundNo == 4)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twothree);
+                        else if (roundNo == 5)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twofour);
+                        else if (roundNo == 6)
+                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twofive);
                     }
                     MediaController mediaController=new MediaController(getActivity());
                     mediaController.setAnchorView(videoView);
