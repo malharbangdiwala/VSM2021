@@ -170,13 +170,14 @@ public class News {
                         break;
 
                 }
-            } else {
-                setNews.clear();
-                setNews.add("Airline Sector may soon be privatized.");
-                setNews.add("Government un-bans the controversial documentary.");
-                if (PowerCardFragment.pc2flag == 1) {
-                    setNews.add(0, "IPL to begin from 9th April.");
-                }
+            }
+        }
+        else {
+            setNews.clear();
+            setNews.add("Airline Sector may soon be privatized.");
+            setNews.add("Government un-bans the controversial documentary.");
+            if (PowerCardFragment.pc2flag == 1) {
+                setNews.add(0, "IPL to begin from 9th April.");
             }
         }
         newsFeedFragment.newsroundnumber.setText("News: Round "+String.valueOf(HomeFragment.roundNo));

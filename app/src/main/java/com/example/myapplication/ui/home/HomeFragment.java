@@ -132,13 +132,23 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
         IncDec.add(-1);
-
-        nameStock.add("AIR UTOPIA");
-        nameStock.add("DR. PHARMA");
-        nameStock.add("STEEL WORKS");
-        nameStock.add("THE BANK");
-        nameStock.add("FINOLOGY");
-        nameStock.add("CHEMICAL COMPANY");
+        if(News.day==1){
+            nameStock.clear();
+            nameStock.add("AIR UTOPIA");
+            nameStock.add("DR. PHARMA");
+            nameStock.add("STEEL WORKS");
+            nameStock.add("THE BANK");
+            nameStock.add("FINOLOGY");
+            nameStock.add("CHEMICAL COMPANY");
+        }else{
+            nameStock.clear();
+            nameStock.add("UTOPIA AUTOMOBILES");
+            nameStock.add("THE AGRICULTURE");
+            nameStock.add("BLOCKBUSTER");
+            nameStock.add("FINOLOGY");
+            nameStock.add("FMCG");
+            nameStock.add("INFRASTUCTURE WORKS");
+        }
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
