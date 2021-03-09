@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,9 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.oculus.vsm.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
+import static com.oculus.vsm.MainActivity.MyPREFERENCES;
 
 public class GameOverActivity extends AppCompatActivity {
 

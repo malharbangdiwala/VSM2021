@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/BgColour"
     android:layout_height="match_parent"
-    tools:context=".TrialActivity">
+    tools:context="com.oculus.vsm.TrialActivity">
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"

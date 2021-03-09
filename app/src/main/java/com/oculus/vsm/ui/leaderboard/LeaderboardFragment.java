@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.leaderboard;
+package com.oculus.vsm.ui.leaderboard;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,21 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.ConnectionHelper;
-import com.example.myapplication.R;
-import com.example.myapplication.UserAdapter;
-import com.example.myapplication.Users;
-import com.example.myapplication.ui.home.HomeFragment;
+import com.oculus.vsm.ConnectionHelper;
+import com.oculus.vsm.R;
+import com.oculus.vsm.UserAdapter;
+import com.oculus.vsm.Users;
+import com.oculus.vsm.ui.home.HomeFragment;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
-import static com.example.myapplication.ui.home.HomeFragment.roundNo;
-import static com.example.myapplication.ui.home.HomeFragment.stockPrice;
+import static com.oculus.vsm.MainActivity.MyPREFERENCES;
+import static com.oculus.vsm.ui.home.HomeFragment.roundNo;
+import static com.oculus.vsm.ui.home.HomeFragment.stockPrice;
 
 public class LeaderboardFragment extends Fragment {
     ConnectionHelper con;

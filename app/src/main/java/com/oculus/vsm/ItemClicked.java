@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import android.view.View;
 

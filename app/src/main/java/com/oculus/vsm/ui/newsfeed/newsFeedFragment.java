@@ -1,10 +1,9 @@
-package com.example.myapplication.ui.newsfeed;
+package com.oculus.vsm.ui.newsfeed;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.News;
-import com.example.myapplication.NewsAdapter;
-import com.example.myapplication.R;
-import com.example.myapplication.ui.home.HomeFragment;
+import com.oculus.vsm.News;
+import com.oculus.vsm.NewsAdapter;
+import com.oculus.vsm.R;
 
 import java.util.ArrayList;
 

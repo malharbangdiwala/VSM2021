@@ -1,7 +1,6 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.oculus.vsm.R;
 
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
+import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>
 {

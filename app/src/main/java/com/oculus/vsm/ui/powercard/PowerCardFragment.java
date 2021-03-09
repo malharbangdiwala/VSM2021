@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.powercard;
+package com.oculus.vsm.ui.powercard;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
@@ -19,12 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.ConnectionHelper;
-import com.example.myapplication.News;
-import com.example.myapplication.R;
-import com.example.myapplication.powercard3;
-import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.newsfeed.newsFeedFragment;
+import com.oculus.vsm.ConnectionHelper;
+import com.oculus.vsm.News;
+import com.oculus.vsm.R;
+import com.oculus.vsm.powercard3;
+import com.oculus.vsm.ui.home.HomeFragment;
+import com.oculus.vsm.ui.newsfeed.newsFeedFragment;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -33,9 +33,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.xml.transform.Result;
-
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
+import static com.oculus.vsm.MainActivity.MyPREFERENCES;
 
 public class PowerCardFragment extends Fragment {
     SharedPreferences sharedPreferences;

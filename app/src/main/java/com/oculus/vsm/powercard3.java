@@ -1,15 +1,9 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.example.myapplication.ui.home.HomeFragment;
+import com.oculus.vsm.ui.home.HomeFragment;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Connection;
-
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
 
 public class powercard3 {
     public static Double deduction;

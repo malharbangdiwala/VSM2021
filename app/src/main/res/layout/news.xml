@@ -19,16 +19,10 @@
 
         <TextView
             android:id="@+id/newsText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_condensed_regular"
             android:padding="8sp"
-            android:paddingStart="8sp"
-            android:paddingLeft="8sp"
-            android:paddingTop="8sp"
-            android:paddingEnd="8sp"
-            android:paddingRight="8sp"
-            android:paddingBottom="8sp"
             android:text="Scientist discover 119th element and that has super strength and is light weighted and as malleable as steel and is environment friendly. To get this functional scientist need heavy use of Chemical refineries."
             android:textColor="#FFFFFF"
             android:textSize="24sp"

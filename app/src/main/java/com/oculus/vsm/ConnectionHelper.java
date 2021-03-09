@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 import android.annotation.SuppressLint;
 import android.os.StrictMode;
 import android.util.Log;

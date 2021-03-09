@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.home;
+package com.oculus.vsm.ui.home;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -22,8 +21,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,42 +29,31 @@ import android.widget.VideoView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
-import com.example.myapplication.ConnectionHelper;
-import com.example.myapplication.GameOverActivity;
-import com.example.myapplication.ItemClicked;
-import com.example.myapplication.News;
-import com.example.myapplication.R;
-import com.example.myapplication.SelectorActivity;
-import com.example.myapplication.StockAdapter;
-import com.example.myapplication.Stocks;
-import com.example.myapplication.powercard3;
-import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
-import com.example.myapplication.ui.newsfeed.newsFeedFragment;
-import com.example.myapplication.ui.newsfeed.newsFeedFragment;
-import com.example.myapplication.ui.powercard.PowerCardFragment;
-
-import org.w3c.dom.Text;
+import com.oculus.vsm.ConnectionHelper;
+import com.oculus.vsm.GameOverActivity;
+import com.oculus.vsm.ItemClicked;
+import com.oculus.vsm.News;
+import com.oculus.vsm.R;
+import com.oculus.vsm.StockAdapter;
+import com.oculus.vsm.Stocks;
+import com.oculus.vsm.powercard3;
+import com.oculus.vsm.ui.leaderboard.LeaderboardFragment;
+import com.oculus.vsm.ui.newsfeed.newsFeedFragment;
+import com.oculus.vsm.ui.powercard.PowerCardFragment;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.channels.Selector;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
-import static com.example.myapplication.MainActivity.MyPREFERENCES;
+import static com.oculus.vsm.MainActivity.MyPREFERENCES;
 
 public class HomeFragment extends Fragment
 {

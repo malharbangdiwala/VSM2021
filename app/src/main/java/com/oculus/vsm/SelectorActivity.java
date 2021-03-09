@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.oculus.vsm.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,20 +1,16 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
-import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.newsfeed.newsFeedFragment;
-import com.example.myapplication.ui.powercard.PowerCardFragment;
+import com.oculus.vsm.ui.home.HomeFragment;
+import com.oculus.vsm.ui.newsfeed.newsFeedFragment;
+import com.oculus.vsm.ui.powercard.PowerCardFragment;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.xml.transform.Result;
 
 public class News {
     static int newscolorflag=0;

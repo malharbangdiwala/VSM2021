@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 public class Stocks {
     private int id;

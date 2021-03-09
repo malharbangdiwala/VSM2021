@@ -1,14 +1,14 @@
-package com.example.myapplication;
+package com.oculus.vsm;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.myapplication.ui.leaderboard.LeaderboardFragment;
-import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.newsfeed.newsFeedFragment;
-import com.example.myapplication.ui.powercard.PowerCardFragment;
+import com.oculus.vsm.ui.leaderboard.LeaderboardFragment;
+import com.oculus.vsm.ui.home.HomeFragment;
+import com.oculus.vsm.ui.newsfeed.newsFeedFragment;
+import com.oculus.vsm.ui.powercard.PowerCardFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter
 {

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.myapplication.ui.home.HomeFragment"
+        android:name="com.oculus.vsm.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_leaderboard"
-        android:name="com.example.myapplication.ui.leaderboard.LeaderboardFragment"
+        android:name="com.oculus.vsm.ui.leaderboard.LeaderboardFragment"
         android:label="@string/title_leaderBoard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_powercards"
-        android:name="com.example.myapplication.ui.powercard.PowerCardFragment"
+        android:name="com.oculus.vsm.ui.powercard.PowerCardFragment"
         android:label="@string/title_powerCards"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
