@@ -118,23 +118,22 @@ public class HomeFragment extends Fragment
         IncDec.add(-1);
         IncDec.add(-1);
         IncDec.add(-1);
-        if(News.day==1){
-            nameStock.clear();
-            nameStock.add("AIR UTOPIA");
-            nameStock.add("DR. PHARMA");
-            nameStock.add("STEEL WORKS");
-            nameStock.add("THE BANK");
-            nameStock.add("FINOLOGY");
-            nameStock.add("CHEMICAL COMPANY");
-        }else{
+//        if(News.day==1){
+//            nameStock.clear();
+//            nameStock.add("AIR UTOPIA");
+//            nameStock.add("DR. PHARMA");
+//            nameStock.add("STEEL WORKS");
+//            nameStock.add("THE BANK");
+//            nameStock.add("FINOLOGY");
+//            nameStock.add("CHEMICAL COMPANY");
+//        }else{
             nameStock.clear();
             nameStock.add("UTOPIA AUTOMOBILES");
             nameStock.add("THE AGRICULTURE");
             nameStock.add("BLOCKBUSTER");
             nameStock.add("FINOLOGY");
             nameStock.add("FMCG");
-            nameStock.add("INFRASTUCTURE WORKS");
-        }
+            nameStock.add("INFRASTUCTURE WORKS");//      }
         adapter = new StockAdapter(stocks, requireContext(), new ItemClicked() {
             @Override
             public void onClickBuy(final int position, View view)
@@ -549,18 +548,18 @@ public class HomeFragment extends Fragment
                     final RecyclerView stockviewtext=requireView().findViewById(R.id.stockView);
                     final VideoView videoView=(VideoView)requireView().findViewById(R.id.videoView);
                     final TextView useramounttext=requireView().findViewById(R.id.userAmount);
-                    if (News.day==1) {
-                        if (roundNo == 2)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.oneone);
-                        else if (roundNo == 3)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onetwo);
-                        else if (roundNo == 4)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onethree);
-                        else if (roundNo == 5)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefour);
-                        else if (roundNo == 6)
-                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefive);
-                    }else{
+//                    if (News.day==1) {
+//                        if (roundNo == 2)
+//                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.oneone);
+//                        else if (roundNo == 3)
+//                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onetwo);
+//                        else if (roundNo == 4)
+//                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onethree);
+//                        else if (roundNo == 5)
+//                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefour);
+//                        else if (roundNo == 6)
+//                            videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.onefive);
+//                    }else{
                         if (roundNo == 2)
                             videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twoone);
                         else if (roundNo == 3)
@@ -571,7 +570,7 @@ public class HomeFragment extends Fragment
                             videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twofour);
                         else if (roundNo == 6)
                             videoView.setVideoPath("android.resource://" + getActivity().getPackageName() + "/" + R.raw.twofive);
-                    }
+                    //}
                     MediaController mediaController=new MediaController(getActivity());
                     mediaController.setAnchorView(videoView);
                     videoView.setMediaController(mediaController);

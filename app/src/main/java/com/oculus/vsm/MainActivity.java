@@ -72,23 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                     if (rs.getInt("day") == 0) {
                         Toast.makeText(this, "Your registered slot is not today!", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (rs.getInt("loginflag") == 0) {
-                            String updateLoginFlag = "Update login set loginflag = 1 where phoneID= " + number + ";";
-                            try {
-                                Statement st2 = connect.createStatement();
-                                ResultSet rs2 = st2.executeQuery(updateLoginFlag);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
                             Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, SelectorActivity.class);
                             startActivity(intent);
                             finish();
-                        } else {
-                            Toast.makeText(this, "This user has already logged in!", Toast.LENGTH_SHORT).show();
                         }
                     }
-                } else {
+                 else {
                     Toast.makeText(this, "Login Unsuccessful. Try Again!", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
